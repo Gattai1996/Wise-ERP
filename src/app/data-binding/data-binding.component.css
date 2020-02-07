@@ -1,0 +1,36 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-image: url("http://wisesale.com.br/assets/images/banner/banner1.jpg");
+    height: 760px;
+}
+section {
+    background-color: #5275a1;
+    width: 80%;
+    padding: 1%;
+    border-radius: 1em;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 8%;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.4);
+}
+.campo {
+    border-radius: 10px;
+    text-align: center;
+    padding: 3px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+h1 {
+    text-align: center;
+    font-size: 3em;
+}
+h2 {
+    text-align: center;
+    font-size: 2em;
+}
+h3 {
+    text-align: center;
+    font-size: 1em;
+}

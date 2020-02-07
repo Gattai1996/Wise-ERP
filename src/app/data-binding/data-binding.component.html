@@ -1,0 +1,17 @@
+<body>
+    <img class="imagem" scr="http://wisesale.com.br/assets/images/banner/banner1.jpg">
+    <section>
+        <h1>Digite seu login e senha:</h1>
+
+        <h2>Login</h2>
+        <input class="campo" type="text" (change)="login = $event.target.value">
+        <h2>Senha</h2>
+        <input class="campo" type="text" (change)="obtemSenha($event.target.value)">
+
+        <h3 *ngIf="login != 'Bruno'">Login Incorreto, verifique seu login!</h3>
+
+        <h3 *ngIf="senha != 1234">Senha Incorreta, verifique sua senha!</h3>
+
+        <h3 *ngIf="login == 'Bruno' && senha == 1234">Seja bem vindo ao Wise ERP!</h3>
+    </section>
+</body>
