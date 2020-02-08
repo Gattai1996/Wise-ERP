@@ -1,17 +1,23 @@
 <body>
-    <img class="imagem" scr="http://wisesale.com.br/assets/images/banner/banner1.jpg">
-    <section>
-        <h1>Digite seu login e senha:</h1>
-
-        <h2>Login</h2>
-        <input class="campo" type="text" (change)="login = $event.target.value">
-        <h2>Senha</h2>
-        <input class="campo" type="text" (change)="obtemSenha($event.target.value)">
-
-        <h3 *ngIf="login != 'Bruno'">Login Incorreto, verifique seu login!</h3>
-
-        <h3 *ngIf="senha != 1234">Senha Incorreta, verifique sua senha!</h3>
-
-        <h3 *ngIf="login == 'Bruno' && senha == 1234">Seja bem vindo ao Wise ERP!</h3>
-    </section>
+    <img class="responsive-img" class="imagem" scr="http://wisesale.com.br/assets/images/banner/banner1.jpg">
+    <div class="container" class="valign-wrapper">
+        <section class="card blue-grey darken-1" class="card-content white-text">
+            <span class="flow-text">Digite seu login e senha para entrar:</span>
+            <br>
+            <div class="input-field col s6">
+                <input id="login" type="text" (change)="login = $event.target.value" class="white-text">
+                <label for="login"><i class="tiny material-icons">account_box</i>Login</label>
+            </div>
+            <div class="input-field col s6">
+                <input id="senha" type="text" (change)="obtemSenha($event.target.value)" class="white-text">
+                <label for="senha" class="password"><i class="tiny material-icons">lock</i>Senha</label>
+            </div>
+            <a id="entrar" class="waves-effect waves-light btn"><i class="material-icons right">send</i>Entrar</a>
+            <blockquote>
+                <p class="flow-text" *ngIf="login != 'Bruno'"><a class="btn-floating pulse"><i class="tiny material-icons">lock_outline</i></a>&nbsp; Login Incorreto, verifique seu login!</p>
+                <p class="flow-text" *ngIf="senha != 1234"><a class="btn-floating pulse"><i class="tiny material-icons">lock_outline</i></a>&nbsp; Senha Incorreta, verifique sua senha!</p>
+                <p class="flow-text" *ngIf="login == 'Bruno' && senha == 1234"><a class="btn-floating pulse"><i class="tiny material-icons">lock_open</i></a>&nbsp; Seja bem vindo ao Wise ERP!</p>
+            </blockquote>
+        </section>
+    </div>
 </body>
