@@ -1,12 +1,10 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { DataBindingComponent } from './data-binding/data-binding.component';
-import { SegundoComponenteComponent } from './segundo-componente/segundo-componente.component';
+import { LoginComponent } from './components/login/login.component';
 
 
 const routes: Routes = [
-  { path: "", component: DataBindingComponent },
-  { path: "2", component: SegundoComponenteComponent }
+  { path: "", component: LoginComponent },
 ];
 
 @NgModule({
