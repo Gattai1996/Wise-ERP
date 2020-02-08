@@ -1,4 +1,3 @@
-
 body {
     margin: 0;
     padding: 0;
@@ -8,10 +7,12 @@ body {
 section {
     background-color: #5275a1;
     padding: 2rem;
+    min-width: 500px;
+    min-height: 500px;
     border-radius: 1rem;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 8rem;
+    margin-top: 5rem;
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
 }
 #entrar {

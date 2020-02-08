@@ -10,20 +10,22 @@
             </ul>
         </div>
         </nav>
-        <div id="login" class="container" class="valign-wrapper">
+        <div id="login" class="container valign-wrapper">
             <section class="card-content light-blue darken-3 white-text">
-                <span class="flow-text">Digite seu login e senha para entrar:</span>
+                <h1 class="flow-text">Digite seu login e senha para entrar:</h1>
                 <br>
                 <div class="row">
                     <div class="input-field col s12">
-                        <input type="text" (change)="login = $event.target.value" class="white-text">
-                        <label for="login"><i class="tiny material-icons">account_box</i>Login</label>
+                        <i class="tiny material-icons prefix">account_box</i>
+                        <input id="Login" type="text" (change)="login = $event.target.value" class="validate white-text">
+                        <label for="Login">Login</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s12">
-                        <input type="text" (change)="obtemSenha($event.target.value)" class="white-text">
-                        <label for="senha" class="password"><i class="tiny material-icons">lock</i>Senha</label>
+                        <i class="tiny material-icons prefix">lock</i>
+                        <input id="senha" type="password" (change)="obtemSenha($event.target.value)" class="validate white-text">
+                        <label for="senha" class="password">Senha</label>
                     </div>
                 </div>
                 <a id="entrar" class="waves-effect waves-light btn" (click)="onSubmit()"><i class="material-icons right">send</i>Entrar</a>
