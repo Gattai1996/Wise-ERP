@@ -15,9 +15,9 @@ export class LoginService {
 
   constructor(private http: HttpClient) { }
 
-  public getLogin(usuario: string, senha: string):Observable<any> {
+  public getLogin(usuario: string, senha: string):Observable<Login> {
     console.log(this.SEARCH_URL + this.PARAMETERS + `&password=` + senha + `&user=` + usuario); 
-    return this.http.get(
+    return this.http.get<Login>(
       this.SEARCH_URL + this.PARAMETERS + `&password=` + senha + `&user=` + usuario
       );
       

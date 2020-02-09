@@ -17,23 +17,19 @@
                 <div class="row">
                     <div class="input-field col s12">
                         <i class="tiny material-icons prefix">account_box</i>
-                        <input [(ngModel)]="usuario.nome" id="Login" type="text" class="validate white-text">
-                        <!-- <input [(ngModel)]="usuario.nome" id="Login" type="text" (change)="usuario = $event.target.value" class="validate white-text"> -->
+                        <input [(ngModel)]="usuario" id="Login" type="text" (change)="usuario = $event.target.value" class="validate white-text">
                         <label for="Login">Usuário</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s12">
                         <i class="tiny material-icons prefix">lock</i>
-                        <input [(ngModel)]="usuario.senha" id="senha" type="password" class="validate white-text">
-                        <!-- <input [(ngModel)]="usuario.senha" id="senha" type="password" (change)="senha = $event.target.value" class="validate white-text"> -->
+                        <input [(ngModel)]="senha" id="senha" type="password" (change)="senha = $event.target.value" class="validate white-text">
                         <label for="senha" class="password">Senha</label>
                     </div>
                 </div>
-                <a id="entrar" type="submit" (click)="fazerLogin()" class="waves-effect waves-light btn"><i class="material-icons right">send</i>Login</a>
-                <!-- <p class="flow-text" *ngIf="login != 'Bruno'"><a class="btn-floating pulse"><i class="tiny material-icons">lock_outline</i></a>&nbsp; Login Incorreto, verifique seu login!</p>
-                <p class="flow-text" *ngIf="senha != 1234"><a class="btn-floating pulse"><i class="tiny material-icons">lock_outline</i></a>&nbsp; Senha Incorreta, verifique sua senha!</p> -->
-                <!-- <p class="flow-text" *ngIf="fazerLogin(login) == true">Seja bem vindo ao Wise ERP!</p> -->
+                <a id="entrar" type="submit" (click)="onSubmit()" class="waves-effect waves-light btn"><i class="material-icons right">send</i>Login</a>
+                <p class="flow-text" *ngIf="this.login[0].ok === true">Seja bem vindo ao Wise ERP!</p>
             </section>
         </div>
         </body>
