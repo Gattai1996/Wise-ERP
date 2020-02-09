@@ -4,36 +4,38 @@
     <body>
         <nav>
         <div class="nav-wrapper light-blue darken-3">
-            <img id="logo" src="http://compuwise.com.br/assets/images/logo.png" class="brand-logo center">
+            <a id="logo" href="https://imgbb.com/"><img src="https://i.ibb.co/wszdgT7/wise-erp-logo.png" alt="wise-erp-logo" class="brand-logo center"/></a>
             <ul id="nav-mobile" class="right hide-on-med-and-down">
             <!-- <li><a href="#">Exemplo</a></li> -->
             </ul>
         </div>
         </nav>
-        <div id="login" class="container valign-wrapper">
-            <section class="card-content light-blue darken-3 white-text">
-                <h1 class="flow-text">Digite seu login e senha para entrar:</h1>
+        <div id="login" class="valign-wrapper">
+            <section class="light-blue darken-3 white-text">
+                <h6 class="flow-text">Digite seu login e senha para entrar:</h6>
                 <br>
                 <div class="row">
                     <div class="input-field col s12">
                         <i class="tiny material-icons prefix">account_box</i>
-                        <input id="Login" type="text" (change)="login = $event.target.value" class="validate white-text">
-                        <label for="Login">Login</label>
+                        <input [(ngModel)]="usuario.nome" id="Login" type="text" class="validate white-text">
+                        <!-- <input [(ngModel)]="usuario.nome" id="Login" type="text" (change)="usuario = $event.target.value" class="validate white-text"> -->
+                        <label for="Login">Usuário</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s12">
                         <i class="tiny material-icons prefix">lock</i>
-                        <input id="senha" type="password" (change)="obtemSenha($event.target.value)" class="validate white-text">
+                        <input [(ngModel)]="usuario.senha" id="senha" type="password" class="validate white-text">
+                        <!-- <input [(ngModel)]="usuario.senha" id="senha" type="password" (change)="senha = $event.target.value" class="validate white-text"> -->
                         <label for="senha" class="password">Senha</label>
                     </div>
                 </div>
-                <a id="entrar" class="waves-effect waves-light btn" (click)="onSubmit()"><i class="material-icons right">send</i>Entrar</a>
-                <p class="flow-text" *ngIf="login != 'Bruno'"><a class="btn-floating pulse"><i class="tiny material-icons">lock_outline</i></a>&nbsp; Login Incorreto, verifique seu login!</p>
-                <p class="flow-text" *ngIf="senha != 1234"><a class="btn-floating pulse"><i class="tiny material-icons">lock_outline</i></a>&nbsp; Senha Incorreta, verifique sua senha!</p>
-                <p class="flow-text" *ngIf="login == 'Bruno' && senha == 1234">Seja bem vindo ao Wise ERP!</p>
+                <a id="entrar" type="submit" (click)="fazerLogin()" class="waves-effect waves-light btn"><i class="material-icons right">send</i>Login</a>
+                <!-- <p class="flow-text" *ngIf="login != 'Bruno'"><a class="btn-floating pulse"><i class="tiny material-icons">lock_outline</i></a>&nbsp; Login Incorreto, verifique seu login!</p>
+                <p class="flow-text" *ngIf="senha != 1234"><a class="btn-floating pulse"><i class="tiny material-icons">lock_outline</i></a>&nbsp; Senha Incorreta, verifique sua senha!</p> -->
+                <!-- <p class="flow-text" *ngIf="fazerLogin(login) == true">Seja bem vindo ao Wise ERP!</p> -->
             </section>
         </div>
         </body>
-        <footer class="white-text">Desenvolvido por <img class="responsive-img" src="https://wisecommerce-compuwise.azurewebsites.net/images/logo-signature.png"></footer>
+        <footer class="white-text">Desenvolvido por &nbsp;<img src="https://wisecommerce-compuwise.azurewebsites.net/images/logo-signature.png"></footer>
 </html>
