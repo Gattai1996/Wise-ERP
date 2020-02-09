@@ -9,7 +9,6 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './components/login/login.component';
 import { LoginService } from './services/login.service';
 import { FormsModule } from '@angular/forms';
-import { AuthService } from './services/auth.service';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 @NgModule({
@@ -26,7 +25,6 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
   ],
   providers: [
     HttpClient,
-    AuthService,
     LoginService
   ],
   bootstrap: [AppComponent]
