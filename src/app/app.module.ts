@@ -5,7 +5,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-
 import { LoginService } from './services/login.service';
 import { FormsModule } from '@angular/forms';
 import { InvoicesComponent } from './invoices/invoices.component';
@@ -14,7 +13,6 @@ import { HomeModule } from './home/home.module';
 @NgModule({
   declarations: [
     AppComponent,
-    
     InvoicesComponent
   ],
   imports: [
