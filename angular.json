@@ -130,6 +130,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "Wise-ERP"
+    }
+  },
+  "defaultProject": "Wise-ERP",
+  "cli": {
+    "analytics": "96d04c6f-a29c-43e6-88ea-66e9bf571638"
+  }
 }

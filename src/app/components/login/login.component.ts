@@ -14,27 +14,26 @@ export class LoginComponent implements OnInit {
   senha: string;
   login: Login = new Login();
   erro: any;
+  ok: boolean;
 
-  constructor(private loginService: LoginService) { 
-
+  constructor(private loginService: LoginService) {
+    this.ok = false;
   }
 
   ngOnInit() {
-
   }
 
    getter() {
     this.loginService.getLogin(this.usuario, this.senha).subscribe(
       (data: Login) => {
         this.login = data;
-        console.log('this.login: ' + this.login);  
-      }, 
+        console.log(this.login);
+      },
       (error: any) => {
         this.erro = error;
         console.log(this.erro);
       });
   }
-  
 
   onSubmit() {
     this.getter();
@@ -42,6 +41,21 @@ export class LoginComponent implements OnInit {
 
   obtemSenha(senha: string) {
     this.senha = senha;
+  }
+
+  isLoginOk(): boolean {
+    if (this.login[0].ok === undefined) {
+      return this.ok;
+    } else {
+      return this.login[0].ok;
+    }
+  }
+
+  changeOk() {
+    if (this.login[0].ok !== undefined) {
+      this.ok = this.login[0].ok;
+    }
+    console.log(this.ok);
   }
 
 

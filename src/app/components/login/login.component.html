@@ -29,7 +29,7 @@
                     </div>
                 </div>
                 <a id="entrar" type="submit" (click)="onSubmit()" class="waves-effect waves-light btn"><i class="material-icons right">send</i>Login</a>
-                <p class="flow-text" *ngIf="this.login[0].ok === true">Seja bem vindo ao Wise ERP!</p>
+                <p class="flow-text" *ngIf="isLoginOk()">Seja bem vindo ao Wise ERP!</p>
             </section>
         </div>
         </body>
