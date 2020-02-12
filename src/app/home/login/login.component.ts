@@ -63,8 +63,9 @@ export class LoginComponent implements OnInit {
           alert('Usuário ou senha incorreta!')
         }
 
-      }, 
+      },
       (error: any) => {
+        alert('Usuário e/ou senha inválidos!');
         this.erro = error;
         console.log('Deu erro ao tentar se inscrever!');
       });
