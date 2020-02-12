@@ -4,23 +4,26 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
+
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { LoginComponent } from './components/login/login.component';
+
 import { LoginService } from './services/login.service';
 import { FormsModule } from '@angular/forms';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { InvoicesComponent } from './invoices/invoices.component';
+import { HomeModule } from './home/home.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
-    DashboardComponent
+    BrowserAnimationsModule,
+    InvoicesComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    HomeModule,
     FormsModule
   ],
   providers: [
