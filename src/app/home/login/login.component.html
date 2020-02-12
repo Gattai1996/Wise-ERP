@@ -1,0 +1,70 @@
+<html>
+    <head>
+    </head>
+    <body>
+        <nav>
+        <div class="nav-wrapper light-blue darken-3">
+            <a id="logo">
+                <img src="https://i.ibb.co/wszdgT7/wise-erp-logo.png" 
+                alt="wise-erp-logo" 
+                class="brand-logo center"/></a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <!-- <li><a href="#">Exemplo</a></li> -->
+            </ul>
+        </div>
+        </nav>
+        <div id="login" class="valign-wrapper">
+            <form 
+            [formGroup]="loginForm" 
+            class="light-blue darken-3 white-text"
+            (submit)="onSubmit()"
+            >
+                <div class="row">
+                    <div class="input-field col s12">
+                        <i class="tiny material-icons prefix">account_box</i>
+                        <input formControlName="user" 
+                        autofocus
+                        id="Login" 
+                        type="text" 
+                        (change)="usuario = $event.target.value" 
+                        class="white-text">
+                        <label for="Login">Usuário</label>
+                        <blockquote 
+                        *ngIf="loginForm.get('user').errors?.required" 
+                        class="flow-text red-text text-lighten-2">
+                            Usuário é obrigatório
+                            <i class="small material-icons">announcement</i>
+                        </blockquote>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <i class="tiny material-icons prefix">lock</i>
+                        <input formControlName="password" 
+                        id="senha" type="password" 
+                        (change)="senha = $event.target.value" 
+                        class="white-text">
+                        <label for="senha" class="password">Senha</label>
+                        <blockquote 
+                        *ngIf="loginForm.get('password').errors?.required" 
+                        class="flow-text red-text text-lighten-2">
+                            Senha é obrigatória
+                            <i class="small material-icons">announcement</i>
+                        </blockquote>
+                    </div>
+                </div>
+                <button 
+                [disabled]="loginForm.invalid"
+                id="entrar" 
+                type="submit" 
+                class="waves-effect waves-light btn">
+                <i class="material-icons right">send</i>Login</button>
+                <!-- <p class="flow-text" *ngIf="this.login[0].ok === true">Seja bem vindo ao Wise ERP!</p>
+                <p class="flow-text" *ngIf="this.login[0].ok === false">Login ou senha incorreta!</p> -->
+            </form>
+        </div>
+        </body>
+        <footer class="white-text">Desenvolvido por &nbsp;
+            <img src="https://wisecommerce-compuwise.azurewebsites.net/images/logo-signature.png">
+        </footer>
+</html>
