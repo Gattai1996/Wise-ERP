@@ -12,10 +12,8 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 })
 export class LoginComponent implements OnInit {
 
-  // usuario: string;
-  // senha: string;
-  // login: Login = new Login();
-  // erro: any;
+  login: Login = new Login();
+  erro: any;
 
   loginForm: FormGroup;
 
@@ -34,55 +32,48 @@ export class LoginComponent implements OnInit {
 
   }
 
-  fazerLogin() {
+  // fazerLogin() {
   
+  //   const usuario = this.loginForm.get('user').value;
+  //   const senha = this.loginForm.get('password').value;
+
+  //   this.loginService.autenticar(senha, usuario)
+  //     .subscribe(
+  //       () => 
+  //         console.log('Estou autenticado'),
+  //       err => {
+  //         console.log('ERRO: ' + err);
+  //         this.loginForm.reset();
+  //         alert('Usuário incorreto ou senha incorreta!')
+  //       });
+
+  // }
+
+  getter() {
     const usuario = this.loginForm.get('user').value;
     const senha = this.loginForm.get('password').value;
 
-    this.loginService.autenticar(senha, usuario)
-      .subscribe(
-        () => 
-          console.log('Estou autenticado'),
-        err => {
-          console.log('ERRO: ' + err);
-          this.loginForm.reset();
-        });
+    this.loginService.autenticar(usuario, senha).subscribe(
+      (login: Login) => {
+        this.login = login;
+        console.log('Se inscreveu com sucesso!');  
+      }, 
+      (error: any) => {
+        alert('Usuário e/ou senha inválidos!');
+        this.erro = error;
+        console.log('Deu erro ao tentar se inscrever!');
+      });
+      
   }
 
-  // constructor(private loginService: LoginService, private router: Router) { 
-    
-  // }
+  onSubmit() {
 
-  // ngOnInit() {
+    this.getter();
 
-  // }
+    // if(this.login[0].ok == true) {
+    //   console.log('LOGIN OK === TRUE');
+    // }
 
-  //  getter() {
-  //   this.loginService.getLogin(this.usuario, this.senha).subscribe(
-  //     (data: Login) => {
-  //       this.login = data;
-  //       console.log('this.login: ' + this.login);  
-  //     }, 
-  //     (error: any) => {
-  //       this.erro = error;
-  //       console.log('ERRO: ' + this.erro);
-  //     });
-
-      
-  // }
-
-  // onSubmit() {
-  //   this.getter();
-
-  //   if(this.login[0].ok === true) {
-  //     console.log('LOGIN OK === TRUE');
-  //     this.router.navigate(['/invoices']);
-  //   }
-
-  // }
-
-  // obtemSenha(senha: string) {
-  //   this.senha = senha;
-  // }
+  }
 
 }

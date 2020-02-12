@@ -12,12 +12,16 @@ const PARAMETERS = '?brand_Id=58&collection_Id=4&company_Id=1&dept_Id=1';
 })
 export class LoginService{
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private http: HttpClient) { }
 
-  autenticar(usuario: String, senha: String) {
+  // autenticar(usuario: String, senha: String) {
+  //   return this.http.post(API_URL + PARAMETERS + `&password=` + senha + `&user=` + usuario, {senha, usuario})
+  // }
 
-    return this.httpClient.post(API_URL + PARAMETERS + `&password=` + senha + `&user=` + usuario, {senha, usuario})
-
+  public autenticar(usuario: string, senha: string):Observable<Login> {
+      console.log(API_URL + PARAMETERS + '&password=' + senha + '&user=' + usuario); 
+      return this.http.get<Login>(
+      API_URL + PARAMETERS + '&password=' + senha + '&user=' + usuario);
   }
 
 }
