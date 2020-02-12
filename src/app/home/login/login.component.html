@@ -22,7 +22,9 @@
                 <div class="row">
                     <div class="input-field col s12">
                         <i class="tiny material-icons prefix">account_box</i>
-                        <input formControlName="user" 
+                        <input 
+                        class="form-group"
+                        formControlName="user" 
                         autofocus
                         id="Login" 
                         type="text" 
@@ -40,7 +42,9 @@
                 <div class="row">
                     <div class="input-field col s12">
                         <i class="tiny material-icons prefix">lock</i>
-                        <input formControlName="password" 
+                        <input 
+                        class="form-group"
+                        formControlName="password" 
                         id="senha" type="password" 
                         (change)="senha = $event.target.value" 
                         class="white-text">
