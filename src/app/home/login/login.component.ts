@@ -19,8 +19,8 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private loginService: LoginService
-    ) {
+    private loginService: LoginService,
+    private router: Router) {
 
   }
 
@@ -57,7 +57,13 @@ export class LoginComponent implements OnInit {
       (login: Login) => {
         this.login = login;
         console.log('Se inscreveu com sucesso!');  
-      }, 
+        if(login[0].ok == true) {
+          this.router.navigate(['/invoices']);
+        } else {
+          alert('Usuário ou senha incorreta!')
+        }
+
+      },
       (error: any) => {
         alert('Usuário e/ou senha inválidos!');
         this.erro = error;
@@ -69,10 +75,6 @@ export class LoginComponent implements OnInit {
   onSubmit() {
 
     this.getter();
-
-    // if(this.login[0].ok == true) {
-    //   console.log('LOGIN OK === TRUE');
-    // }
 
   }
 
