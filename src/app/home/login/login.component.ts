@@ -56,10 +56,12 @@ export class LoginComponent implements OnInit {
     this.loginService.autenticar(usuario, senha).subscribe(
       (login: Login) => {
         this.login = login;
-        console.log('Se inscreveu com sucesso!');  
+        console.log('GET com sucesso, validando...');  
         if(login[0].ok == true) {
+          console.log('Login validado com sucesso');
           this.router.navigate(['/invoices']);
         } else {
+          console.log('Login inválido');
           alert('Usuário ou senha incorreta!')
         }
 

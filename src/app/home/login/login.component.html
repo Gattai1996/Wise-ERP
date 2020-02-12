@@ -13,14 +13,15 @@
             </ul>
         </div>
         </nav>
-        <div id="login" class="valign-wrapper">
+        <div class="row">
             <form 
+            id="formulario"
             [formGroup]="loginForm" 
-            class="light-blue darken-3 white-text"
+            class="light-blue darken-3 white-text col s10 offset-s1 m6 offset-m3 l4 offset-l4"
             (submit)="onSubmit()"
             >
                 <div class="row">
-                    <div class="input-field col s12">
+                    <div class="input-field col s10 offset-s1">
                         <i class="tiny material-icons prefix">account_box</i>
                         <input 
                         class="form-group"
@@ -31,16 +32,15 @@
                         (change)="usuario = $event.target.value" 
                         class="white-text">
                         <label for="Login">Usuário</label>
-                        <blockquote 
+                        <div
+                        id="mensagem"
                         *ngIf="loginForm.get('user').errors?.required" 
                         class="flow-text red-text text-lighten-2">
                             Usuário é obrigatório
-                            <i class="small material-icons">announcement</i>
-                        </blockquote>
+                            <i class="tiny material-icons">announcement</i>
+                        </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="input-field col s12">
+                    <div class="input-field col s10 offset-s1">
                         <i class="tiny material-icons prefix">lock</i>
                         <input 
                         class="form-group"
@@ -49,26 +49,27 @@
                         (change)="senha = $event.target.value" 
                         class="white-text">
                         <label for="senha" class="password">Senha</label>
-                        <blockquote 
+                        <div
+                        id="mensagem"
                         *ngIf="loginForm.get('password').errors?.required" 
                         class="flow-text red-text text-lighten-2">
                             Senha é obrigatória
-                            <i class="small material-icons">announcement</i>
-                        </blockquote>
-                    </div>
+                            <i class="tiny material-icons">announcement</i>
+                        </div>
+                    </div>    
+                    <button 
+                    [disabled]="loginForm.invalid"
+                    id="entrar" 
+                    type="submit" 
+                    class="waves-effect waves-light btn col s6 offset-s3">
+                    <i class="material-icons right">send</i>Login</button>
+                    <!-- <p class="flow-text" *ngIf="this.login[0].ok === true">Seja bem vindo ao Wise ERP!</p>
+                    <p class="flow-text" *ngIf="this.login[0].ok === false">Login ou senha incorreta!</p> -->
                 </div>
-                <button 
-                [disabled]="loginForm.invalid"
-                id="entrar" 
-                type="submit" 
-                class="waves-effect waves-light btn">
-                <i class="material-icons right">send</i>Login</button>
-                <!-- <p class="flow-text" *ngIf="this.login[0].ok === true">Seja bem vindo ao Wise ERP!</p>
-                <p class="flow-text" *ngIf="this.login[0].ok === false">Login ou senha incorreta!</p> -->
             </form>
         </div>
-        </body>
         <footer class="white-text">Desenvolvido por &nbsp;
             <img src="https://wisecommerce-compuwise.azurewebsites.net/images/logo-signature.png">
         </footer>
+        </body>
 </html>
