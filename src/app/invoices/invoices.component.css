@@ -1,7 +1,8 @@
 body {
     margin: 0;
     padding: 0;
-    background-image: linear-gradient(135deg, #83C3FF, #5994FF); 
+    /* background-image: linear-gradient(135deg, #83C3FF, #5994FF); */
+    background-color: #fff;
     height: 725px;
 }
 section {
@@ -10,16 +11,25 @@ section {
     border-radius: 1rem;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 8rem;
+    margin-top: 5%;
+    margin-bottom: 5%;
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
 }
-#voltar {
+#botao {
     border-radius: 1rem;
 }
-#login {
+#botao-buscar {
+    border-radius: 1rem;
+    margin-top: 1.5rem;
+}
+#conteudo {
+    padding: 1.5rem;
+}
+#tabela {
+    margin-bottom: 1rem;
+}
+#titulo {
     text-align: center;
-    margin-left: auto;
-    margin-right: auto;
 }
 footer {
     background-color: #1e366c;

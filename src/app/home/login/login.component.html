@@ -17,7 +17,7 @@
             <form 
             id="formulario"
             [formGroup]="loginForm" 
-            class="light-blue darken-3 white-text col s10 offset-s1 m6 offset-m3 l4 offset-l4"
+            class="light-blue darken-3 white-text col s8 offset-s2 m6 offset-m3 l4 offset-l4"
             (submit)="onSubmit()"
             >
                 <div class="row">
@@ -34,7 +34,7 @@
                         <label for="Login">Usuário</label>
                         <div
                         id="mensagem"
-                        *ngIf="loginForm.get('user').errors?.required" 
+                        *ngIf="loginForm.get('user').errors?.required && loginForm.get('user').touched" 
                         class="flow-text red-text text-lighten-2">
                             Usuário é obrigatório
                             <i class="tiny material-icons">announcement</i>
@@ -45,13 +45,14 @@
                         <input 
                         class="form-group"
                         formControlName="password" 
-                        id="senha" type="password" 
+                        id="senha" 
+                        type="password" 
                         (change)="senha = $event.target.value" 
                         class="white-text">
                         <label for="senha" class="password">Senha</label>
                         <div
                         id="mensagem"
-                        *ngIf="loginForm.get('password').errors?.required" 
+                        *ngIf="loginForm.get('password').errors?.required && loginForm.get('password').touched" 
                         class="flow-text red-text text-lighten-2">
                             Senha é obrigatória
                             <i class="tiny material-icons">announcement</i>
