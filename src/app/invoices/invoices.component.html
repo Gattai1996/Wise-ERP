@@ -4,21 +4,31 @@
     <body>
         <nav>
         <div class="nav-wrapper light-blue darken-3">
-            <a id="logo" href="https://imgbb.com/"><img src="https://i.ibb.co/wszdgT7/wise-erp-logo.png" alt="wise-erp-logo" class="brand-logo center"/></a>
+            <a id="logo"><img src="https://i.ibb.co/wszdgT7/wise-erp-logo.png" alt="wise-erp-logo" class="brand-logo center"/></a>
             <ul id="nav-mobile" class="right hide-on-med-and-down">
             <!-- <li><a href="#">Exemplo</a></li> -->
             </ul>
         </div>
         </nav>
-        <div id="conteudo" class="row">
+        <div class="row">
             <section id="conteudo" class="light-blue darken-3 white-text col s10 offset-s1 m8 offset-m2 l6 offset-l3">
                 <h6 id="titulo" class="flow-text">WE_invoices</h6>
                 <div class="row">
                     <div class="input-field col s8">
-                        <input id="buscar" class="white-text flow-text" type="text">
+                        <input 
+                        id="buscar" 
+                        class="white-text flow-text" 
+                        type="text"
+                        (keyup)="cnpjDigitado = $event.target.value"
+                        >
                         <label for="buscar">Consulta por CNPJ</label>
                     </div>
-                    <a id="botao-buscar" type="submit" class="waves-effect waves-light btn col s4"><i class="material-icons right">search</i>Buscar</a>
+                    <a 
+                    id="botao-buscar" 
+                    type="submit" 
+                    class="waves-effect waves-light btn col s4"
+                    (click)="filtro = cnpjDigitado">
+                    <i class="material-icons right">search</i>Buscar</a>
                 </div>
                 <table id="tabela" class="highlight">
                     <thead>
@@ -28,25 +38,18 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <td>TALENTO S CALCADOS E CONFECCOES LTDA EPP</td>
-                        <td>02895848000151</td>
-                      </tr>
-                      <tr>
-                        <td>TRIBAL COMERCIO DO VESTUARIO LTDA ME</td>
-                        <td>04347601000126</td>
-                      </tr>
-                      <tr>
-                        <td>TOK MODAS LTDA ME</td>
-                        <td>04781668000174</td>
-                      </tr>
-                      <tr>
-                        <td>EMPORIO MARIA BONITA DE PAULO AFONSO LTDA EPP</td>
-                        <td>08233236000180</td>
+                      <tr *ngFor="let cliente of clientes">
+                        <td *ngIf="cliente.cnpj == filtro"> {{ cliente.razao_social }} </td>
+                        <td *ngIf="cliente.cnpj == filtro"> {{ cliente.cnpj }} </td>
                       </tr>
                     </tbody>
                 </table>
-                <a id="botao" type="submit" (click)="voltarAoLogin()" class="waves-effect waves-light btn col s4 offset-s4"><i class="material-icons right">send</i>Voltar</a>
+                <a 
+                id="botao" 
+                type="submit" 
+                (click)="voltarAoLogin()" 
+                class="waves-effect waves-light btn col s4 offset-s4">
+                <i class="material-icons right">send</i>Voltar</a>
             </section>
         </div>
         </body>
