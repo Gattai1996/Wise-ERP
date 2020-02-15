@@ -27,5 +27,5 @@ export class InvoicesComponent implements OnInit {
     this.router.navigate(['/']);
 
   }
-
+  
 }
