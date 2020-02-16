@@ -1,16 +1,29 @@
 body {
     margin: 0;
     padding: 0;
-    /* background-image: linear-gradient(135deg, #83C3FF, #5994FF); */
     background-color: #fff;
-    min-height: 600px;
 }
 form {
-    background-color: #5275a1;
+    color: #fff;
+    background-color: #0277bd;
     border-radius: 1rem;
     margin-top: 10%;
     margin-bottom: 10%;
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+}
+#logo {
+    width: 60%;
+    margin-left: 20%;
+}
+#mensagem {
+    background-color: #e23939;
+    border-radius: 10px;
+    width: 60%;
+    margin-left: 20%;
+}
+form img {
+    margin-left: auto;
+    margin-right: auto;
 }
 #formulario {
     padding: 1.5rem;

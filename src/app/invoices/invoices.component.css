@@ -72,14 +72,16 @@ body {
     margin: 0;
     padding: 0;
     width: 15%;
-    background-color: #1e366c;
+    background-color: #0277bd;
     position: fixed;
     height: 100%;
     overflow: auto;
   }
-
+  .sidebar a {
+    font-size: 1rem;
+    transition: font-size 0.5s, background-color 0.5s;
+  }
   #logo {
-    background-color: white;
     width: 100%;
     padding: 5px;
   }
@@ -100,8 +102,9 @@ body {
   
   /* Links on mouse-over */
   .sidebar a:hover:not(.active) {
-    background-color: #00aaff;
+    background-color: #1e366c;
     color: white;
+    font-size: 2rem;
   }
   
   /* On screens that are less than 700px wide, make the sidebar into a topbar */
@@ -109,13 +112,13 @@ body {
     .sidebar {
       width: 100%;
       height: auto;
-      position: relative;
+      position: fixed;
     }
     .sidebar a {
         float: right;
     }
     #logo {
-        width: 250px;
+        width: 150px;
         float: left;
     }
     #content {
@@ -128,7 +131,9 @@ body {
   /* On screens that are less than 400px, display the bar vertically, instead of horizontally */
   @media screen and (max-width: 400px) {
     .sidebar a {
-      text-align: center;
-      float: none;
+      float: right;
+    }
+    #logo { 
+        width: 100px;
     }
   }
