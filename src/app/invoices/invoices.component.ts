@@ -14,7 +14,7 @@ export class InvoicesComponent implements OnInit {
   filtro: string = '';
 
   company_doc: string = '';
-
+ 
   constructor(
     private router: Router,
     private service: ConsultaCnpjService

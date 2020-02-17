@@ -54,8 +54,9 @@ export class LoginComponent implements OnInit {
     this.loginService.autenticar(usuario, senha).subscribe(
       (login: Login) => {
         this.login = login;
+        console.log(this.login);
         console.log('GET com sucesso, validando...');  
-        if(login[0].ok == true) {
+        if(login.ok == true) {
           console.log('Login validado com sucesso');
           this.router.navigate(['/invoices']);
         } else {
@@ -66,6 +67,7 @@ export class LoginComponent implements OnInit {
       }, 
       (error: any) => {
         this.erro = error;
+        alert('Usuário ou senha incorreta!')
         console.log('Deu erro ao tentar se inscrever!');
       });
       
