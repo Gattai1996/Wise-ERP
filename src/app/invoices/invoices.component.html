@@ -29,24 +29,24 @@
                     <a id="botao-buscar" 
                     type="submit" 
                     class="waves-effect waves-light btn col s4 m3 l2"
-                    (click)="filtro = cnpjDigitado">
+                    (click)="company_doc = cnpjDigitado"
+                    (click)="buscarCnpj()">
                     <i class="material-icons right">search</i>Buscar</a>
                 </div>            
-                
+
                 <!-- TABLE -->
                 <div class="col s12 m10 l8 offset-m1 offset-l2">
                     <table id="tabela" class="highlight">
                         <thead>
                             <tr id="titulos-tabela">
-                                <th id="razao_social">Razão Social</th>
-                                <th id="cnpj">CNPJ</th>
+                                <th id="razao_social">NOME FANTASIA</th>
+                                <th id="cnpj">CLIFOR</th>
                             </tr>
                         </thead>
-
                         <tbody>
-                            <tr *ngFor="let cliente of clientes">
-                            <td id="razao_social" *ngIf="cliente.cnpj == filtro"> {{ cliente.razao_social }} </td>
-                            <td id="cnpj" *ngIf="cliente.cnpj == filtro"> {{ cliente.cnpj }} </td>
+                            <tr>
+                                <td id=""> {{ clientes.customer_name }} </td>
+                                <td id=""> {{ clientes.customerFab_Id }} </td>
                             </tr>
                         </tbody>
                     </table>

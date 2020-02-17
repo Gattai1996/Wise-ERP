@@ -9,6 +9,7 @@ import { LoginService } from './services/login.service';
 import { FormsModule } from '@angular/forms';
 import { InvoicesComponent } from './invoices/invoices.component';
 import { HomeModule } from './home/home.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { HomeModule } from './home/home.module';
     AppRoutingModule,
     HttpClientModule,
     HomeModule,
-    FormsModule
+    FormsModule,
+    BrowserAnimationsModule
   ],
   providers: [
     HttpClient,

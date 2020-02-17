@@ -13,13 +13,19 @@ export class InvoicesComponent implements OnInit {
   clientes: ConsultaCnpj;
   filtro: string = '';
 
+  company_doc: string = '';
+
   constructor(
     private router: Router,
     private service: ConsultaCnpjService
     ) {};
 
   ngOnInit() {
-    this.service.listar().subscribe(dados => this.clientes = dados);
+    
+  }
+
+  public buscarCnpj () {
+    this.service.listar(this.company_doc).subscribe(dados => this.clientes = dados);
   }
 
   public voltarAoLogin() {

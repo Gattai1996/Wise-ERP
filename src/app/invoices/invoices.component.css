@@ -104,7 +104,7 @@ body {
   .sidebar a:hover:not(.active) {
     background-color: #1e366c;
     color: white;
-    font-size: 2rem;
+    font-size: 1.2rem;
   }
   
   /* On screens that are less than 700px wide, make the sidebar into a topbar */
