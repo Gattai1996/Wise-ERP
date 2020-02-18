@@ -9,12 +9,69 @@
             <!-- <li><a href="#">Exemplo</a></li> -->
             </ul>
         </div>
+<<<<<<< Updated upstream
         </nav>
         <div id="login" class="valign-wrapper">
             <section class="light-blue darken-3 white-text">
                 <h6 class="flow-text">WE_invoices</h6>
                 <a id="voltar" type="submit" (click)="voltarAoLogin()" class="waves-effect waves-light btn"><i class="material-icons right">send</i>Voltar</a>
             </section>
+=======
+
+        <!-- CONTENT -->
+        <div id="content" class="row">
+            <h6 id="titulo" class="flow-text">WE_invoices</h6>
+                 
+                <!-- DROPDOWNS -->
+                <div id="marca" class="col s8 m7 l4 offset-m1 offset-l3">
+                    <mat-form-field>
+                        <mat-label>Marca</mat-label>
+                        <mat-select>
+                            <mat-option>Nenhuma</mat-option>
+                            <mat-option *ngFor="let marca of marcas" value="marca.brand_name">{{ marca.brand_name }}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+                <!-- FORM -->
+                <div id="formulario">
+                    <div class="input-field col s8 m7 l4 offset-m1 offset-l3">
+                        <input id="buscar" 
+                        class="input-field inline" 
+                        type="text"
+                        (keyup)="cnpjDigitado = $event.target.value">
+                        <label for="buscar">Consultar CNPJ</label>
+                        <span class="helper-text">Digite apenas números</span>
+                    </div>
+                    
+                    <!-- BUTTON -->
+                    <a id="botao-buscar" 
+                    type="submit" 
+                    class="waves-effect waves-light btn col s4 m3 l2"
+                    (click)="company_doc = cnpjDigitado"
+                    (click)="buscarCnpj()"
+                    (click)="listaDeMarcas()">
+                    <i class="material-icons right">search</i>Buscar</a>
+                </div>            
+
+                <!-- TABLE -->
+                <div class="col s12 m10 l8 offset-m1 offset-l2">
+                    <table id="tabela" class="highlight">
+                        <thead>
+                            <tr id="titulos-tabela">
+                                <th id="razao_social">NOME FANTASIA</th>
+                                <th id="cnpj">CLIFOR</th>
+                            </tr>
+                        </thead>
+                        <tbody *ngIf="clienteValido == true">
+                            <tr>
+                                <td id=""> {{ clientes.customer_name }} </td>
+                                <td id=""> {{ clientes.customerFab_Id }} </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+>>>>>>> Stashed changes
         </div>
         </body>
         <footer class="white-text">Desenvolvido por &nbsp;<img src="https://wisecommerce-compuwise.azurewebsites.net/images/logo-signature.png"></footer>

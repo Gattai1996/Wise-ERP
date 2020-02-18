@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';  
 import { BrowserModule } from '@angular/platform-browser';
 import { Component, OnInit } from '@angular/core';
+
 import { Login } from 'src/app/models/login.model';
 import { LoginService } from 'src/app/services/login.service';
 import { Router } from '@angular/router';
@@ -32,23 +33,6 @@ export class LoginComponent implements OnInit {
 
   }
 
-  // fazerLogin() {
-  
-  //   const usuario = this.loginForm.get('user').value;
-  //   const senha = this.loginForm.get('password').value;
-
-  //   this.loginService.autenticar(senha, usuario)
-  //     .subscribe(
-  //       () => 
-  //         console.log('Estou autenticado'),
-  //       err => {
-  //         console.log('ERRO: ' + err);
-  //         this.loginForm.reset();
-  //         alert('Usuário incorreto ou senha incorreta!')
-  //       });
-
-  // }
-
   getter() {
     const usuario = this.loginForm.get('user').value;
     const senha = this.loginForm.get('password').value;
@@ -62,7 +46,10 @@ export class LoginComponent implements OnInit {
         } else {
           alert('Usuário ou senha incorreta!')
         }
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
       },
       (error: any) => {
         alert('Usuário e/ou senha inválidos!');
