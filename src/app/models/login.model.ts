@@ -1,7 +1,10 @@
 export class Login {
-    email:string;
-    ok:boolean;
-    profile:string;
+    customer_Id: string;
+    customer_name: string;
+    agent: string;
+    pricelist: string;
+    email: string;
+    ok: boolean;
+    profile: string;
     msg:string;
-
 }

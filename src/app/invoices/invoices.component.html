@@ -9,11 +9,28 @@
             <a href="#">Sair</a>
             <a href="/invoices">WE_invoices</a>
         </div>
+        </nav>
+        <div id="login" class="valign-wrapper">
+            <section class="light-blue darken-3 white-text">
+                <h6 class="flow-text">WE_invoices</h6>
+                <a id="voltar" type="submit" (click)="voltarAoLogin()" class="waves-effect waves-light btn"><i class="material-icons right">send</i>Voltar</a>
+            </section>
 
         <!-- CONTENT -->
         <div id="content" class="row">
             <h6 id="titulo" class="flow-text">WE_invoices</h6>
                  
+                <!-- DROPDOWNS -->
+                <div id="marca" class="col s8 m7 l4 offset-m1 offset-l3">
+                    <mat-form-field>
+                        <mat-label>Marca</mat-label>
+                        <mat-select>
+                            <mat-option>Nenhuma</mat-option>
+                            <mat-option *ngFor="let marca of marcas" value="marca.brand_name">{{ marca.brand_name }}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
                 <!-- FORM -->
                 <div id="formulario">
                     <div class="input-field col s8 m7 l4 offset-m1 offset-l3">
@@ -30,6 +47,8 @@
                     type="submit" 
                     class="waves-effect waves-light btn col s4 m3 l2"
                     (click)="company_doc = cnpjDigitado"
+                    (click)="buscarCnpj()"
+                    (click)="listaDeMarcas()">
                     (click)="buscarCnpj()">
                     <i class="material-icons right">search</i>Buscar</a>
                 </div>            
@@ -43,6 +62,7 @@
                                 <th id="cnpj">CLIFOR</th>
                             </tr>
                         </thead>
+                        <tbody *ngIf="clienteValido == true">
                         <tbody>
                             <tr>
                                 <td id=""> {{ clientes.customer_name }} </td>

@@ -15,6 +15,7 @@ export class ConsultaCnpjService {
 
   constructor(private http: HttpClient) { }
 
+  public listarClientes(company_doc: string):Observable<ConsultaCnpj> {
   public listar(company_doc: string):Observable<ConsultaCnpj> {
     console.log(this.API_URL + this.PARAMETERS + company_doc); 
     return this.http.get<ConsultaCnpj>(

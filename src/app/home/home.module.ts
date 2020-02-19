@@ -4,7 +4,9 @@ import { LoginComponent } from './login/login.component';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms'
-import { MatButtonModule } from '@angular/material'
+import { MaterialModule } from '../material/material.module';
+import { RouterModule } from '@angular/router';
+import { ReactiveFormsModule } from '@angular/forms'
 
 @NgModule({
     declarations: [LoginComponent],
@@ -12,7 +14,6 @@ import { MatButtonModule } from '@angular/material'
         ReactiveFormsModule, 
         RouterModule,
         CommonModule,
-        MatButtonModule
+        MaterialModule
     ]
-})
 export class HomeModule { }
