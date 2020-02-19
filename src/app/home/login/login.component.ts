@@ -1,5 +1,4 @@
 import { CommonModule } from '@angular/common';  
-import { BrowserModule } from '@angular/platform-browser';
 import { Component, OnInit } from '@angular/core';
 
 import { Login } from 'src/app/models/login.model';
@@ -48,7 +47,6 @@ export class LoginComponent implements OnInit {
           alert('Usuário ou senha incorreta!')
         }
       },
-      }, 
       (error: any) => {
         this.erro = error;
         alert('Usuário ou senha incorreta!')
@@ -58,9 +56,7 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-
     this.getter();
-
   }
 
 }

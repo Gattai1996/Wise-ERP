@@ -5,8 +5,6 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms'
 import { MaterialModule } from '../material/material.module';
-import { RouterModule } from '@angular/router';
-import { ReactiveFormsModule } from '@angular/forms'
 
 @NgModule({
     declarations: [LoginComponent],
@@ -16,4 +14,6 @@ import { ReactiveFormsModule } from '@angular/forms'
         CommonModule,
         MaterialModule
     ]
-export class HomeModule { }
+})
+
+export class HomeModule { };

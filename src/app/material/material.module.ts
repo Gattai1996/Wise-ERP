@@ -3,13 +3,15 @@ import { NgModule } from '@angular/core';
 import { 
   MatButtonModule,
   MatMenuModule,
-  MatSelectModule
+  MatSelectModule,
+  MatTableModule
 } from '@angular/material'
 
 const MeterialComponents = [
   MatButtonModule,
   MatMenuModule,
-  MatSelectModule
+  MatSelectModule,
+  MatTableModule
 ]
 
 @NgModule({
