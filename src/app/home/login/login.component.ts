@@ -21,10 +21,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private loginService: LoginService,
-    private router: Router) {
-
-  }
-
+    private router: Router) {}
+    
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
         user: ['', Validators.required],
@@ -40,20 +38,20 @@ export class LoginComponent implements OnInit {
     this.loginService.autenticar(usuario, senha).subscribe(
       (login: Login) => {
         this.login = login;
-        console.log('Se inscreveu com sucesso!');  
-        if(login[0].ok == true) {
+        console.log(this.login);
+        console.log('GET com sucesso, validando...');  
+        if(login.ok == true) {
+          console.log('Login validado com sucesso');
           this.router.navigate(['/invoices']);
         } else {
+          console.log('Login inválido');
           alert('Usuário ou senha incorreta!')
         }
-<<<<<<< Updated upstream
-
-=======
->>>>>>> Stashed changes
       },
+      }, 
       (error: any) => {
-        alert('Usuário e/ou senha inválidos!');
         this.erro = error;
+        alert('Usuário ou senha incorreta!')
         console.log('Deu erro ao tentar se inscrever!');
       });
       

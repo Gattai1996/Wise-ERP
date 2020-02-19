@@ -2,21 +2,19 @@
     <head>
     </head>
     <body>
-        <nav>
-        <div class="nav-wrapper light-blue darken-3">
-            <a id="logo" href="https://imgbb.com/"><img src="https://i.ibb.co/wszdgT7/wise-erp-logo.png" alt="wise-erp-logo" class="brand-logo center"/></a>
-            <ul id="nav-mobile" class="right hide-on-med-and-down">
-            <!-- <li><a href="#">Exemplo</a></li> -->
-            </ul>
+
+        <!-- SIDEBAR -->
+        <div class="sidebar">
+            <img id="logo" href="#" src="https://i.ibb.co/wszdgT7/wise-erp-logo.png" alt="wise-erp-logo"/>            
+            <a href="#">Sair</a>
+            <a href="/invoices">WE_invoices</a>
         </div>
-<<<<<<< Updated upstream
         </nav>
         <div id="login" class="valign-wrapper">
             <section class="light-blue darken-3 white-text">
                 <h6 class="flow-text">WE_invoices</h6>
                 <a id="voltar" type="submit" (click)="voltarAoLogin()" class="waves-effect waves-light btn"><i class="material-icons right">send</i>Voltar</a>
             </section>
-=======
 
         <!-- CONTENT -->
         <div id="content" class="row">
@@ -51,6 +49,7 @@
                     (click)="company_doc = cnpjDigitado"
                     (click)="buscarCnpj()"
                     (click)="listaDeMarcas()">
+                    (click)="buscarCnpj()">
                     <i class="material-icons right">search</i>Buscar</a>
                 </div>            
 
@@ -64,6 +63,7 @@
                             </tr>
                         </thead>
                         <tbody *ngIf="clienteValido == true">
+                        <tbody>
                             <tr>
                                 <td id=""> {{ clientes.customer_name }} </td>
                                 <td id=""> {{ clientes.customerFab_Id }} </td>
@@ -71,8 +71,8 @@
                         </tbody>
                     </table>
                 </div>
->>>>>>> Stashed changes
         </div>
-        </body>
-        <footer class="white-text">Desenvolvido por &nbsp;<img src="https://wisecommerce-compuwise.azurewebsites.net/images/logo-signature.png"></footer>
+
+    </body>
+
 </html>

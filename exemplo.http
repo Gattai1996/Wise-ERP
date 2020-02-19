@@ -1,0 +1,32 @@
+json-server --watch db.json
+
+http://localhost:3000/clientes
+
+###
+
+
+GET http://localhost:3000/clientes
+
+###
+
+POST http://localhost:3000/clientes HTTP/1.1
+content-type: application/json
+
+{
+    "razao_social":"ELIZABETH MARRIE LOCACAO DE TRAJES LTDA ME",
+    "cnpj":"73820276000432"
+}
+
+###
+
+PUT http://localhost:3000/clientes/1 HTTP/1.1
+content-type: application/json
+
+{
+    "razao_social":"MARIA DE LOURDES DA COSTA",
+    "cnpj":"07818159000167"
+}
+
+###
+
+DELETE http://localhost:3000/clientes/5

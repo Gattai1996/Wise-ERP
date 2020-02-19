@@ -1,33 +1,38 @@
-body {
+/* NORMALIZE */
+* {
     margin: 0;
     padding: 0;
-    background-image: linear-gradient(135deg, #83C3FF, #5994FF); 
-    height: 725px;
 }
-section {
-    background-color: #5275a1;
-    padding: 1.5rem;
-    border-radius: 1rem;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 8rem;
-    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+/* CONTENT */
+body {
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
 }
-#voltar {
-    border-radius: 1rem;
+#content {
+    width: 85%;
+    margin-left: 15%;
+    padding: 5px;
 }
-#login {
+#titulo {
+    margin-top: 5% 0;
+    font-size: 3rem;
+    font-style: bolder;
     text-align: center;
-    margin-left: auto;
-    margin-right: auto;
 }
-footer {
+#formulario {
+    margin: 5% 0;
+}
+#tabela {
+    margin: 5% 0;
+    border-style: solid;
+    border-width: 1px;
+    border-color: rgba(151, 151, 151, 0.5);
+}
+#titulos-tabela {
+    color: #fff;
     background-color: #1e366c;
-    text-align: center;
-    padding: 1rem;
 }
-<<<<<<< Updated upstream
-=======
 #razao_social {
     border-style: solid;
     border-width: 1px;
@@ -136,4 +141,3 @@ footer {
         width: 100px;
     }
   }
->>>>>>> Stashed changes

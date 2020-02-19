@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Router } from '@angular/router';
-<<<<<<< Updated upstream
-=======
 import { ConsultaCnpjService } from '../services/consulta-cnpj.service';
 import { ConsultaCnpj } from '../models/consulta-cnpj.model';
 import { BrandsService } from '../services/brands.service';
 import { Brands } from '../models/brands.models';
->>>>>>> Stashed changes
+import { ConsultaCnpjService } from '../services/consulta-cnpj.service';
+import { ConsultaCnpj } from '../models/consulta-cnpj.model';
 
 @Component({
   selector: 'app-dashboard',
@@ -16,17 +15,29 @@ import { Brands } from '../models/brands.models';
 })
 export class InvoicesComponent implements OnInit {
 
-<<<<<<< Updated upstream
+  clientes: ConsultaCnpj;
+  filtro: string = '';
+
+  company_doc: string = '';
+ 
+  constructor(
+    private router: Router,
+    private service: ConsultaCnpjService
+    ) {};
+
   ngOnInit() {
+    
   }
 
   constructor(private router: Router) {};
-=======
   clientes: ConsultaCnpj;
   marcas: Brands;
   filtro: string = '';
   erroCnpj: any;
   erroMarcas: any;
+  public buscarCnpj () {
+    this.service.listar(this.company_doc).subscribe(dados => this.clientes = dados);
+  }
 
   company_doc: string = '';
   clienteValido: boolean = false;
@@ -56,7 +67,6 @@ export class InvoicesComponent implements OnInit {
       console.log('ERRO: ' + this.erroCnpj)}
       )
   }
->>>>>>> Stashed changes
 
   public listaDeMarcas() { 
 
@@ -70,5 +80,5 @@ export class InvoicesComponent implements OnInit {
   public voltarAoLogin() {
     this.router.navigate(['/']);
   }
-
+  
 }
