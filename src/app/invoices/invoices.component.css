@@ -15,13 +15,13 @@ body {
     padding: 5px;
 }
 #titulo {
-    margin-top: 5% 0;
+    margin-top: 5%;
     font-size: 3rem;
     font-style: bolder;
     text-align: center;
 }
 #formulario {
-    margin: 5% 0;
+    margin-top: 5%;
 }
 #tabela {
     margin: 5% 0;
@@ -48,9 +48,6 @@ body {
 .mat-form-field {
   margin-top: 5%;
   margin-right: 1rem;
-}
-#marca, #colecao, #representante {
-  width: 100px;
 }
 
 
@@ -90,11 +87,9 @@ th, td {
   border-right: 1px solid #e0e0e0;
 }
 
-.mat-table-sticky:last-child {
-  border-left: 1px solid #e0e0e0;
+#filtro {
+  margin-top: 3%;
 }
-
-
 
 
 
@@ -179,8 +174,11 @@ th, td {
     .sidebar a {
         float: right;
     }
+    #marca, #colecao {
+      margin-top: 70px;
+    }
     #logo {
-        width: 150px;
+        width: 200px;
         float: left;
     }
     #content {
@@ -189,7 +187,7 @@ th, td {
     }
 
     .example-container {
-      height: 300px;
+      height: 200px;
     }
     
   
@@ -201,6 +199,6 @@ th, td {
       float: right;
     }
     #logo { 
-        width: 100px;
+        width: 150px;
     }
   }
