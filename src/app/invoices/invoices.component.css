@@ -1,28 +1,204 @@
-body {
+/* NORMALIZE */
+* {
     margin: 0;
     padding: 0;
-    background-image: linear-gradient(135deg, #83C3FF, #5994FF); 
-    height: 725px;
 }
-section {
-    background-color: #5275a1;
-    padding: 1.5rem;
-    border-radius: 1rem;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 8rem;
-    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+/* CONTENT */
+body {
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
 }
-#voltar {
-    border-radius: 1rem;
+#content {
+    width: 85%;
+    margin-left: 15%;
+    padding: 5px;
 }
-#login {
+#titulo {
+    margin-top: 5%;
+    font-size: 3rem;
+    font-style: bolder;
     text-align: center;
-    margin-left: auto;
-    margin-right: auto;
 }
-footer {
+#formulario {
+    margin-top: 5%;
+}
+#tabela {
+    margin: 5% 0;
+    border-style: solid;
+    border-width: 1px;
+    border-color: rgba(151, 151, 151, 0.5);
+}
+#titulos-tabela {
+    color: #fff;
     background-color: #1e366c;
-    text-align: center;
-    padding: 1rem;
 }
+#razao_social {
+    border-style: solid;
+    border-width: 1px;
+    border-color: rgba(151, 151, 151, 0.5);
+}
+#cnpj {
+    border-style: solid;
+    border-width: 1px;
+    border-color: rgba(151, 151, 151, 0.5);
+} 
+
+/* DROPDOWNS */
+.mat-form-field {
+  margin-top: 5%;
+  margin-right: 1rem;
+}
+
+
+
+
+
+
+
+.example-container {
+  margin-top: 5%;
+  height: 450px;
+  width: 800px;
+  overflow: auto;
+}
+
+table {
+  width: 800px;
+}
+
+td.mat-column-star {
+  width: 20px;
+  padding-right: 8px;
+}
+
+th.mat-column-position, td.mat-column-position {
+  padding-left: 8px;
+}
+
+th, td {
+  border-right: 1px solid #e0e0e0;
+  border-left: 1px solid #e0e0e0;
+  text-align: center;
+
+}
+
+.mat-table-sticky:first-child {
+  border-right: 1px solid #e0e0e0;
+}
+
+#filtro {
+  margin-top: 3%;
+}
+
+
+
+
+
+
+
+
+
+
+
+/* FORM */
+/* label color */
+.input-field label {
+    color: #000;
+  }
+  /* label focus color */
+  .input-field input[type=text]:focus + label {
+    color: #00aaff;
+    font-style: bolder;
+  }
+  /* label underline focus color */
+  .input-field input[type=text]:focus {
+    border-bottom: 1px solid #00aaff;
+    box-shadow: 0 1px 0 0 #0277b1;
+  }
+ /* BUTTON */
+ .btn {
+    background-color: #1e366c;
+}
+.btn:hover {
+    background-color: #00aaff;
+}
+/* SIDEBAR */
+/* The side navigation menu */
+.sidebar {
+    margin: 0;
+    padding: 0;
+    width: 15%;
+    background-color: #0277bd;
+    position: fixed;
+    height: 100%;
+    overflow: auto;
+  }
+  .sidebar a {
+    font-size: 1rem;
+    transition: font-size 0.5s, background-color 0.5s;
+  }
+  #logo {
+    width: 100%;
+    padding: 5px;
+  }
+  
+  /* Sidebar links */
+  .sidebar a {
+    display: block;
+    color: white;
+    padding: 16px;
+    text-decoration: none;
+  }
+  
+  /* Active/current link */
+  .sidebar a.active {
+    background-color: #4CAF50;
+    color: white;
+  }
+  
+  /* Links on mouse-over */
+  .sidebar a:hover:not(.active) {
+    background-color: #1e366c;
+    color: white;
+    font-size: 1.2rem;
+  }
+  
+  /* On screens that are less than 700px wide, make the sidebar into a topbar */
+  @media screen and (max-width: 700px) {
+    .sidebar {
+      width: 100%;
+      height: auto;
+      position: fixed;
+    }
+    .sidebar a {
+        float: right;
+    }
+    #marca, #colecao {
+      margin-top: 70px;
+    }
+    #logo {
+        width: 200px;
+        float: left;
+    }
+    #content {
+        width: 100%;
+        margin-left: 0;
+    }
+
+    .example-container {
+      height: 200px;
+    }
+    
+  
+  }
+    
+  /* On screens that are less than 400px, display the bar vertically, instead of horizontally */
+  @media screen and (max-width: 400px) {
+    .sidebar a {
+      float: right;
+    }
+    #logo { 
+        width: 150px;
+    }
+  }

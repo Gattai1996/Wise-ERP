@@ -1,6 +1,6 @@
-import { CommonModule } from '@angular/common';  
-import { BrowserModule } from '@angular/platform-browser';
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+
 import { Login } from 'src/app/models/login.model';
 import { LoginService } from 'src/app/services/login.service';
 import { Router } from '@angular/router';
@@ -20,9 +20,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private loginService: LoginService,
-    private router: Router) {
-
-  }
+    private router: Router) {}
 
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
@@ -32,23 +30,6 @@ export class LoginComponent implements OnInit {
 
   }
 
-  // fazerLogin() {
-  
-  //   const usuario = this.loginForm.get('user').value;
-  //   const senha = this.loginForm.get('password').value;
-
-  //   this.loginService.autenticar(senha, usuario)
-  //     .subscribe(
-  //       () => 
-  //         console.log('Estou autenticado'),
-  //       err => {
-  //         console.log('ERRO: ' + err);
-  //         this.loginForm.reset();
-  //         alert('Usuário incorreto ou senha incorreta!')
-  //       });
-
-  // }
-
   getter() {
     const usuario = this.loginForm.get('user').value;
     const senha = this.loginForm.get('password').value;
@@ -56,26 +37,25 @@ export class LoginComponent implements OnInit {
     this.loginService.autenticar(usuario, senha).subscribe(
       (login: Login) => {
         this.login = login;
-        console.log('Se inscreveu com sucesso!');  
-        if(login[0].ok == true) {
+        console.log(this.login);
+        console.log('GET com sucesso, validando...');
+        if (login.ok === true) {
+          console.log('Login validado com sucesso');
           this.router.navigate(['/invoices']);
         } else {
-          alert('Usuário ou senha incorreta!')
+          console.log('Login inválido');
+          alert('Usuário ou senha incorreta!');
         }
-
       },
       (error: any) => {
-        alert('Usuário e/ou senha inválidos!');
         this.erro = error;
+        alert('Usuário ou senha incorreta!');
         console.log('Deu erro ao tentar se inscrever!');
       });
-      
   }
 
   onSubmit() {
-
     this.getter();
-
   }
 
 }

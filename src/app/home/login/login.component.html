@@ -1,7 +1,7 @@
 <html>
     <head>
     </head>
-    <body>
+    <!-- <body>
         <nav>
         <div class="nav-wrapper light-blue darken-3">
             <a id="logo">
@@ -9,62 +9,67 @@
                 alt="wise-erp-logo" 
                 class="brand-logo center"/></a>
             <ul id="nav-mobile" class="right hide-on-med-and-down">
-            <!-- <li><a href="#">Exemplo</a></li> -->
             </ul>
         </div>
         </nav>
         <div id="login" class="valign-wrapper">
+        <div class="row"> -->
+    <body>       
+        <div class="row">
             <form 
+            id="formulario"
             [formGroup]="loginForm" 
-            class="light-blue darken-3 white-text"
-            (submit)="onSubmit()"
-            >
+            class="col s10 m6 l4 offset-s1 offset-m3 offset-l4"
+            (submit)="onSubmit()">
+                <div id="logo">
+                    <img src="https://i.ibb.co/wszdgT7/wise-erp-logo.png" alt="wise-erp-logo" class="responsive-img">
+                </div>
                 <div class="row">
-                    <div class="input-field col s12">
+                    <div class="input-field col s10  offset-s1">
                         <i class="tiny material-icons prefix">account_box</i>
-                        <input formControlName="user" 
+                        <input 
+                        class="form-group"
+                        formControlName="user" 
                         autofocus
                         id="Login" 
                         type="text" 
                         (change)="usuario = $event.target.value" 
                         class="white-text">
                         <label for="Login">Usuário</label>
-                        <blockquote 
-                        *ngIf="loginForm.get('user').errors?.required" 
-                        class="flow-text red-text text-lighten-2">
+                        <div
+                        id="mensagem"
+                        *ngIf="loginForm.get('user').errors?.required && loginForm.get('user').touched" 
+                        class="flow-text white-text">
                             Usuário é obrigatório
-                            <i class="small material-icons">announcement</i>
-                        </blockquote>
+                            <i class="tiny material-icons">announcement</i>
+                        </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="input-field col s12">
+                    <div class="input-field col s10 offset-s1">
                         <i class="tiny material-icons prefix">lock</i>
-                        <input formControlName="password" 
-                        id="senha" type="password" 
+                        <input 
+                        class="form-group"
+                        formControlName="password" 
+                        id="senha" 
+                        type="password" 
                         (change)="senha = $event.target.value" 
                         class="white-text">
                         <label for="senha" class="password">Senha</label>
-                        <blockquote 
-                        *ngIf="loginForm.get('password').errors?.required" 
-                        class="flow-text red-text text-lighten-2">
+                        <div
+                        id="mensagem"
+                        *ngIf="loginForm.get('password').errors?.required && loginForm.get('password').touched" 
+                        class="flow-text white-text">
                             Senha é obrigatória
-                            <i class="small material-icons">announcement</i>
-                        </blockquote>
-                    </div>
+                            <i class="tiny material-icons">announcement</i>
+                        </div>
+                    </div>    
+                    <button 
+                    [disabled]="loginForm.invalid"
+                    id="entrar" 
+                    type="submit" 
+                    class="waves-effect waves-light btn col s10 m6 l4 offset-s1 offset-m3 offset-l4">
+                    <i class="material-icons right">send</i>Login</button>
                 </div>
-                <button 
-                [disabled]="loginForm.invalid"
-                id="entrar" 
-                type="submit" 
-                class="waves-effect waves-light btn">
-                <i class="material-icons right">send</i>Login</button>
-                <!-- <p class="flow-text" *ngIf="this.login[0].ok === true">Seja bem vindo ao Wise ERP!</p>
-                <p class="flow-text" *ngIf="this.login[0].ok === false">Login ou senha incorreta!</p> -->
             </form>
         </div>
-        </body>
-        <footer class="white-text">Desenvolvido por &nbsp;
-            <img src="https://wisecommerce-compuwise.azurewebsites.net/images/logo-signature.png">
-        </footer>
+    </body>
 </html>

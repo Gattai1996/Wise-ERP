@@ -7,11 +7,13 @@ import { AppComponent } from './app.component';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-
 import { LoginService } from './services/login.service';
 import { FormsModule } from '@angular/forms';
 import { InvoicesComponent } from './invoices/invoices.component';
 import { HomeModule } from './home/home.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MaterialModule } from './material/material.module';
+import { BrandsService } from './services/brands.service';
 
 @NgModule({
   declarations: [
@@ -24,11 +26,14 @@ import { HomeModule } from './home/home.module';
     AppRoutingModule,
     HttpClientModule,
     HomeModule,
-    FormsModule
+    FormsModule,
+    BrowserAnimationsModule,
+    MaterialModule
   ],
   providers: [
     HttpClient,
-    LoginService
+    LoginService,
+    BrandsService
   ],
   bootstrap: [AppComponent]
 })

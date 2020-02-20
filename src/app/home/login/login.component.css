@@ -1,28 +1,55 @@
 body {
     margin: 0;
     padding: 0;
-    background-image: linear-gradient(135deg, #83C3FF, #5994FF); 
-    height: 725px;
+    background-color: #fff;
 }
 form {
-    background-color: #5275a1;
-    padding: 1.5rem;
+    color: #fff;
+    background-color: #0277bd;
     border-radius: 1rem;
+    margin-top: 10%;
+    margin-bottom: 10%;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+}
+#logo {
+    width: 60%;
+    margin-left: 20%;
+}
+#mensagem {
+    background-color: #e23939;
+    border-radius: 10px;
+    width: 60%;
+    margin-left: 20%;
+}
+form img {
     margin-left: auto;
     margin-right: auto;
-    margin-top: 8rem;
-    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+}
+#formulario {
+    padding: 1.5rem;
 }
 #entrar {
     border-radius: 1rem;
 }
-#login {
+#mensagem {
+    font-size: 1rem;
     text-align: center;
-    margin-left: auto;
-    margin-right: auto;
 }
 footer {
     background-color: #1e366c;
     text-align: center;
     padding: 1rem;
+}
+/* BREAKPOINTS */
+@media screen and (max-width: 600px) {
+    form {
+        margin-top: 19%;
+        margin-bottom: 19%;
+    }
+}
+@media screen and (min-width: 992px) {
+    form {
+        margin-top: 8%;
+        margin-bottom: 8%;
+    }
 }
