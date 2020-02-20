@@ -10,14 +10,16 @@ import { tap } from 'rxjs/operators';
 })
 export class BrandsService {
 
-  private readonly API_URL = 'http://wiseerp-api-demo.azurewebsites.net/api/brands?'
-  private readonly PARAMETERS = 'company_Id=1&'
+  private readonly API_URL = 'http://wiseerp-api-demo.azurewebsites.net/api/brands?';
+  private readonly PARAMETERS = 'company_Id=1&';
 
-  dept_Id = '1'
+  // tslint:disable-next-line: variable-name
+  dept_Id = '1';
 
   constructor(private http: HttpClient) { }
 
-  public listarMarcas(dept_Id: string):Observable<Brands> {
+  // tslint:disable-next-line: variable-name
+  public listarMarcas(dept_Id: string): Observable<Brands> {
     console.log(this.API_URL + this.PARAMETERS + dept_Id);
     return this.http.get<Brands>(
       this.API_URL + this.PARAMETERS + 'dept_Id=' + dept_Id)
