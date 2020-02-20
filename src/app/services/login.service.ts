@@ -3,20 +3,21 @@ import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Login } from '../models/login.model';
 
+const API_URL = 'http://wiseerp-api-demo.azurewebsites.net/api/login';
+const PARAMETERS = '?company_Id=1&dept_Id=1&brand_Id=58';
+
 @Injectable({
   providedIn: 'root'
 })
 
-export class LoginService {
-
-  SEARCH_URL: string = `https://wiseapi-compuwise.azurewebsites.net/service.asmx/login`;
-  PARAMETERS: string = `?brand_Id=58&collection_Id=4&company_Id=1&dept_Id=1&`;
+export class LoginService{
 
   constructor(private http: HttpClient) { }
 
-  public getLogin(usuario: string, senha: string):Observable<Login> {
-    return this.http.get<Login[]>(
-      this.SEARCH_URL + this.PARAMETERS + `password=` + senha + `&user=` + usuario
-      );
+
+  public autenticar(usuario: string, senha: string): Observable<Login> {
+      console.log(API_URL + PARAMETERS + '&user=' + usuario + '&password=' + senha);
+      return this.http.get<Login>(
+        API_URL + PARAMETERS + '&user=' + usuario + '&password=' + senha);
   }
 }
