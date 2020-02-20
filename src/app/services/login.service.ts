@@ -10,14 +10,14 @@ const PARAMETERS = '?company_Id=1&dept_Id=1&brand_Id=58';
   providedIn: 'root'
 })
 
-export class LoginService{
+export class LoginService {
 
   constructor(private http: HttpClient) { }
 
 
   public autenticar(usuario: string, senha: string): Observable<Login> {
-      console.log(API_URL + PARAMETERS + '&user=' + usuario + '&password=' + senha);
-      return this.http.get<Login>(
+    console.log(API_URL + PARAMETERS + '&user=' + usuario + '&password=' + senha);
+    return this.http.get<Login>(
         API_URL + PARAMETERS + '&user=' + usuario + '&password=' + senha);
   }
 }
