@@ -1,4 +1,6 @@
 export class Collections {
-    collection_Id:number;
-    collection_name:string;
+    // tslint:disable-next-line: variable-name
+    collection_Id: number;
+    // tslint:disable-next-line: variable-name
+    collection_name: string;
 }

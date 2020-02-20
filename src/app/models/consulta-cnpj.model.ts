@@ -1,4 +1,6 @@
 export class ConsultaCnpj {
-    customer_name:string;
-    customerFab_Id:string;
+    // tslint:disable-next-line: variable-name
+    customer_name: string;
+    // tslint:disable-next-line: variable-name
+    customerFab_Id: string;
 }

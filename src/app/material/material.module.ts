@@ -1,22 +1,23 @@
 import { NgModule } from '@angular/core';
 
-import { 
+import {
   MatButtonModule,
   MatMenuModule,
   MatSelectModule,
   MatTableModule,
   MatSortModule,
   MatPaginatorModule
-} from '@angular/material'
+} from '@angular/material';
 
-const MeterialComponents = [
+const MeterialComponents =
+[
   MatButtonModule,
   MatMenuModule,
   MatSelectModule,
   MatTableModule,
   MatSortModule,
   MatPaginatorModule
-]
+];
 
 @NgModule({
   imports: [MeterialComponents],
