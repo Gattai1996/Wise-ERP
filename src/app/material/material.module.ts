@@ -4,14 +4,18 @@ import {
   MatButtonModule,
   MatMenuModule,
   MatSelectModule,
-  MatTableModule
+  MatTableModule,
+  MatSortModule,
+  MatPaginatorModule
 } from '@angular/material'
 
 const MeterialComponents = [
   MatButtonModule,
   MatMenuModule,
   MatSelectModule,
-  MatTableModule
+  MatTableModule,
+  MatSortModule,
+  MatPaginatorModule
 ]
 
 @NgModule({
