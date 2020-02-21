@@ -3,202 +3,234 @@
     </head>
     <body>
 
-        <!-- SIDEBAR -->
-        <div class="sidebar">
-            <img id="logo" href="#" src="https://i.ibb.co/wszdgT7/wise-erp-logo.png" alt="wise-erp-logo"/>            
-            <a href="#">Sair</a>
-            <a href="/invoices">WE_invoices</a>
-        </div>
-        <!-- <div id="login" class="valign-wrapper">
-            <section class="light-blue darken-3 white-text">
-                <h6 class="flow-text">WE_invoices</h6>
-                <a id="voltar" type="submit" (click)="voltarAoLogin()" class="waves-effect waves-light btn"><i class="material-icons right">send</i>Voltar</a>
-            </section> -->
+        <!----------------------- SIDEBAR ---------------------->
 
-        <!-- CONTENT -->
-        <div id="content" class="row">
+        <mat-sidenav-container>
+
+            <mat-sidenav #sidenav mode="over" [(opened)]="sidenavAberta">
+                <img id="logo" href="#" 
+                src="https://i.ibb.co/wszdgT7/wise-erp-logo.png" 
+                alt="wise-erp-logo">            
+                <div id="fecharmenu">
+                    <button mat-raised-button color="primary">
+                        <mat-icon (click)="sidenav.toggle()">chevron_left</mat-icon>
+                    </button>
+                </div>
+                <mat-nav-list>
+                    <a href="#">
+                        <mat-list-item id="sair">Sair</mat-list-item>
+                    </a>
+                    <a href="/invoices">
+                        <mat-list-item id="invoices">WE_invoices</mat-list-item>
+                    </a>
+                </mat-nav-list>
+            </mat-sidenav>
+
+            <mat-sidenav-content>
+                <div id="abrirmenu">
+                    <button mat-raised-button color="primary">
+                        <mat-icon (click)="sidenav.toggle()">chevron_right</mat-icon>
+                    </button>
+                </div>
+
+                <!------------------ CONTENT -------------------->
+
+                <div id="content" class="row">
             
-                 
-                <!-- DROPDOWNS -->
-                <div class="col s12">
+                    <!------------------ DROPDOWNS -------------------->
+                    <div class="col s12">
 
-                    <mat-form-field class="col s5" id="marca">
-                        <mat-label>Marca</mat-label>
-                        <mat-select>
-                            <mat-option>Todas</mat-option>
-                            <mat-option *ngFor="let marca of marcas" value="marca.brand_name">{{ marca.brand_name }}</mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                
-                    <mat-form-field class="col s6" id="colecao">
-                        <mat-label>Coleção</mat-label>
-                        <mat-select>
-                            <mat-option>Todas</mat-option>
-                            <mat-option *ngFor="let colecao of colecoes" value="colecao.collection_name">{{ colecao.collection_name }}</mat-option>
-                        </mat-select>
-                    </mat-form-field>
+                        <!---------------- MARCA ------------------->
+                        <mat-form-field class="col s12" id="marca">
+                            <mat-label>Marca</mat-label>
+                            <mat-select>
+                                <mat-option>Todas</mat-option>
+                                <mat-option *ngFor="let marca of marcas" 
+                                value="marca.brand_name">{{ marca.brand_name }}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    
+                        <!---------------- COLEÇÃO ------------------->
+                        <mat-form-field class="col s12" id="colecao">
+                            <mat-label>Coleção</mat-label>
+                            <mat-select>
+                                <mat-option>Todas</mat-option>
+                                <mat-option *ngFor="let colecao of colecoes" 
+                                value="colecao.collection_name">{{ colecao.collection_name }}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
 
-                    <mat-form-field class="col s5" id="colecao">
-                        <mat-label>Representante</mat-label>
-                        <mat-select>
-                            <mat-option>Todos</mat-option>
-                            <mat-option *ngFor="let repre of repres" value="repre.agent_name">{{ repre.agent_name }}</mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                
-                    <div class="input-field col s6">
-                        <input id="filtro" 
-                        class="input-field inline" 
-                        type="text"
-                        (keyup)="aplicarFiltro($event.target.value)">
-                        <label for="filtro">Filtro</label>
-                        <span class="helper-text">Filtrar por qualquer campo</span>
+                        <!--------------------- REPRESENTANTE --------------------->
+                        <mat-form-field class="col s12" id="colecao">
+                            <mat-label>Representante</mat-label>
+                            <mat-select>
+                                <mat-option>Todos</mat-option>
+                                <mat-option *ngFor="let repre of repres" 
+                                value="repre.agent_name">{{ repre.agent_name }}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        
+                        <!--------------------- FILTRO DIRETO NO GRID ------------------------>
+                        <div class="input-field col s12">
+                            <input id="filtro" 
+                            class="input-field inline" 
+                            type="text"
+                            (keyup)="aplicarFiltro($event.target.value)">
+                            <label for="filtro">Filtro</label>
+                            <span class="helper-text">Filtrar por qualquer campo</span>
+                        </div>
+
                     </div>
+
+
+                    <!------------------- FORM DE CNPJ ------------------------>
+                    <div>
+                        <div id="formulario" class="input-field col s12">
+                            <input 
+                            class="input-field inline" 
+                            type="text"
+                            (keyup)="cnpjDigitado = $event.target.value">
+                            <label for="buscar">Consultar CNPJ</label>
+                            <span class="helper-text">Digite apenas números</span>
+                        </div>
+                        
+                        <!-------------- BUTTON PESQUISAR CNPJ ------------->
+                        <a id="botao-buscar" 
+                        type="submit" 
+                        class="waves-effect waves-light btn col s12"
+                        (click)="company_doc = cnpjDigitado"
+                        (click)="buscarCnpj()"
+                        (click)="listaDeMarcas()"
+                        (click)="listaDeColecoes()">
+                        <i class="material-icons right">search</i>BUSCAR CNPJ</a>
+                    </div>            
+
+                    <!-------------------- TABELA DE CNPJ --------------------->
+                    
+                    <!-- <div class="col s12 m10 l8 offset-m1 offset-l2">
+                        <table id="tabela" class="highlight">
+                            <thead>
+                                <tr id="titulos-tabela">
+                                    <th id="razao_social">NOME FANTASIA</th>
+                                    <th id="cnpj">CLIFOR</th>
+                                </tr>
+                            </thead>
+                            <tbody *ngIf="clienteValido == true">
+                                <tr>
+                                    <td id=""> {{ clientes.customer_name }} </td>
+                                    <td id=""> {{ clientes.customerFab_Id }} </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div> -->
+
+                    <!-------------------- GRID DE INVOICES -------------------->
+
+                    <div class="tabela-container mat-elevation-z4 col s12">
+
+                        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
+                            <!-- cnpj Column -->
+                            <ng-container matColumnDef="cnpj">
+                                <th mat-header-cell mat-sort-header *matHeaderCellDef> CNPJ </th>
+                                <td mat-cell *matCellDef="let element"> {{element.cnpj}} </td>
+                            </ng-container>
+                            
+                            <!-- pedido_linx Column -->
+                            <ng-container matColumnDef="pedido_linx">
+                                <th mat-header-cell mat-sort-header *matHeaderCellDef> PEDIDO_LINX </th>
+                                <td mat-cell *matCellDef="let element"> {{element.pedido_linx}} </td>
+                            </ng-container>
+                            
+                            <!-- pedido_wise Column -->
+                            <ng-container matColumnDef="pedido_wise">
+                                <th mat-header-cell mat-sort-header *matHeaderCellDef> PEDIDO_WISE </th>
+                                <td mat-cell *matCellDef="let element"> {{element.pedido_wise}} </td>
+                            </ng-container>
+                            
+                            <!-- nf Column -->
+                            <ng-container matColumnDef="nf">
+                                <th mat-header-cell mat-sort-header *matHeaderCellDef> NF </th>
+                                <td mat-cell *matCellDef="let element"> {{element.nf}} </td>
+                            </ng-container>
+
+                            <!-- dt_faturamento Column -->
+                            <ng-container matColumnDef="dt_faturamento">
+                                <th mat-header-cell mat-sort-header *matHeaderCellDef> DATA_DE_FATURAMENTO </th>
+                                <td mat-cell *matCellDef="let element"> {{element.dt_faturamento}} </td>
+                            </ng-container>
+
+                            <!-- dt_fat_relat Column -->
+                            <ng-container matColumnDef="dt_fat_relat">
+                                <th mat-header-cell mat-sort-header *matHeaderCellDef> DATA_DE_FATURAMENTO_RELATÓRIO </th>
+                                <td mat-cell *matCellDef="let element"> {{element.dt_fat_relat}} </td>
+                            </ng-container>
+
+                            <!-- marca Column -->
+                            <ng-container matColumnDef="marca">
+                                <th mat-header-cell mat-sort-header *matHeaderCellDef> MARCA </th>
+                                <td mat-cell *matCellDef="let element"> {{element.marca}} </td>
+                            </ng-container>
+
+                            <!-- total_pecas_pedido Column -->
+                            <ng-container matColumnDef="total_pecas_pedido">
+                                <th mat-header-cell mat-sort-header *matHeaderCellDef> TOTAL_PEÇAS_PEDIDO </th>
+                                <td mat-cell *matCellDef="let element"> {{element.total_pecas_pedido}} </td>
+                            </ng-container>
+
+                            <!-- total_valor_pedido Column -->
+                            <ng-container matColumnDef="total_valor_pedido">
+                                <th mat-header-cell mat-sort-header *matHeaderCellDef> TOTAL_VALOR_PEDIDO </th>
+                                <td mat-cell *matCellDef="let element"> {{element.total_valor_pedido}} </td>
+                            </ng-container>
+
+                            <!-- nf Column -->
+                            <ng-container matColumnDef="qtde_embalada">
+                                <th mat-header-cell mat-sort-header *matHeaderCellDef> QUANTIDADE_EMBALADA </th>
+                                <td mat-cell *matCellDef="let element"> {{element.qtde_embalada}} </td>
+                            </ng-container>
+
+                            <!-- valor_embalado Column -->
+                            <ng-container matColumnDef="valor_embalado">
+                                <th mat-header-cell mat-sort-header *matHeaderCellDef> VALOR_EMBALADO </th>
+                                <td mat-cell *matCellDef="let element"> {{element.valor_embalado}} </td>
+                            </ng-container>
+
+                            <!-- total_pecas_faturadas Column -->
+                            <ng-container matColumnDef="total_pecas_faturadas">
+                                <th mat-header-cell mat-sort-header *matHeaderCellDef> TOTAL_PEÇAS_FATURADAS </th>
+                                <td mat-cell *matCellDef="let element"> {{element.total_pecas_faturadas}} </td>
+                            </ng-container>
+
+                            <!-- total_valor_faturado Column -->
+                            <ng-container matColumnDef="total_valor_faturado">
+                                <th mat-header-cell mat-sort-header *matHeaderCellDef> TOTAL_VALOR_FATURADO </th>
+                                <td mat-cell *matCellDef="let element"> {{element.total_valor_faturado}} </td>
+                            </ng-container>
+
+                            <!-- porcentagem_fat Column -->
+                            <ng-container matColumnDef="porcentagem_fat">
+                                <th mat-header-cell mat-sort-header *matHeaderCellDef> PORCENTAGEM_FATURADA </th>
+                                <td mat-cell *matCellDef="let element"> {{element.porcentagem_fat}} </td>
+                            </ng-container>
+                            
+                            <tr mat-header-row 
+                            *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+                            <tr mat-row 
+                            *matRowDef="let row; columns: displayedColumns;"></tr>
+                        </table>
+                        
+                    </div>
+
+                    <mat-paginator class="col s12 mat-elevation-z8" 
+                    [pageSizeOptions]="[10, 20, 50, 100]" 
+                    showFirstLastButtons>
+                    </mat-paginator>
 
                 </div>
 
+            </mat-sidenav-content>
 
-                <!-- FORM -->
-                <div id="formulario">
-                    <div class="input-field col s9 l4 offset-l3">
-                        <input id="buscar" 
-                        class="input-field inline" 
-                        type="text"
-                        (keyup)="cnpjDigitado = $event.target.value">
-                        <label for="buscar">Consultar CNPJ</label>
-                        <span class="helper-text">Digite apenas números</span>
-                    </div>
-                    
-                    <!-- BUTTON -->
-                    <a id="botao-buscar" 
-                    type="submit" 
-                    class="waves-effect waves-light btn col s5 m3 l2"
-                    (click)="company_doc = cnpjDigitado"
-                    (click)="buscarCnpj()"
-                    (click)="listaDeMarcas()"
-                    (click)="listaDeColecoes()">
-                    <i class="material-icons right">search</i>Buscar</a>
-                </div>            
-
-                <!-- TABLE -->
-                <!-- <div class="col s12 m10 l8 offset-m1 offset-l2">
-                    <table id="tabela" class="highlight">
-                        <thead>
-                            <tr id="titulos-tabela">
-                                <th id="razao_social">NOME FANTASIA</th>
-                                <th id="cnpj">CLIFOR</th>
-                            </tr>
-                        </thead>
-                        <tbody *ngIf="clienteValido == true">
-                            <tr>
-                                <td id=""> {{ clientes.customer_name }} </td>
-                                <td id=""> {{ clientes.customerFab_Id }} </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div> -->
-
-                
-
-
-
-                <div class="example-container mat-elevation-z4 col s12">
-  
-                    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
-                        <!-- cnpj Column -->
-                        <ng-container matColumnDef="cnpj">
-                            <th mat-header-cell mat-sort-header *matHeaderCellDef> CNPJ </th>
-                            <td mat-cell *matCellDef="let element"> {{element.cnpj}} </td>
-                        </ng-container>
-                        
-                        <!-- pedido_linx Column -->
-                        <ng-container matColumnDef="pedido_linx">
-                            <th mat-header-cell mat-sort-header *matHeaderCellDef> PEDIDO_LINX </th>
-                            <td mat-cell *matCellDef="let element"> {{element.pedido_linx}} </td>
-                        </ng-container>
-                        
-                        <!-- pedido_wise Column -->
-                        <ng-container matColumnDef="pedido_wise">
-                            <th mat-header-cell mat-sort-header *matHeaderCellDef> PEDIDO_WISE </th>
-                            <td mat-cell *matCellDef="let element"> {{element.pedido_wise}} </td>
-                        </ng-container>
-                        
-                        <!-- nf Column -->
-                        <ng-container matColumnDef="nf">
-                            <th mat-header-cell mat-sort-header *matHeaderCellDef> NF </th>
-                            <td mat-cell *matCellDef="let element"> {{element.nf}} </td>
-                        </ng-container>
-
-                        <!-- dt_faturamento Column -->
-                        <ng-container matColumnDef="dt_faturamento">
-                            <th mat-header-cell mat-sort-header *matHeaderCellDef> DATA_DE_FATURAMENTO </th>
-                            <td mat-cell *matCellDef="let element"> {{element.dt_faturamento}} </td>
-                        </ng-container>
-
-                        <!-- dt_fat_relat Column -->
-                        <ng-container matColumnDef="dt_fat_relat">
-                            <th mat-header-cell mat-sort-header *matHeaderCellDef> DATA_DE_FATURAMENTO_RELATÓRIO </th>
-                            <td mat-cell *matCellDef="let element"> {{element.dt_fat_relat}} </td>
-                        </ng-container>
-
-                        <!-- marca Column -->
-                        <ng-container matColumnDef="marca">
-                            <th mat-header-cell mat-sort-header *matHeaderCellDef> MARCA </th>
-                            <td mat-cell *matCellDef="let element"> {{element.marca}} </td>
-                        </ng-container>
-
-                        <!-- total_pecas_pedido Column -->
-                        <ng-container matColumnDef="total_pecas_pedido">
-                            <th mat-header-cell mat-sort-header *matHeaderCellDef> TOTAL_PEÇAS_PEDIDO </th>
-                            <td mat-cell *matCellDef="let element"> {{element.total_pecas_pedido}} </td>
-                        </ng-container>
-
-                        <!-- total_valor_pedido Column -->
-                        <ng-container matColumnDef="total_valor_pedido">
-                            <th mat-header-cell mat-sort-header *matHeaderCellDef> TOTAL_VALOR_PEDIDO </th>
-                            <td mat-cell *matCellDef="let element"> {{element.total_valor_pedido}} </td>
-                        </ng-container>
-
-                        <!-- nf Column -->
-                        <ng-container matColumnDef="qtde_embalada">
-                            <th mat-header-cell mat-sort-header *matHeaderCellDef> QUANTIDADE_EMBALADA </th>
-                            <td mat-cell *matCellDef="let element"> {{element.qtde_embalada}} </td>
-                        </ng-container>
-
-                        <!-- valor_embalado Column -->
-                        <ng-container matColumnDef="valor_embalado">
-                            <th mat-header-cell mat-sort-header *matHeaderCellDef> VALOR_EMBALADO </th>
-                            <td mat-cell *matCellDef="let element"> {{element.valor_embalado}} </td>
-                        </ng-container>
-
-                        <!-- total_pecas_faturadas Column -->
-                        <ng-container matColumnDef="total_pecas_faturadas">
-                            <th mat-header-cell mat-sort-header *matHeaderCellDef> TOTAL_PEÇAS_FATURADAS </th>
-                            <td mat-cell *matCellDef="let element"> {{element.total_pecas_faturadas}} </td>
-                        </ng-container>
-
-                        <!-- total_valor_faturado Column -->
-                        <ng-container matColumnDef="total_valor_faturado">
-                            <th mat-header-cell mat-sort-header *matHeaderCellDef> TOTAL_VALOR_FATURADO </th>
-                            <td mat-cell *matCellDef="let element"> {{element.total_valor_faturado}} </td>
-                        </ng-container>
-
-                        <!-- porcentagem_fat Column -->
-                        <ng-container matColumnDef="porcentagem_fat">
-                            <th mat-header-cell mat-sort-header *matHeaderCellDef> PORCENTAGEM_FATURADA </th>
-                            <td mat-cell *matCellDef="let element"> {{element.porcentagem_fat}} </td>
-                        </ng-container>
-                        
-                        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-                    </table>
-                    
-                </div>
-                <mat-paginator class="col s12 mat-elevation-z8" [pageSizeOptions]="[5, 10, 20, 50, 100]" showFirstLastButtons></mat-paginator>
-
-
-
-        </div>
+        </mat-sidenav-container>
 
     </body>
 

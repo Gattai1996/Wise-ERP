@@ -463,6 +463,7 @@ export class InvoicesComponent implements OnInit {
     'total_pecas_faturadas', 'total_valor_faturado', 'porcentagem_fat'];
   dataSource = new MatTableDataSource(ELEMENT_DATA);
 
+  sidenavAberta = false; // Variável que controla a Sidenavbar
   clientes: ConsultaCnpj;
   filtro: string = '';
   company_doc: string = '';
