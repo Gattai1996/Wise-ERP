@@ -13,12 +13,15 @@ import { HomeModule } from './home/home.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material/material.module';
 import { BrandsService } from './services/brands.service';
+import { DialogErrorComponent } from './home/login/dialog-error/dialog-error.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    InvoicesComponent
+    InvoicesComponent,
+    DialogErrorComponent
   ],
+  entryComponents: [DialogErrorComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

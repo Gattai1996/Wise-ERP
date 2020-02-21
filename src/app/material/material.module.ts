@@ -6,8 +6,14 @@ import {
   MatSelectModule,
   MatTableModule,
   MatSortModule,
-  MatPaginatorModule
-} from '@angular/material';
+
+  MatPaginatorModule,
+  MatDialogModule,
+  MatSidenavModule,
+  MatListModule,
+  MatIconModule
+} from '@angular/material'
+
 
 const MeterialComponents =
 [
@@ -16,8 +22,12 @@ const MeterialComponents =
   MatSelectModule,
   MatTableModule,
   MatSortModule,
-  MatPaginatorModule
-];
+  MatPaginatorModule,
+  MatDialogModule,
+  MatSidenavModule,
+  MatListModule,
+  MatIconModule
+]
 
 @NgModule({
   imports: [MeterialComponents],
