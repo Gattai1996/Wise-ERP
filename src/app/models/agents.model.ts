@@ -1,4 +1,6 @@
 export class Agents {
-    agent_Id:number;
-    agent_name:string;
+    // tslint:disable-next-line: variable-name
+    agent_Id: number;
+    // tslint:disable-next-line: variable-name
+    agent_name: string;
 }
