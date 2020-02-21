@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Login } from '../models/login.model';
 
 const API_URL = 'http://wiseerp-api-demo.azurewebsites.net/api/login';
-const PARAMETERS = '?company_Id=1&dept_Id=1&brand_Id=58';
+const PARAMETERS = '?company_Id=1&dept_Id=1&brand_Id=1';
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +19,5 @@ export class LoginService {
     console.log(API_URL + PARAMETERS + '&user=' + usuario + '&password=' + senha);
     return this.http.get<Login>(
         API_URL + PARAMETERS + '&user=' + usuario + '&password=' + senha);
-
   }
 }
