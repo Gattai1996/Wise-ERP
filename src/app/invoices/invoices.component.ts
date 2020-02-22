@@ -9,8 +9,8 @@ import { CollectionsService } from '../services/collections.service';
 import { Collections } from '../models/collections.model';
 import { Agents } from '../models/agents.model'
 import { AgentsService } from '../services/agents.service';
-import { InvoiceInterface } from '../models/invoice.model';
 import { MatTableDataSource, MatSort, MatPaginator } from '@angular/material'
+<<<<<<< Updated upstream
 
 const ELEMENT_DATA: InvoiceInterface[] = [
   {clifor: 513595, cnpj: '07186101000148', pedido_linx: '11885337Q1', pedido_wise: 'W054108', nf: '000167428', dt_faturamento: '30/01/2020', dt_fat_relat: '03/02/2020', 
@@ -446,6 +446,10 @@ const ELEMENT_DATA: InvoiceInterface[] = [
   marca: 'INDIVIDUAL', total_pecas_pedido: 35, total_valor_pedido: 'R$29.587,50', qtde_embalada: 0, valor_embalado: 'R$0,00', total_pecas_faturadas: 35, 
   total_valor_faturado: 'R$0,00', porcentagem_fat: '100%'}
 ]
+=======
+import { DataSource } from '@angular/cdk/table';
+import { Observable } from 'rxjs';
+>>>>>>> Stashed changes
 
 @Component({
   selector: 'app-invoices',
@@ -454,6 +458,7 @@ const ELEMENT_DATA: InvoiceInterface[] = [
 })
 export class InvoicesComponent implements OnInit {
 
+<<<<<<< Updated upstream
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
@@ -462,10 +467,15 @@ export class InvoicesComponent implements OnInit {
     'total_valor_pedido', 'qtde_embalada', 'valor_embalado',
     'total_pecas_faturadas', 'total_valor_faturado', 'porcentagem_fat'];
   dataSource = new MatTableDataSource(ELEMENT_DATA);
+=======
+  displayedColumns: string[] = ['customerFab_Id', 'company_doc', 'orderFactory_Id', 'order_Id',
+    'invoice', 'dt_invoice', 'dt_invoice_relat', 'brand_name', 'total_quantity', 
+    'total_price', 'packed_quantity', 'packed_price', 'total_quantity_invoiced',
+    'total_price_invoiced', 'percentual_invoiced'];
+>>>>>>> Stashed changes
 
   clientes: ConsultaCnpj;
   filtro: string = '';
-  company_doc: string = '';
   marcas: Brands;
   colecoes: Collections;
   repres: Agents;
@@ -475,11 +485,16 @@ export class InvoicesComponent implements OnInit {
   erroColecoes: any;
   clienteValido: boolean = false;
   brand_Id = '1';
+  dataSource: any;
 
   constructor(
 
     private router: Router,
+<<<<<<< Updated upstream
     private serviceCnpj: ConsultaCnpjService,
+=======
+    private consultaCnpjService: ConsultaCnpjService,
+>>>>>>> Stashed changes
     private serviceMarcas: BrandsService,
     private serviceColecao: CollectionsService,
     private serviceRepres: AgentsService
@@ -487,21 +502,21 @@ export class InvoicesComponent implements OnInit {
     ) {};
 
   ngOnInit() { 
-    this.dataSource.sort = this.sort;
-    this.dataSource.paginator = this.paginator;
-    this.paginator._intl.itemsPerPageLabel = "Número de linhas por página:";
-    this.paginator._intl.nextPageLabel = "Próxima página";
-    this.paginator._intl.previousPageLabel = "Página anterior";
-    this.paginator._intl.lastPageLabel = "Última página";
-    this.paginator._intl.firstPageLabel = "Primeira página";
+    // this.dataSource.sort = this.sort;
+    // this.dataSource.paginator = this.paginator;
+    // this.paginator._intl.itemsPerPageLabel = "Número de linhas por página:";
+    // this.paginator._intl.nextPageLabel = "Próxima página";
+    // this.paginator._intl.previousPageLabel = "Página anterior";
+    // this.paginator._intl.lastPageLabel = "Última página";
+    // this.paginator._intl.firstPageLabel = "Primeira página";
     this.listaDeMarcas(),
     this.listaDeColecoes(),
     this.listaDeRepres()
   }
 
-  public aplicarFiltro(filtroValor: string) {
-    this.dataSource.filter = filtroValor.trim().toLowerCase();
-  }
+  // public aplicarFiltro(filtroValor: string) {
+  //   this.dataSource.filter = filtroValor.trim().toLowerCase();
+  // }
 
   public buscarCnpj () {
 
@@ -545,8 +560,51 @@ export class InvoicesComponent implements OnInit {
     )
   }
 
+<<<<<<< Updated upstream
+=======
+  // public buscarCnpj () {
+
+  //   this.serviceConsultaCnpj.listarInvoices(this.company_doc).subscribe(dados => 
+  //     {this.invoice = dados;
+  //     console.log(this.invoice);
+      
+      // if(this.invoice.customer_name != undefined && this.invoice.customerFab_Id != undefined) 
+      //   this.clienteValido = true;
+      // else 
+      //   this.clienteValido = false;
+  //     },
+  //     (error: any) => {this.erroCnpj = error;
+  //     this.clienteValido = false;
+  //     console.log('ERRO: ' + this.erroCnpj)}
+  //     )
+  // }
+
+  public buscarCnpj() {
+    this.dataSource = new InvoicesDataSource(this.consultaCnpjService);
+  }
+
+>>>>>>> Stashed changes
   public voltarAoLogin() {
     this.router.navigate(['/']);
   }
   
+}
+
+export class InvoicesDataSource extends DataSource<any> {
+  
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+
+  company_doc: string = '';
+  
+  constructor(private consultaCnpjService: ConsultaCnpjService) {
+    super();
+  }
+
+  connect(): Observable<ConsultaCnpj[]> {
+    return this.consultaCnpjService.listarInvoices(this.company_doc);
+  }
+
+  disconnect() {}
+
 }
