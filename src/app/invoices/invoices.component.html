@@ -88,9 +88,7 @@
                         id="botao-buscar" 
                         type="submit" 
                         (click)="company_doc = cnpjDigitado"
-                        (click)="buscarCnpj()"
-                        (click)="listaDeMarcas()"
-                        (click)="listaDeColecoes()">
+                        (click)="buscarCnpj()">
                         <i class="material-icons right">search</i>BUSCAR</button>
                         
                     </div>            
@@ -122,6 +120,20 @@
                         <mat-hint>Filtrar por qualquer campo</mat-hint>
                     </mat-form-field>
 
+                    <!----------------------------- ORDER BY ------------------------------>
+                    <mat-form-field id="repres">
+                        <mat-label>Ordenar</mat-label>
+                        <mat-select>
+                            <mat-option value="COLEÇÃO EM ORDEM CRESCENTE">COLEÇÃO EM ORDEM CRESCENTE</mat-option>
+                            <mat-option value="COLEÇÃO EM ORDEM DECRESCENTE">COLEÇÃO EM ORDEM DECRESCENTE</mat-option>
+                            <mat-option value="DATA DE ENTRADA EM ORDEM CRESCENTE">DATA DE ENTRADA EM ORDEM CRESCENTE</mat-option>
+                            <mat-option value="DATA DE ENTRADA EM ORDEM DECRESCENTE">DATA DE ENTRADA EM ORDEM DECRESCENTE</mat-option>
+                            <mat-option value="NÚMERO DO PEDIDO EM ORDEM CRESCENTE">NÚMERO DO PEDIDO EM ORDEM CRESCENTE</mat-option>
+                            <mat-option value="NÚMERO DO PEDIDO EM ORDEM DECRESCENTE">NÚMERO DO PEDIDO EM ORDEM DECRESCENTE</mat-option>
+                            <mat-option value="A - Z">A - Z</mat-option>
+                            <mat-option value="Z - A">Z - A</mat-option>
+                        </mat-select>
+                    </mat-form-field>
                     <!---------------------- DATA TABLE ---------------------->
                     <!-------------------- GRID DE INVOICES -------------------->
 

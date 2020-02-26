@@ -9,10 +9,9 @@ import { CollectionsService } from '../services/collections.service';
 import { Collections } from '../models/collections.model';
 import { Agents } from '../models/agents.model'
 import { AgentsService } from '../services/agents.service';
-import { MatTableDataSource, MatSort, MatPaginator } from '@angular/material'
+import { MatSort, MatPaginator } from '@angular/material'
 import { DataSource } from '@angular/cdk/table';
 import { Observable } from 'rxjs';
-
 
 @Component({
   selector: 'app-invoices',
@@ -28,8 +27,8 @@ export class InvoicesComponent implements OnInit {
 
   dataSource = new InvoicesDataSource(this.consultaCnpjService);
 
-  @ViewChild(MatSort, {static: true}) sort: MatSort;
-  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+  @ViewChild(MatSort,null) sort: MatSort;
+  @ViewChild(MatPaginator, null) paginator: MatPaginator;
   
   sidenavAberta = false; // Variável que controla a Sidenavbar
   invoice: ConsultaCnpj;
@@ -44,7 +43,6 @@ export class InvoicesComponent implements OnInit {
   clienteValido: boolean = false;
   brand_Id = '1';
   
-
   constructor(
     private router: Router,
     private consultaCnpjService: ConsultaCnpjService,
@@ -54,8 +52,8 @@ export class InvoicesComponent implements OnInit {
     ) {};
 
   ngOnInit() { 
-    this.dataSource.sort = this.sort;
-    this.dataSource.paginator = this.paginator;
+    // this.dataSource.sort = this.sort;
+    // this.dataSource.paginator = this.paginator;
     // this.paginator._intl.itemsPerPageLabel = "Número de linhas por página:";
     // this.paginator._intl.nextPageLabel = "Próxima página";
     // this.paginator._intl.previousPageLabel = "Página anterior";
