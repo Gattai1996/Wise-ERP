@@ -11,12 +11,17 @@ import { HomeModule } from './home/home.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material/material.module';
 import { BrandsService } from './services/brands.service';
+import { DialogErrorComponent } from './home/dialog-error/dialog-error.component';
+import { DataTableComponent } from './invoices/table/data-table/data-table.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    InvoicesComponent
+    InvoicesComponent,
+    DialogErrorComponent,
+    DataTableComponent
   ],
+  entryComponents: [DialogErrorComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

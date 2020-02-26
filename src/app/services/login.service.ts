@@ -5,7 +5,7 @@ import { Login } from '../models/login.model';
 import { tap } from 'rxjs/operators';
 
 const API_URL = 'http://wiseerp-api-demo.azurewebsites.net/api/login';
-const PARAMETERS = '?company_Id=1&dept_Id=1&brand_Id=58';
+const PARAMETERS = '?company_Id=1&dept_Id=1&brand_Id=1';
 
 @Injectable({
   providedIn: 'root'

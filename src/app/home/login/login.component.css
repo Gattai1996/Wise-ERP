@@ -8,28 +8,31 @@ form {
     background-color: #0277bd;
     border-radius: 1rem;
     margin-top: 10%;
-    margin-bottom: 10%;
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
 }
 #logo {
-    width: 60%;
-    margin-left: 20%;
+    width: 100%;
+    margin-left: 10%;
 }
 #mensagem {
     background-color: #e23939;
     border-radius: 10px;
-    width: 60%;
-    margin-left: 20%;
-}
-form img {
-    margin-left: auto;
-    margin-right: auto;
+    width: 100%;
+    margin-bottom: 2rem;
 }
 #formulario {
-    padding: 1.5rem;
+    margin-left: auto;
+    margin-right: auto;
+    width: 300px;
+    max-width: 100%;
+    padding: 2rem;
 }
-#entrar {
-    border-radius: 1rem;
+#login, #senha, #botao-entrar {
+    width: 100%;
+}
+#botao-entrar {
+    margin-top: 1rem;
+    border-radius: 0.5rem;
 }
 #mensagem {
     font-size: 1rem;
@@ -41,7 +44,7 @@ footer {
     padding: 1rem;
 }
 /* BREAKPOINTS */
-@media screen and (max-width: 600px) {
+/* @media screen and (max-width: 600px) {
     form {
         margin-top: 19%;
         margin-bottom: 19%;
@@ -52,4 +55,4 @@ footer {
         margin-top: 8%;
         margin-bottom: 8%;
     }
-}
+} */

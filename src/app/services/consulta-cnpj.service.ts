@@ -10,10 +10,11 @@ import { Observable } from 'rxjs';
 })
 export class ConsultaCnpjService {
 
-  private readonly API_URL='http://wiseerp-api-demo.azurewebsites.net/api/customers?';
-  private readonly PARAMETERS='company_Id=1&dept_Id=1&brand_Id=58&';
+  private readonly API_URL = 'http://wiseerp-api-demo.azurewebsites.net/api/invoices?';
+  private readonly PARAMETERS = 'company_Id=1&dept_Id=1&brand_Id=1&collection_Id=63&agent_Id=300243&orderBy=7&';
 
   constructor(private http: HttpClient) { }
+
 
   public listarInvoices(company_doc):Observable<ConsultaCnpj[]> {
     console.log('Chamando GET com a URL: ' + this.API_URL + this.PARAMETERS + company_doc); 

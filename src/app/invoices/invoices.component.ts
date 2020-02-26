@@ -10,8 +10,10 @@ import { Collections } from '../models/collections.model';
 import { Agents } from '../models/agents.model'
 import { AgentsService } from '../services/agents.service';
 import { MatTableDataSource, MatSort, MatPaginator } from '@angular/material'
+
 import { DataSource } from '@angular/cdk/table';
 import { Observable } from 'rxjs';
+
 
 @Component({
   selector: 'app-invoices',
@@ -20,12 +22,14 @@ import { Observable } from 'rxjs';
 })
 export class InvoicesComponent implements OnInit {
 
+
   displayedColumns: string[] = ['customerFab_Id', 'company_doc', 'orderFactory_Id', 'order_Id',
     'invoice', 'dt_invoice', 'dt_invoice_relat', 'brand_name', 'total_quantity', 
     'total_price', 'packed_quantity', 'packed_price', 'total_quantity_invoiced',
     'total_price_invoiced', 'percentual_invoiced'];
 
-  clientes: ConsultaCnpj;
+  sidenavAberta = false; // Variável que controla a Sidenavbar
+  invoice: ConsultaCnpj;
   filtro: string = '';
   marcas: Brands;
   colecoes: Collections;
@@ -41,10 +45,12 @@ export class InvoicesComponent implements OnInit {
   constructor(
 
     private router: Router,
+
     private consultaCnpjService: ConsultaCnpjService,
+
     private serviceMarcas: BrandsService,
     private serviceColecao: CollectionsService,
-    private serviceRepres: AgentsService
+    private serviceRepres: AgentsService,
 
     ) {};
 
@@ -60,10 +66,10 @@ export class InvoicesComponent implements OnInit {
     this.listaDeColecoes(),
     this.listaDeRepres()
   }
-
   // public aplicarFiltro(filtroValor: string) {
   //   this.dataSource.filter = filtroValor.trim().toLowerCase();
   // }
+
 
   public listaDeMarcas() { 
 
@@ -94,6 +100,7 @@ export class InvoicesComponent implements OnInit {
 
   public buscarCnpj() {
     this.dataSource = new InvoicesDataSource(this.consultaCnpjService);
+
   }
 
   public voltarAoLogin() {

@@ -5,6 +5,8 @@ import { Login } from 'src/app/models/login.model';
 import { LoginService } from 'src/app/services/login.service';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material'
+import { DialogErrorComponent } from '../dialog-error/dialog-error.component';
 
 @Component({
   templateUrl: './login.component.html',
@@ -20,7 +22,10 @@ export class LoginComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private loginService: LoginService,
-    private router: Router) {}
+
+    private router: Router,
+    private dialog: MatDialog
+    ) {}
 
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
@@ -44,14 +49,21 @@ export class LoginComponent implements OnInit {
           this.router.navigate(['/invoices']);
         } else {
           console.log('Login inválido');
-          alert('Usuário ou senha incorreta!');
+
+          this.openDialog();
+
         }
       },
       (error: any) => {
         this.erro = error;
-        alert('Usuário ou senha incorreta!');
+        this.openDialog();
+
         console.log('Deu erro ao tentar se inscrever!');
       });
+  }
+
+  openDialog() {
+    this.dialog.open(DialogErrorComponent);
   }
 
   onSubmit() {

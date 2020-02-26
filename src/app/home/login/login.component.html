@@ -1,75 +1,68 @@
 <html>
     <head>
     </head>
-    <!-- <body>
-        <nav>
-        <div class="nav-wrapper light-blue darken-3">
-            <a id="logo">
-                <img src="https://i.ibb.co/wszdgT7/wise-erp-logo.png" 
-                alt="wise-erp-logo" 
-                class="brand-logo center"/></a>
-            <ul id="nav-mobile" class="right hide-on-med-and-down">
-            </ul>
-        </div>
-        </nav>
-        <div id="login" class="valign-wrapper">
-        <div class="row"> -->
-    <body>       
-        <div class="row">
-            <form 
-            id="formulario"
-            [formGroup]="loginForm" 
-            class="col s10 m6 l4 offset-s1 offset-m3 offset-l4"
-            (submit)="onSubmit()">
-                <div id="logo">
-                    <img src="https://i.ibb.co/wszdgT7/wise-erp-logo.png" alt="wise-erp-logo" class="responsive-img">
-                </div>
-                <div class="row">
-                    <div class="input-field col s10  offset-s1">
-                        <i class="tiny material-icons prefix">account_box</i>
+    
+    <body>   
+
+        <form id="formulario" [formGroup]="loginForm" (submit)="onSubmit()">
+
+            <div id="logo">
+                <img src="https://i.ibb.co/wszdgT7/wise-erp-logo.png" alt="wise-erp-logo">
+            </div>
+            
+            <div>
+                
+                <div>
+                    <mat-form-field id="login">
                         <input 
+                        matInput
                         class="form-group"
-                        formControlName="user" 
-                        autofocus
-                        id="Login" 
-                        type="text" 
+                        formControlName="user"
                         (change)="usuario = $event.target.value" 
                         class="white-text">
-                        <label for="Login">Usuário</label>
-                        <div
+                        <mat-label for="Login" style="color: white"><mat-icon>person</mat-icon>&nbsp;&nbsp;Usuário</mat-label>
+                    </mat-form-field>
+                    <div
                         id="mensagem"
                         *ngIf="loginForm.get('user').errors?.required && loginForm.get('user').touched" 
                         class="flow-text white-text">
-                            Usuário é obrigatório
-                            <i class="tiny material-icons">announcement</i>
-                        </div>
+                        Usuário é obrigatório
+                        <i class="tiny material-icons">announcement</i>
                     </div>
-                    <div class="input-field col s10 offset-s1">
-                        <i class="tiny material-icons prefix">lock</i>
+                </div>
+
+                <div>
+                    <mat-form-field id="senha">
                         <input 
+                        matInput
                         class="form-group"
-                        formControlName="password" 
-                        id="senha" 
+                        formControlName="password"
                         type="password" 
                         (change)="senha = $event.target.value" 
                         class="white-text">
-                        <label for="senha" class="password">Senha</label>
-                        <div
+                        <mat-label for="senha" style="color: white" class="password"><mat-icon>vpn_key</mat-icon>&nbsp;&nbsp;Senha</mat-label>
+                    </mat-form-field>
+                    <div
                         id="mensagem"
                         *ngIf="loginForm.get('password').errors?.required && loginForm.get('password').touched" 
                         class="flow-text white-text">
-                            Senha é obrigatória
-                            <i class="tiny material-icons">announcement</i>
-                        </div>
-                    </div>    
-                    <button 
-                    [disabled]="loginForm.invalid"
-                    id="entrar" 
-                    type="submit" 
-                    class="waves-effect waves-light btn col s10 m6 l4 offset-s1 offset-m3 offset-l4">
-                    <i class="material-icons right">send</i>Login</button>
+                        Senha é obrigatória
+                        <i class="tiny material-icons">announcement</i>
+                    </div>
                 </div>
-            </form>
-        </div>
+
+                <button mat-raised-button
+                color="primary"
+                [disabled]="loginForm.invalid"
+                id="botao-entrar" 
+                type="submit">
+                Login&nbsp;
+                <i class="material-icons right">send</i></button>
+
+            </div>
+
+        </form>
+        
     </body>
+
 </html>
