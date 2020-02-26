@@ -5,7 +5,7 @@
 
         <!-- SIDEBAR -->
         <div class="sidebar">
-            <img id="logo" href="#" src="https://i.ibb.co/wszdgT7/wise-erp-logo.png" alt="wise-erp-logo"/>            
+            <img id="logo" href="#" src="https://i.ibb.co/wszdgT7/wise-erp-logo.png" alt="wise-erp-logo"/>
             <a href="#">Sair</a>
             <a href="/invoices">WE_invoices</a>
         </div>
@@ -17,8 +17,8 @@
 
         <!-- CONTENT -->
         <div id="content" class="row">
-            
-                 
+
+
                 <!-- DROPDOWNS -->
                 <div>
 
@@ -29,7 +29,7 @@
                             <mat-option *ngFor="let marca of marcas" value="marca.brand_name">{{ marca.brand_name }}</mat-option>
                         </mat-select>
                     </mat-form-field>
-                
+
                     <mat-form-field id="colecao">
                         <mat-label>Coleção</mat-label>
                         <mat-select>
@@ -46,20 +46,20 @@
                         </mat-select>
                     </mat-form-field>
 
-                </div>        
+                </div>
 
                     <!------------------- FORM DE CNPJ ------------------------>
                     <div>
-                        
+
                         <!-------------- BUTTON PESQUISAR CNPJ ------------->
                         <button mat-raised-button
                         color="primary"
-                        id="botao-buscar" 
-                        type="submit" 
+                        id="botao-buscar"
+                        type="submit"
                         (click)="company_doc = cnpjDigitado"
                         (click)="buscarCnpj()">
                         <i class="material-icons right">search</i>BUSCAR</button>
-                       
+
                     <mat-form-field id="filtro" (keyup)="aplicarFiltro($event.target.value)">
                         <mat-label>Filtro</mat-label>
                         <input matInput/>
@@ -76,25 +76,25 @@
                                 <th mat-header-cell mat-sort-header *matHeaderCellDef> Clifor </th>
                                 <td mat-cell *matCellDef="let invoice"> {{ invoice.customerFab_Id }} </td>
                             </ng-container>
-                            
+
                             <!-- cnpj Column -->
                             <ng-container matColumnDef="company_doc">
                                 <th mat-header-cell mat-sort-header *matHeaderCellDef> CNPJ </th>
                                 <td mat-cell *matCellDef="let invoice"> {{ invoice.company_doc }} </td>
                             </ng-container>
-                            
+
                             <!-- pedido_linx Column -->
                             <ng-container matColumnDef="orderFactory_Id">
                                 <th mat-header-cell mat-sort-header *matHeaderCellDef> PEDIDO_LINX </th>
                                 <td mat-cell *matCellDef="let invoice"> {{ invoice.orderFactory_Id }} </td>
                             </ng-container>
-                            
+
                             <!-- pedido_wise Column -->
                             <ng-container matColumnDef="order_Id">
                                 <th mat-header-cell mat-sort-header *matHeaderCellDef> PEDIDO_WISE </th>
                                 <td mat-cell *matCellDef="let invoice"> {{ invoice.order_Id }} </td>
                             </ng-container>
-                            
+
                             <!-- nf Column -->
                             <ng-container matColumnDef="invoice">
                                 <th mat-header-cell mat-sort-header *matHeaderCellDef> NF </th>
@@ -160,31 +160,20 @@
                                 <th mat-header-cell mat-sort-header *matHeaderCellDef> PORCENTAGEM_FATURADA </th>
                                 <td mat-cell *matCellDef="let invoice"> {{ invoice.percentual_invoiced }} </td>
                             </ng-container>
-                            
-                            <tr mat-header-row 
+
+                            <tr mat-header-row
                             *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-                            <tr mat-row 
+                            <tr mat-row
                             *matRowDef="let row; columns: displayedColumns;"></tr>
                         </table>
-                        
+
                     </div>
 
-                    <mat-paginator class="col s12 mat-elevation-z8" 
-                    [pageSizeOptions]="[10, 20, 50, 100]" 
+                    <mat-paginator class="col s12 mat-elevation-z8"
+                    [pageSizeOptions]="[10, 20, 50, 100]"
                     showFirstLastButtons>
                     </mat-paginator>
-
-                </div>
-
-
-                <mat-paginator class="col s12 mat-elevation-z8" 
-                [pageSizeOptions]="[5, 10, 20, 50, 100]" 
-                showFirstLastButtons>
-                </mat-paginator>
-
-
-        </mat-sidenav-container>
-
+          </div>
+        </div>
     </body>
-
 </html>
