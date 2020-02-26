@@ -10,7 +10,7 @@ import { tap } from 'rxjs/operators';
 })
 export class AgentsService {
 
-  private readonly API_URL = 'http://wiseerp-api-demo.azurewebsites.net/api/AGENTS?'
+  private readonly API_URL = 'http://wiseerp-api-demo.azurewebsites.net/api/agents?'
   private readonly PARAMETERS = 'company_Id=1&dept_Id=1&'
 
   brand_Id = '1'
@@ -18,7 +18,7 @@ export class AgentsService {
   constructor(private http: HttpClient) { }
 
   public listarRepres(brand_Id: string):Observable<Agents> {
-    console.log(this.API_URL + this.PARAMETERS + 'brand_Id=' + brand_Id);
+    console.log('CHAMANDO API REPRESENTANTES COM URL: ' + this.API_URL + this.PARAMETERS + 'brand_Id=' + brand_Id + ' RETORNOU > ');
     return this.http.get<Agents>(
       this.API_URL + this.PARAMETERS + 'brand_Id=' + brand_Id)
       .pipe(tap(console.log));
