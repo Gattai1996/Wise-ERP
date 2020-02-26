@@ -15,9 +15,10 @@ export class ConsultaCnpjService {
 
   constructor(private http: HttpClient) { }
 
-  public listarInvoices(company_doc: string = '07481359000177'):Observable<ConsultaCnpj> {
-    console.log(this.API_URL + this.PARAMETERS + company_doc); 
-    return this.http.get<ConsultaCnpj>(
+
+  public listarInvoices(company_doc):Observable<ConsultaCnpj[]> {
+    console.log('Chamando GET com a URL: ' + this.API_URL + this.PARAMETERS + company_doc); 
+    return this.http.get<ConsultaCnpj[]>(
       this.API_URL + this.PARAMETERS + 'company_doc=' + company_doc)
         .pipe(tap(console.log));
   }

@@ -9,14 +9,11 @@ import { CollectionsService } from '../services/collections.service';
 import { Collections } from '../models/collections.model';
 import { Agents } from '../models/agents.model'
 import { AgentsService } from '../services/agents.service';
-import { InvoiceInterface } from '../models/invoice.model';
 import { MatTableDataSource, MatSort, MatPaginator } from '@angular/material'
 
-var ELEMENT_DATA: InvoiceInterface[] = [
-  {clifor: 513595, cnpj: '07186101000148', pedido_linx: '11885337Q1', pedido_wise: 'W054108', nf: '000167428', dt_faturamento: '30/01/2020', dt_fat_relat: '03/02/2020', 
-  marca: 'DUDALINA FEM', total_pecas_pedido: 35, total_valor_pedido: 'R$500,50', qtde_embalada: 0, valor_embalado: 'R$0,00', total_pecas_faturadas: 35, 
-  total_valor_faturado: 'R$0,00', porcentagem_fat: '100%'}
-]
+import { DataSource } from '@angular/cdk/table';
+import { Observable } from 'rxjs';
+
 
 @Component({
   selector: 'app-invoices',
@@ -25,19 +22,15 @@ var ELEMENT_DATA: InvoiceInterface[] = [
 })
 export class InvoicesComponent implements OnInit {
 
-  @ViewChild(MatSort, {static: true}) sort: MatSort;
-  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
-  displayedColumns: string[] = ['clifor', 'cnpj', 'pedido_linx', 'pedido_wise',
-    'nf', 'dt_faturamento', 'dt_fat_relat', 'marca', 'total_pecas_pedido', 
-    'total_valor_pedido', 'qtde_embalada', 'valor_embalado',
-    'total_pecas_faturadas', 'total_valor_faturado', 'porcentagem_fat'];
-  dataSource = new MatTableDataSource(ELEMENT_DATA);
+  displayedColumns: string[] = ['customerFab_Id', 'company_doc', 'orderFactory_Id', 'order_Id',
+    'invoice', 'dt_invoice', 'dt_invoice_relat', 'brand_name', 'total_quantity', 
+    'total_price', 'packed_quantity', 'packed_price', 'total_quantity_invoiced',
+    'total_price_invoiced', 'percentual_invoiced'];
 
   sidenavAberta = false; // Variável que controla a Sidenavbar
   invoice: ConsultaCnpj;
   filtro: string = '';
-  company_doc: string = '';
   marcas: Brands;
   colecoes: Collections;
   repres: Agents;
@@ -47,11 +40,14 @@ export class InvoicesComponent implements OnInit {
   erroColecoes: any;
   clienteValido: boolean = false;
   brand_Id = '1';
+  dataSource: any;
 
   constructor(
 
     private router: Router,
-    private serviceConsultaCnpj: ConsultaCnpjService,
+
+    private consultaCnpjService: ConsultaCnpjService,
+
     private serviceMarcas: BrandsService,
     private serviceColecao: CollectionsService,
     private serviceRepres: AgentsService,
@@ -59,21 +55,21 @@ export class InvoicesComponent implements OnInit {
     ) {};
 
   ngOnInit() { 
-    this.dataSource.sort = this.sort;
-    this.dataSource.paginator = this.paginator;
-    this.paginator._intl.itemsPerPageLabel = "Número de linhas por página:";
-    this.paginator._intl.nextPageLabel = "Próxima página";
-    this.paginator._intl.previousPageLabel = "Página anterior";
-    this.paginator._intl.lastPageLabel = "Última página";
-    this.paginator._intl.firstPageLabel = "Primeira página";
+    // this.dataSource.sort = this.sort;
+    // this.dataSource.paginator = this.paginator;
+    // this.paginator._intl.itemsPerPageLabel = "Número de linhas por página:";
+    // this.paginator._intl.nextPageLabel = "Próxima página";
+    // this.paginator._intl.previousPageLabel = "Página anterior";
+    // this.paginator._intl.lastPageLabel = "Última página";
+    // this.paginator._intl.firstPageLabel = "Primeira página";
     this.listaDeMarcas(),
     this.listaDeColecoes(),
     this.listaDeRepres()
   }
+  // public aplicarFiltro(filtroValor: string) {
+  //   this.dataSource.filter = filtroValor.trim().toLowerCase();
+  // }
 
-  public aplicarFiltro(filtroValor: string) {
-    this.dataSource.filter = filtroValor.trim().toLowerCase();
-  }
 
   public listaDeMarcas() { 
 
@@ -102,25 +98,32 @@ export class InvoicesComponent implements OnInit {
     )
   }
 
-  public buscarCnpj () {
+  public buscarCnpj() {
+    this.dataSource = new InvoicesDataSource(this.consultaCnpjService);
 
-    this.serviceConsultaCnpj.listarInvoices(this.company_doc).subscribe(dados => 
-      {this.invoice = dados;
-      console.log(this.invoice);
-      
-      // if(this.invoice.customer_name != undefined && this.invoice.customerFab_Id != undefined) 
-      //   this.clienteValido = true;
-      // else 
-      //   this.clienteValido = false;
-      },
-      (error: any) => {this.erroCnpj = error;
-      this.clienteValido = false;
-      console.log('ERRO: ' + this.erroCnpj)}
-      )
   }
 
   public voltarAoLogin() {
     this.router.navigate(['/']);
   }
   
+}
+
+export class InvoicesDataSource extends DataSource<any> {
+  
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+
+  company_doc: string = '';
+  
+  constructor(private consultaCnpjService: ConsultaCnpjService) {
+    super();
+  }
+
+  connect(): Observable<ConsultaCnpj[]> {
+    return this.consultaCnpjService.listarInvoices(this.company_doc);
+  }
+
+  disconnect() {}
+
 }
