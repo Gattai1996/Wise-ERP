@@ -17,17 +17,9 @@ export class LoginService {
 
 
   public autenticar(usuario: string, senha: string): Observable<Login> {
-<<<<<<< Updated upstream
-
-    console.log(API_URL + PARAMETERS + '&user=' + usuario + '&password=' + senha);
-    return this.http.get<Login>(
-        API_URL + PARAMETERS + '&user=' + usuario + '&password=' + senha);
-
-=======
     console.log('CHAMANDO API LOGIN COM URL: ' + API_URL + PARAMETERS + '&user=' + usuario + '&password=' + senha);
     return this.http.get<Login>(
         API_URL + PARAMETERS + '&user=' + usuario + '&password=' + senha)
         .pipe(tap(console.log));
->>>>>>> Stashed changes
   }
 }
