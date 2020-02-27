@@ -6,7 +6,7 @@
 
         <div id="content">
 
-            <app-sidenavbar></app-sidenavbar>
+            <app-sidenav></app-sidenav>
             
             <mat-form-field id="filtro" (keyup)="aplicarFiltro($event.target.value)">
                 <mat-label>Nome Fantasia</mat-label>
@@ -30,7 +30,7 @@
                     </ng-container>
 
                     <tr mat-header-row
-                    *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+                    *matHeaderRowDef="displayedColumns; sticky: false"></tr>
                     <tr mat-row
                     *matRowDef="let row; columns: displayedColumns;"></tr>
                 </table>

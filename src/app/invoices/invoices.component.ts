@@ -42,7 +42,9 @@ export class InvoicesComponent implements OnInit {
   erroColecoes: any;
   clienteValido: boolean = false;
   brand_Id = '1';
-  
+  dept_Id = '1';
+  company_Id = '1';
+
   constructor(
     private router: Router,
     private consultaCnpjService: ConsultaCnpjService,
@@ -70,7 +72,7 @@ export class InvoicesComponent implements OnInit {
 
   public listaDeMarcas() { 
 
-    this.serviceMarcas.listarMarcas(this.brand_Id).subscribe(dados =>
+    this.serviceMarcas.listarMarcas(this.company_Id, this.dept_Id).subscribe(dados =>
       {this.marcas = dados;},
       (error:any) => {this.erroMarcas = error;
       console.log('ERRO: ' + this.erroMarcas)}
@@ -79,7 +81,7 @@ export class InvoicesComponent implements OnInit {
 
   public listaDeColecoes() { 
 
-  this.serviceColecao.listarColecoes(this.brand_Id).subscribe(dados =>
+  this.serviceColecao.listarColecoes(this.company_Id, this.dept_Id, this.brand_Id).subscribe(dados =>
     {this.colecoes = dados;},
     (error:any) => {this.erroColecoes = error;
     console.log('ERRO: ' + this.erroColecoes)}
@@ -88,7 +90,7 @@ export class InvoicesComponent implements OnInit {
 
   public listaDeRepres() { 
 
-  this.serviceRepres.listarRepres(this.brand_Id).subscribe(dados =>
+  this.serviceRepres.listarRepres(this.company_Id, this.dept_Id, this.brand_Id).subscribe(dados =>
     {this.repres = dados;},
     (error:any) => {this.erroColecoes = error;
     console.log('ERRO: ' + this.erroColecoes)}
@@ -107,6 +109,12 @@ export class InvoicesComponent implements OnInit {
 
 export class InvoicesDataSource extends DataSource<any> {
 
+  company_Id: string = '1';
+  dept_Id: string = '1';
+  brand_Id: string = '1';
+  collection_Id: string = '63';
+  agent_Id: string = '300243';
+  orderBy: string = '7';
   company_doc: string = '';
   
   constructor(private consultaCnpjService: ConsultaCnpjService) {
@@ -114,9 +122,10 @@ export class InvoicesDataSource extends DataSource<any> {
   }
 
   connect(): Observable<ConsultaCnpj[]> {
-    return this.consultaCnpjService.listarInvoices(this.company_doc);
+    return this.consultaCnpjService.listarInvoices(this.company_Id, 
+      this.dept_Id, this.brand_Id, this.collection_Id, this.agent_Id, this.orderBy);
   }
-
+ 
   disconnect() {}
 
 }
