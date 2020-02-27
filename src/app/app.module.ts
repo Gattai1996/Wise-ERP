@@ -13,13 +13,24 @@ import { MaterialModule } from './material/material.module';
 import { BrandsService } from './services/brands.service';
 import { DialogErrorComponent } from './home/dialog-error/dialog-error.component';
 import { DataTableComponent } from './invoices/table/data-table/data-table.component';
+<<<<<<< Updated upstream
+=======
+import { ClientesComponent } from './clientes/clientes/clientes.component';
+import { SidenavbarComponent } from './sidenavbar/sidenavbar/sidenavbar.component';
+>>>>>>> Stashed changes
 
 @NgModule({
   declarations: [
     AppComponent,
     InvoicesComponent,
     DialogErrorComponent,
+<<<<<<< Updated upstream
     DataTableComponent
+=======
+    DataTableComponent,
+    ClientesComponent,
+    SidenavbarComponent
+>>>>>>> Stashed changes
   ],
   entryComponents: [DialogErrorComponent],
   imports: [

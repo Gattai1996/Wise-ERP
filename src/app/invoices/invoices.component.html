@@ -3,69 +3,137 @@
     </head>
     <body>
 
-        <!-- SIDEBAR -->
-        <div class="sidebar">
-            <img id="logo" href="#" src="https://i.ibb.co/wszdgT7/wise-erp-logo.png" alt="wise-erp-logo"/>
-            <a href="#">Sair</a>
-            <a href="/invoices">WE_invoices</a>
-        </div>
-        <!-- <div id="login" class="valign-wrapper">
-            <section class="light-blue darken-3 white-text">
-                <h6 class="flow-text">WE_invoices</h6>
-                <a id="voltar" type="submit" (click)="voltarAoLogin()" class="waves-effect waves-light btn"><i class="material-icons right">send</i>Voltar</a>
-            </section> -->
+        <!----------------------- SIDEBAR ---------------------->
 
-        <!-- CONTENT -->
-        <div id="content" class="row">
+        <mat-sidenav-container>
 
-
-                <!-- DROPDOWNS -->
-                <div>
-
-                    <mat-form-field id="marca">
-                        <mat-label>Marca</mat-label>
-                        <mat-select>
-                            <mat-option>Todas</mat-option>
-                            <mat-option *ngFor="let marca of marcas" value="marca.brand_name">{{ marca.brand_name }}</mat-option>
-                        </mat-select>
-                    </mat-form-field>
-
-                    <mat-form-field id="colecao">
-                        <mat-label>Coleção</mat-label>
-                        <mat-select>
-                            <mat-option>Todas</mat-option>
-                            <mat-option *ngFor="let colecao of colecoes" value="colecao.collection_name">{{ colecao.collection_name }}</mat-option>
-                        </mat-select>
-                    </mat-form-field>
-
-                    <mat-form-field id="colecao">
-                        <mat-label>Representante</mat-label>
-                        <mat-select>
-                            <mat-option>Todos</mat-option>
-                            <mat-option *ngFor="let repre of repres" value="repre.agent_name">{{ repre.agent_name }}</mat-option>
-                        </mat-select>
-                    </mat-form-field>
-
+            <mat-sidenav #sidenav mode="over" [(opened)]="sidenavAberta">
+                <img id="logo" href="#" 
+                src="https://i.ibb.co/wszdgT7/wise-erp-logo.png" 
+                alt="wise-erp-logo">            
+                <div id="fecharmenu">
+                    <button mat-raised-button color="primary">
+                        <mat-icon (click)="sidenav.toggle()">chevron_left</mat-icon>
+                    </button>
                 </div>
+                <mat-nav-list>
+                    <a href="#">
+                        <mat-list-item id="sair">Sair</mat-list-item>
+                    </a>
+                    <a href="/invoices">
+                        <mat-list-item id="invoices">WE_invoices</mat-list-item>
+                    </a>
+                </mat-nav-list>
+            </mat-sidenav>
+
+            <mat-sidenav-content>
+                <div id="abrirmenu">
+                    <button mat-raised-button color="primary">
+                        <mat-icon (click)="sidenav.toggle()">chevron_right</mat-icon>
+                    </button>
+                </div>
+
+                <!------------------ CONTENT -------------------->
+
+                <div id="content">
+            
+                    <!------------------ DROPDOWNS -------------------->
+                    <div>
+
+                        <!---------------- MARCA ------------------->
+                        <mat-form-field id="marca">
+                            <mat-label>Marca</mat-label>
+                            <mat-select>
+                                <mat-option>Todas</mat-option>
+                                <mat-option *ngFor="let marca of marcas" 
+                                value="marca.brand_name">{{ marca.brand_name }}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    
+                        <!---------------- COLEÇÃO ------------------->
+                        <mat-form-field id="colecao">
+                            <mat-label>Coleção</mat-label>
+                            <mat-select>
+                                <mat-option>Todas</mat-option>
+                                <mat-option *ngFor="let colecao of colecoes" 
+                                value="colecao.collection_name">{{ colecao.collection_name }}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+
+                        <!--------------------- REPRESENTANTE --------------------->
+                        <mat-form-field id="repres">
+                            <mat-label>Representante</mat-label>
+                            <mat-select>
+                                <mat-option>Todos</mat-option>
+                                <mat-option *ngFor="let repre of repres" 
+                                value="repre.agent_name">{{ repre.agent_name }}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        
+                        <mat-form-field id="cnpj" (keyup)="cnpjDigitado = $event.target.value">
+                            <mat-label>CNPJ</mat-label>
+                            <input matInput/>
+                            <mat-hint>Apenas números</mat-hint>
+                        </mat-form-field>
+                        <p>Cnpj digitado: {{cnpjDigitado}}</p>
+
+                    </div>
 
                     <!------------------- FORM DE CNPJ ------------------------>
                     <div>
-
+                        
                         <!-------------- BUTTON PESQUISAR CNPJ ------------->
                         <button mat-raised-button
                         color="primary"
-                        id="botao-buscar"
-                        type="submit"
+                        id="botao-buscar" 
+                        type="submit" 
                         (click)="company_doc = cnpjDigitado"
                         (click)="buscarCnpj()">
                         <i class="material-icons right">search</i>BUSCAR</button>
+                        
+                    </div>            
 
+                    <!-------------------- TABELA DE CNPJ --------------------->
+                    
+                    <!-- <div>
+                        <table id="tabela">
+                            <thead>
+                                <tr id="titulos-tabela">
+                                    <th id="razao_social">NOME FANTASIA</th>
+                                    <th id="cnpj">CLIFOR</th>
+                                </tr>
+                            </thead>
+                            <tbody *ngIf="clienteValido == true">
+                                <tr *ngFor="let invoice of invoices">
+                                    <td id=""> {{ invoices.orderFactory_Id }} </td>
+                                    <td id=""> {{ invoices.order_Id }} </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div> -->
+
+                    <!--------------------- FILTRO DIRETO NO GRID ------------------------>
+                    
                     <mat-form-field id="filtro" (keyup)="aplicarFiltro($event.target.value)">
                         <mat-label>Filtro</mat-label>
                         <input matInput/>
                         <mat-hint>Filtrar por qualquer campo</mat-hint>
                     </mat-form-field>
 
+                    <!----------------------------- ORDER BY ------------------------------>
+                    <mat-form-field id="repres">
+                        <mat-label>Ordenar</mat-label>
+                        <mat-select>
+                            <mat-option value="COLEÇÃO EM ORDEM CRESCENTE">COLEÇÃO EM ORDEM CRESCENTE</mat-option>
+                            <mat-option value="COLEÇÃO EM ORDEM DECRESCENTE">COLEÇÃO EM ORDEM DECRESCENTE</mat-option>
+                            <mat-option value="DATA DE ENTRADA EM ORDEM CRESCENTE">DATA DE ENTRADA EM ORDEM CRESCENTE</mat-option>
+                            <mat-option value="DATA DE ENTRADA EM ORDEM DECRESCENTE">DATA DE ENTRADA EM ORDEM DECRESCENTE</mat-option>
+                            <mat-option value="NÚMERO DO PEDIDO EM ORDEM CRESCENTE">NÚMERO DO PEDIDO EM ORDEM CRESCENTE</mat-option>
+                            <mat-option value="NÚMERO DO PEDIDO EM ORDEM DECRESCENTE">NÚMERO DO PEDIDO EM ORDEM DECRESCENTE</mat-option>
+                            <mat-option value="A - Z">A - Z</mat-option>
+                            <mat-option value="Z - A">Z - A</mat-option>
+                        </mat-select>
+                    </mat-form-field>
                     <!---------------------- DATA TABLE ---------------------->
                     <!-------------------- GRID DE INVOICES -------------------->
 
@@ -173,7 +241,13 @@
                     [pageSizeOptions]="[10, 20, 50, 100]"
                     showFirstLastButtons>
                     </mat-paginator>
-          </div>
-        </div>
+
+                </div>
+
+            </mat-sidenav-content>
+
+        </mat-sidenav-container>
+
     </body>
+
 </html>

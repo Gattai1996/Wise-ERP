@@ -9,11 +9,9 @@ import { CollectionsService } from '../services/collections.service';
 import { Collections } from '../models/collections.model';
 import { Agents } from '../models/agents.model'
 import { AgentsService } from '../services/agents.service';
-import { MatTableDataSource, MatSort, MatPaginator } from '@angular/material'
-
+import { MatSort, MatPaginator } from '@angular/material'
 import { DataSource } from '@angular/cdk/table';
 import { Observable } from 'rxjs';
-
 
 @Component({
   selector: 'app-invoices',
@@ -22,12 +20,16 @@ import { Observable } from 'rxjs';
 })
 export class InvoicesComponent implements OnInit {
 
-
   displayedColumns: string[] = ['customerFab_Id', 'company_doc', 'orderFactory_Id', 'order_Id',
     'invoice', 'dt_invoice', 'dt_invoice_relat', 'brand_name', 'total_quantity', 
     'total_price', 'packed_quantity', 'packed_price', 'total_quantity_invoiced',
     'total_price_invoiced', 'percentual_invoiced'];
 
+  dataSource = new InvoicesDataSource(this.consultaCnpjService);
+
+  @ViewChild(MatSort,null) sort: MatSort;
+  @ViewChild(MatPaginator, null) paginator: MatPaginator;
+  
   sidenavAberta = false; // Variável que controla a Sidenavbar
   invoice: ConsultaCnpj;
   filtro: string = '';
@@ -40,18 +42,13 @@ export class InvoicesComponent implements OnInit {
   erroColecoes: any;
   clienteValido: boolean = false;
   brand_Id = '1';
-  dataSource: any;
-
+  
   constructor(
-
     private router: Router,
-
     private consultaCnpjService: ConsultaCnpjService,
-
     private serviceMarcas: BrandsService,
     private serviceColecao: CollectionsService,
     private serviceRepres: AgentsService,
-
     ) {};
 
   ngOnInit() { 
@@ -99,8 +96,7 @@ export class InvoicesComponent implements OnInit {
   }
 
   public buscarCnpj() {
-    this.dataSource = new InvoicesDataSource(this.consultaCnpjService);
-
+    
   }
 
   public voltarAoLogin() {
@@ -110,9 +106,6 @@ export class InvoicesComponent implements OnInit {
 }
 
 export class InvoicesDataSource extends DataSource<any> {
-  
-  @ViewChild(MatSort, {static: true}) sort: MatSort;
-  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
   company_doc: string = '';
   
