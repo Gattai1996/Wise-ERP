@@ -1,0 +1,26 @@
+/* ============== SIDEBAR ============== */
+mat-sidenav-container {
+    height: 100%;
+}
+mat-sidenav, mat-sidenav-content {
+    padding: 1rem;
+}
+mat-sidenav {
+    background-color: #0277b1;
+    width: 20%;
+    max-width: 100%;
+}
+#logo {
+    width: 180px;
+    float: left;
+}
+mat-nav-list {
+    margin-top: 3rem;
+}
+#invoices, #sair, #clientes {
+    color: #fff;
+}
+#fecharmenu {
+    float: right;
+    text-align: right;
+}
