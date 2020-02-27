@@ -17,10 +17,10 @@ export class AgentsService {
 
   constructor(private http: HttpClient) { }
 
-  public listarRepres(brand_Id: string):Observable<Agents> {
-    console.log('CHAMANDO API REPRESENTANTES COM URL: ' + this.API_URL + this.PARAMETERS + 'brand_Id=' + brand_Id + ' RETORNOU > ');
+  public listarRepres(company_Id: string, dept_Id: string, brand_Id: string):Observable<Agents> {
+    console.log('CHAMANDO API REPRESENTANTES COM URL: ' + this.API_URL + 'company_Id=' + company_Id + '&dept_Id=' + dept_Id + '&brand_Id=' + brand_Id + ' RETORNOU > ');
     return this.http.get<Agents>(
-      this.API_URL + this.PARAMETERS + 'brand_Id=' + brand_Id)
+      this.API_URL + 'company_Id=' + company_Id + '&dept_Id=' + dept_Id + '&brand_Id=' + brand_Id)
       .pipe(tap(console.log));
   }
 }

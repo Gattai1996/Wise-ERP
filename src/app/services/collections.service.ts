@@ -17,10 +17,10 @@ export class CollectionsService {
 
   constructor(private http: HttpClient) { }
 
-  public listarColecoes(brand_Id: string):Observable<Collections> {
-    console.log('CHAMANDO API COLEÇÕES COM URL: ' + this.API_URL + this.PARAMETERS + 'brand_Id=' + brand_Id + ' RETORNOU > ');
+  public listarColecoes(company_Id: string, dept_Id: string, brand_Id: string):Observable<Collections> {
+    console.log('CHAMANDO API COLEÇÕES COM URL: ' + this.API_URL + 'company_Id=' + company_Id + '&dept_Id=' + dept_Id + '&brand_Id=' + brand_Id + ' RETORNOU > ');
     return this.http.get<Collections>(
-      this.API_URL + this.PARAMETERS + 'brand_Id=' + brand_Id)
+      this.API_URL + 'company_Id=' + company_Id + '&dept_Id=' + dept_Id + '&brand_Id=' + brand_Id)
       .pipe(tap(console.log));
   }
 }

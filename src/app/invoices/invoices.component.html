@@ -43,20 +43,18 @@
                         <!---------------- MARCA ------------------->
                         <mat-form-field id="marca">
                             <mat-label>Marca</mat-label>
-                            <mat-select>
-                                <mat-option>Todas</mat-option>
+                            <mat-select #brand (change)="mudarMarca($event)">
                                 <mat-option *ngFor="let marca of marcas" 
-                                value="marca.brand_name">{{ marca.brand_name }}</mat-option>
+                                [value]="marca.brand_name">{{ marca.brand_name }}</mat-option>
                             </mat-select>
                         </mat-form-field>
-                    
+                       
                         <!---------------- COLEÇÃO ------------------->
                         <mat-form-field id="colecao">
                             <mat-label>Coleção</mat-label>
                             <mat-select>
-                                <mat-option>Todas</mat-option>
                                 <mat-option *ngFor="let colecao of colecoes" 
-                                value="colecao.collection_name">{{ colecao.collection_name }}</mat-option>
+                                [value]="colecao.collection_name">{{ colecao.collection_name }}</mat-option>
                             </mat-select>
                         </mat-form-field>
 
@@ -64,9 +62,8 @@
                         <mat-form-field id="repres">
                             <mat-label>Representante</mat-label>
                             <mat-select>
-                                <mat-option>Todos</mat-option>
                                 <mat-option *ngFor="let repre of repres" 
-                                value="repre.agent_name">{{ repre.agent_name }}</mat-option>
+                                [value]="repre.agent_name">{{ repre.agent_name }}</mat-option>
                             </mat-select>
                         </mat-form-field>
                         

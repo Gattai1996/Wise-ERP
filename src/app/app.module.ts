@@ -13,24 +13,25 @@ import { MaterialModule } from './material/material.module';
 import { BrandsService } from './services/brands.service';
 import { DialogErrorComponent } from './home/dialog-error/dialog-error.component';
 import { DataTableComponent } from './invoices/table/data-table/data-table.component';
-<<<<<<< Updated upstream
-=======
+import { SidenavComponent } from './sidenav/sidenav.component';
+import { LayoutModule } from '@angular/cdk/layout';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
 import { ClientesComponent } from './clientes/clientes/clientes.component';
 import { SidenavbarComponent } from './sidenavbar/sidenavbar/sidenavbar.component';
->>>>>>> Stashed changes
 
 @NgModule({
   declarations: [
     AppComponent,
     InvoicesComponent,
     DialogErrorComponent,
-<<<<<<< Updated upstream
-    DataTableComponent
-=======
     DataTableComponent,
     ClientesComponent,
-    SidenavbarComponent
->>>>>>> Stashed changes
+    SidenavbarComponent,
+    SidenavComponent
   ],
   entryComponents: [DialogErrorComponent],
   imports: [
@@ -40,7 +41,13 @@ import { SidenavbarComponent } from './sidenavbar/sidenavbar/sidenavbar.componen
     HomeModule,
     FormsModule,
     BrowserAnimationsModule,
-    MaterialModule
+    MaterialModule,
+    LayoutModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatSidenavModule,
+    MatIconModule,
+    MatListModule
   ],
   providers: [
     HttpClient,
