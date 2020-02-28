@@ -12,7 +12,7 @@ mat-sidenav, mat-sidenav-content {
   padding: 1rem;
 }
 mat-sidenav {
-  background-color: #0277b1;
+  background-color: white;
   width: 300px;
   max-width: 100%;
 }
@@ -20,11 +20,15 @@ mat-sidenav {
   width: 180px;
   float: left;
 }
+#logo2 {
+  width: 230px;
+  float: right;
+}
 mat-nav-list {
   margin-top: 3rem;
 }
 #invoices, #sair {
-  color: #fff;
+  color: black;
 }
 #fecharmenu {
   float: right;

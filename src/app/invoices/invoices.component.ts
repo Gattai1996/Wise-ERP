@@ -20,17 +20,21 @@ import { Observable } from 'rxjs';
 })
 export class InvoicesComponent implements OnInit {
 
-  displayedColumns: string[] = ['customerFab_Id', 'company_doc', 'orderFactory_Id', 'order_Id',
-    'invoice', 'dt_invoice', 'dt_invoice_relat', 'brand_name', 'total_quantity', 
+  displayedColumns: string[] = ['orderFactory_Id', 'order_Id',
+    'invoice', 'brand_name', 'total_quantity', 
     'total_price', 'packed_quantity', 'packed_price', 'total_quantity_invoiced',
     'total_price_invoiced', 'percentual_invoiced'];
+  // displayedColumns: string[] = ['customerFab_Id', 'company_doc', 'orderFactory_Id', 'order_Id',
+  // 'invoice', 'dt_invoice', 'dt_invoice_relat', 'brand_name', 'total_quantity', 
+  // 'total_price', 'packed_quantity', 'packed_price', 'total_quantity_invoiced',
+  // 'total_price_invoiced', 'percentual_invoiced'];
 
-  dataSource = new InvoicesDataSource(this.consultaCnpjService);
+  
 
   @ViewChild(MatSort,null) sort: MatSort;
   @ViewChild(MatPaginator, null) paginator: MatPaginator;
   
-  sidenavAberta = false; // Variável que controla a Sidenavbar
+  sidenavAberta = false;
   invoice: ConsultaCnpj;
   filtro: string = '';
   marcas: Brands;
@@ -41,9 +45,13 @@ export class InvoicesComponent implements OnInit {
   erroRepres: any;
   erroColecoes: any;
   clienteValido: boolean = false;
-  brand_Id = '1';
-  dept_Id = '1';
   company_Id = '1';
+  dept_Id = '1';
+  brand_Id = '';
+  collection_Id = '';
+  agent_Id = '';
+  orderBy = '';
+  dataSource: Marca;
 
   constructor(
     private router: Router,
@@ -54,21 +62,8 @@ export class InvoicesComponent implements OnInit {
     ) {};
 
   ngOnInit() { 
-    // this.dataSource.sort = this.sort;
-    // this.dataSource.paginator = this.paginator;
-    // this.paginator._intl.itemsPerPageLabel = "Número de linhas por página:";
-    // this.paginator._intl.nextPageLabel = "Próxima página";
-    // this.paginator._intl.previousPageLabel = "Página anterior";
-    // this.paginator._intl.lastPageLabel = "Última página";
-    // this.paginator._intl.firstPageLabel = "Primeira página";
-    this.listaDeMarcas(),
-    this.listaDeColecoes(),
-    this.listaDeRepres()
+    this.listaDeMarcas()
   }
-  // public aplicarFiltro(filtroValor: string) {
-  //   this.dataSource.filter = filtroValor.trim().toLowerCase();
-  // }
-
 
   public listaDeMarcas() { 
 
@@ -77,6 +72,14 @@ export class InvoicesComponent implements OnInit {
       (error:any) => {this.erroMarcas = error;
       console.log('ERRO: ' + this.erroMarcas)}
     )
+  }
+
+  public mudarMarca(event) {
+    // this.resetar();
+    console.log("Selecionou brand_Id: " + event);
+    this.brand_Id = event;
+    console.log(this.brand_Id);
+    this.listaDeColecoes();
   }
 
   public listaDeColecoes() { 
@@ -88,6 +91,12 @@ export class InvoicesComponent implements OnInit {
     )
   }
 
+  public mudarColecao(event) {
+    console.log("Selecionou collection_Id: " + event)
+    this.collection_Id = event;
+    this.listaDeRepres();
+  }
+
   public listaDeRepres() { 
 
   this.serviceRepres.listarRepres(this.company_Id, this.dept_Id, this.brand_Id).subscribe(dados =>
@@ -97,8 +106,28 @@ export class InvoicesComponent implements OnInit {
     )
   }
 
-  public buscarCnpj() {
-    
+  public mudarRepres(event) {
+    console.log("Selecionou agent_Id: " + event);
+    this.agent_Id = event;
+  }
+
+  public mudarOrdem(event) {
+    console.log("Selecionou orderBy: " + event);
+    this.orderBy = event;
+  }
+
+  public resetar() {
+    this.brand_Id= '';
+    this.collection_Id = '';
+    this.agent_Id='';
+    this.listaDeMarcas();
+    this.listaDeColecoes();
+    this.listaDeRepres();
+  }
+
+  public buscarInvoices() {
+    this.dataSource = new InvoicesDataSource(this.consultaCnpjService, this.company_Id, 
+      this.dept_Id, this.brand_Id, this.collection_Id, this.agent_Id, this.orderBy);
   }
 
   public voltarAoLogin() {
@@ -108,24 +137,45 @@ export class InvoicesComponent implements OnInit {
 }
 
 export class InvoicesDataSource extends DataSource<any> {
+  dept_Id: any;
+  company_Id: any;
+  brand_Id: any;
+  collection_Id: any;
+  agent_Id: any;
+  orderBy: any;
 
-  company_Id: string = '1';
-  dept_Id: string = '1';
-  brand_Id: string = '1';
-  collection_Id: string = '63';
-  agent_Id: string = '300243';
-  orderBy: string = '7';
-  company_doc: string = '';
+  // company_Id: string = '1';
+  // dept_Id: string = '1';
+  // brand_Id: string = '1';
+  // collection_Id: string = '63';
+  // agent_Id: string = '300243';
+  // orderBy: string = '7';
+  // company_doc: string = '';
   
-  constructor(private consultaCnpjService: ConsultaCnpjService) {
-    super();
+  constructor(private consultaCnpjService: ConsultaCnpjService, company_Id, 
+    dept_Id, brand_Id, collection_Id, agent_Id, orderBy) {
+      super();
+      this.dept_Id = dept_Id;
+      this.company_Id = company_Id;
+      this.brand_Id = brand_Id;
+      this.collection_Id = collection_Id;
+      this.agent_Id = agent_Id;
+      this.orderBy = orderBy;
   }
 
   connect(): Observable<ConsultaCnpj[]> {
     return this.consultaCnpjService.listarInvoices(this.company_Id, 
       this.dept_Id, this.brand_Id, this.collection_Id, this.agent_Id, this.orderBy);
   }
+  // connect(): Observable<ConsultaCnpj[]> {
+  //   return this.consultaCnpjService.listarInvoices(this.company_Id, 
+  //     this.dept_Id, this.brand_Id, this.collection_Id, this.agent_Id, this.orderBy);
+  // }
  
   disconnect() {}
 
+}
+
+export class Marca {
+  
 }
