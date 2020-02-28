@@ -7,7 +7,8 @@
         <form id="formulario" [formGroup]="loginForm" (submit)="onSubmit()">
 
             <div id="logo">
-                <img src="https://i.ibb.co/wszdgT7/wise-erp-logo.png" alt="wise-erp-logo">
+                <!-- <img src="https://i.ibb.co/wszdgT7/wise-erp-logo.png" alt="wise-erp-logo"> -->
+                <img id="logo" href="#" src="../../assets/logo.png" alt="restoque-logo">
             </div>
             
             <div>
@@ -20,7 +21,7 @@
                         formControlName="user"
                         (change)="usuario = $event.target.value" 
                         class="white-text">
-                        <mat-label for="Login" style="color: white"><mat-icon>person</mat-icon>&nbsp;&nbsp;Usuário</mat-label>
+                        <mat-label for="Login"><mat-icon>person</mat-icon>&nbsp;&nbsp;Usuário</mat-label>
                     </mat-form-field>
                     <div
                         id="mensagem"
@@ -40,7 +41,7 @@
                         type="password" 
                         (change)="senha = $event.target.value" 
                         class="white-text">
-                        <mat-label for="senha" style="color: white" class="password"><mat-icon>vpn_key</mat-icon>&nbsp;&nbsp;Senha</mat-label>
+                        <mat-label for="senha" class="password"><mat-icon>vpn_key</mat-icon>&nbsp;&nbsp;Senha</mat-label>
                     </mat-form-field>
                     <div
                         id="mensagem"
@@ -53,7 +54,8 @@
 
                 <button mat-raised-button
                 color="primary"
-                [disabled]="loginForm.invalid"
+                style="background-color: black;"
+                
                 id="botao-entrar" 
                 type="submit">
                 Login&nbsp;
