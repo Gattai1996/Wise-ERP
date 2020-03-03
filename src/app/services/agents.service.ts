@@ -11,7 +11,6 @@ import { tap } from 'rxjs/operators';
 export class AgentsService {
 
   private readonly API_URL = 'http://wiseerp-api-demo.azurewebsites.net/api/agents?';
-  private readonly PARAMETERS = 'company_Id=1&dept_Id=1&';
 
   brand_Id = '1';
 

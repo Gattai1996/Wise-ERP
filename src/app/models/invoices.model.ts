@@ -1,4 +1,4 @@
-export class ConsultaCnpj {
+export class Invoices {
     customerFab_Id:string;
     company_doc:string;
     orderFactory_Id:any;
