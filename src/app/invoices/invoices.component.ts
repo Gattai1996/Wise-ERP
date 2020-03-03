@@ -7,9 +7,9 @@ import { BrandsService } from '../services/brands.service';
 import { Brands } from '../models/brands.models';
 import { CollectionsService } from '../services/collections.service';
 import { Collections } from '../models/collections.model';
-import { Agents } from '../models/agents.model'
+import { Agents } from '../models/agents.model';
 import { AgentsService } from '../services/agents.service';
-import { MatSort, MatPaginator } from '@angular/material'
+import { MatSort, MatPaginator } from '@angular/material';
 import { DataSource } from '@angular/cdk/table';
 import { Observable } from 'rxjs';
 
@@ -20,9 +20,10 @@ import { Observable } from 'rxjs';
 })
 export class InvoicesComponent implements OnInit {
 
-  displayedColumns: string[] = ['orderFactory_Id', 'order_Id',
-    'invoice', 'brand_name', 'total_quantity', 
-    'total_price', 'packed_quantity', 'packed_price', 'total_quantity_invoiced',
+  displayedColumns1: string[] = ['orderFactory_Id',
+    'invoice', 'total_quantity', 
+    'total_price'];
+  displayedColumns2: string[] = ['packed_quantity', 'packed_price', 'total_quantity_invoiced',
     'total_price_invoiced', 'percentual_invoiced'];
   // displayedColumns: string[] = ['customerFab_Id', 'company_doc', 'orderFactory_Id', 'order_Id',
   // 'invoice', 'dt_invoice', 'dt_invoice_relat', 'brand_name', 'total_quantity', 
@@ -35,7 +36,7 @@ export class InvoicesComponent implements OnInit {
   @ViewChild(MatPaginator, null) paginator: MatPaginator;
   
   sidenavAberta = false;
-  invoice: ConsultaCnpj;
+  invoices: ConsultaCnpj;
   filtro: string = '';
   marcas: Brands;
   colecoes: Collections;
@@ -44,6 +45,7 @@ export class InvoicesComponent implements OnInit {
   erroMarcas: any;
   erroRepres: any;
   erroColecoes: any;
+  erroInvoices: any;
   clienteValido: boolean = false;
   company_Id = '1';
   dept_Id = '1';
@@ -51,7 +53,7 @@ export class InvoicesComponent implements OnInit {
   collection_Id = '';
   agent_Id = '';
   orderBy = '';
-  dataSource: Marca;
+  // dataSource: Marca;
 
   constructor(
     private router: Router,
@@ -100,7 +102,7 @@ export class InvoicesComponent implements OnInit {
   public listaDeRepres() { 
 
   this.serviceRepres.listarRepres(this.company_Id, this.dept_Id, this.brand_Id).subscribe(dados =>
-    {this.repres = dados;},
+    {this.repres = dados; console.log("Retorno de Repres: " + this.repres);},
     (error:any) => {this.erroColecoes = error;
     console.log('ERRO: ' + this.erroColecoes)}
     )
@@ -126,56 +128,56 @@ export class InvoicesComponent implements OnInit {
   }
 
   public buscarInvoices() {
-    this.dataSource = new InvoicesDataSource(this.consultaCnpjService, this.company_Id, 
-      this.dept_Id, this.brand_Id, this.collection_Id, this.agent_Id, this.orderBy);
+    this.consultaCnpjService.listarInvoices(this.company_Id, this.dept_Id, this.brand_Id, this.collection_Id, this.agent_Id, this.orderBy).subscribe(dados =>
+      {this.invoices = dados; console.log("Retorno de invoice: " + this.invoices);},
+      (error:any) => {this.erroInvoices = error;
+      console.log('ERRO INVOICES: ' + this.erroInvoices)}
+      )
   }
+    
+  // public buscarInvoices() {
+  //   this.dataSource = new InvoicesDataSource(this.consultaCnpjService, this.company_Id, 
+  //     this.dept_Id, this.brand_Id, this.collection_Id, this.agent_Id, this.orderBy);
+  // }
 
   public voltarAoLogin() {
     this.router.navigate(['/']);
   }
-  
 }
 
-export class InvoicesDataSource extends DataSource<any> {
-  dept_Id: any;
-  company_Id: any;
-  brand_Id: any;
-  collection_Id: any;
-  agent_Id: any;
-  orderBy: any;
-
-  // company_Id: string = '1';
-  // dept_Id: string = '1';
-  // brand_Id: string = '1';
-  // collection_Id: string = '63';
-  // agent_Id: string = '300243';
-  // orderBy: string = '7';
-  // company_doc: string = '';
+// export class InvoicesDataSource extends DataSource<any> {
+//   dept_Id: any;
+//   company_Id: any;
+//   brand_Id: any;
+//   collection_Id: any;
+//   agent_Id: any;
+//   orderBy: any;
   
-  constructor(private consultaCnpjService: ConsultaCnpjService, company_Id, 
-    dept_Id, brand_Id, collection_Id, agent_Id, orderBy) {
-      super();
-      this.dept_Id = dept_Id;
-      this.company_Id = company_Id;
-      this.brand_Id = brand_Id;
-      this.collection_Id = collection_Id;
-      this.agent_Id = agent_Id;
-      this.orderBy = orderBy;
-  }
+//   constructor(private consultaCnpjService: ConsultaCnpjService, company_Id, 
+//     dept_Id, brand_Id, collection_Id, agent_Id, orderBy) {
+//       super();
+//       this.dept_Id = dept_Id;
+//       this.company_Id = company_Id;
+//       this.brand_Id = brand_Id;
+//       this.collection_Id = collection_Id;
+//       this.agent_Id = agent_Id;
+//       this.orderBy = orderBy;
+//   }
 
-  connect(): Observable<ConsultaCnpj[]> {
-    return this.consultaCnpjService.listarInvoices(this.company_Id, 
-      this.dept_Id, this.brand_Id, this.collection_Id, this.agent_Id, this.orderBy);
-  }
+  // connect(): Observable<ConsultaCnpj[]> {
+  //   return this.consultaCnpjService.listarInvoices(this.company_Id, 
+  //     this.dept_Id, this.brand_Id, this.collection_Id, this.agent_Id, this.orderBy);
+  // }
+
   // connect(): Observable<ConsultaCnpj[]> {
   //   return this.consultaCnpjService.listarInvoices(this.company_Id, 
   //     this.dept_Id, this.brand_Id, this.collection_Id, this.agent_Id, this.orderBy);
   // }
  
-  disconnect() {}
+//   disconnect() {}
 
-}
+// }
 
-export class Marca {
+// export class Marca {
   
-}
+// }

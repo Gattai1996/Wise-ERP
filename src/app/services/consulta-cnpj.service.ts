@@ -5,7 +5,7 @@ import { ConsultaCnpj } from '../models/consulta-cnpj.model';
 import { tap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
-@Injectable({
+@Injectable({ 
   providedIn: 'root'
 })
 export class ConsultaCnpjService {
@@ -15,14 +15,14 @@ export class ConsultaCnpjService {
 
   constructor(private http: HttpClient) { }
 
-  public listarInvoices(company_Id: string, dept_Id: string, brand_Id: string, collection_Id: string, agent_Id: string, orderBy: string):Observable<ConsultaCnpj[]> {
+  public listarInvoices(company_Id: string, dept_Id: string, brand_Id: string, collection_Id: string, agent_Id: string, orderBy: string):Observable<ConsultaCnpj> {
     console.log('Chamando API Invoices com método GET com a URL: ' + this.API_URL + 
     'company_Id=' + company_Id + '&dept_Id=' + dept_Id + '&brand_Id=' + brand_Id + 
     '&collection_Id=' + collection_Id + '&agent_Id=' + agent_Id + '&orderBy=' + orderBy); 
-    return this.http.get<ConsultaCnpj[]>(
+    return this.http.get<ConsultaCnpj>(
       this.API_URL + 
       'company_Id=' + company_Id + '&dept_Id=' + dept_Id + '&brand_Id=' + brand_Id + 
       '&collection_Id=' + collection_Id + '&agent_Id=' + agent_Id + '&orderBy=' + orderBy)
-        .pipe(tap(console.log));
+      .pipe(tap(console.log));
   }
 }

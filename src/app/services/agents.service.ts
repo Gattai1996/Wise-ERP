@@ -6,14 +6,14 @@ import { Agents } from '../models/agents.model';
 import { tap } from 'rxjs/operators';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root' 
 })
 export class AgentsService {
 
-  private readonly API_URL = 'http://wiseerp-api-demo.azurewebsites.net/api/agents?'
-  private readonly PARAMETERS = 'company_Id=1&dept_Id=1&'
+  private readonly API_URL = 'http://wiseerp-api-demo.azurewebsites.net/api/agents?';
+  private readonly PARAMETERS = 'company_Id=1&dept_Id=1&';
 
-  brand_Id = '1'
+  brand_Id = '1';
 
   constructor(private http: HttpClient) { }
 

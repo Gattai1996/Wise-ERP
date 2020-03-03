@@ -13,7 +13,9 @@ import {
   MatIconModule,
   MatFormFieldModule,
   MatInputModule,
-  MatGridListModule
+  MatGridListModule,
+  MatCardModule
+  
 } from '@angular/material'
 
 
@@ -31,6 +33,8 @@ const MeterialComponents =
   MatIconModule,
   MatFormFieldModule,
   MatInputModule,
+  MatGridListModule,
+  MatCardModule,
   MatGridListModule
 ]
 
