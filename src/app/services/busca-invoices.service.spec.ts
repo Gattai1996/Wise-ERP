@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { ConsultaCnpjService } from './consulta-cnpj.service';
+import { BuscaInvoices } from './busca-invoices.service';
 
 describe('ConsultaCnpjService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: ConsultaCnpjService = TestBed.get(ConsultaCnpjService);
+    const service: BuscaInvoices = TestBed.get(BuscaInvoices);
     expect(service).toBeTruthy();
   });
 });
