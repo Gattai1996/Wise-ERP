@@ -61,31 +61,8 @@ body {
 
 /* ============================ DROPDOWNS =================================== */
 
-/* =============================== GRID INVOICES ================================ */
-.tabela-container {
-  margin-top: 1rem;
-  height: 200px;
-  width: 100%;
-  overflow: auto;
-}
-
-table {
-  width: 800px;
-}
-td.mat-column-star {
-  width: 20px;
-  padding-right: 8px;
-}
-th.mat-column-position, td.mat-column-position {
-  padding-left: 8px;
-}
-th, td {
-  border-right: 1px solid #e0e0e0;
-  border-left: 1px solid #e0e0e0;
-  text-align: center;
-}
-.mat-table-sticky:first-child {
-  border-right: 1px solid #e0e0e0;
+mat-grid-tile {
+  font-size: xx-small;
 }
 
 /* =========================== FORM DE CNPJ ============================== */

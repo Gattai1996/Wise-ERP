@@ -105,30 +105,35 @@
                         <i class="material-icons right">search</i>BUSCAR</button>
                     </div>
 
-                    <mat-card>
+                    <mat-card *ngIf="consultado" style="margin: 15px 0; text-align: center;">
                         <mat-card-title>
-                            Total Qtde Fat.: {{ total }}
-                            <br>
-                            Total Vr. Fat.: {{ total }}
+                            <mat-icon>poll</mat-icon> Totais
                         </mat-card-title>
+                        <mat-card-content>
+                            Qtde Fat.: {{ total.sum_total_quantity_invoiced | number: '1.0-0' }}
+                            <br>
+                            Vr. Fat.: {{ total.sum_total_price_invoiced | currency: 'BRL' }}
+                        </mat-card-content>
                     </mat-card>
                     
                     <mat-card *ngFor="let invoice of invoices" class="mat-elevation-z8" style="margin: 15px 0;">
-                        <mat-card-title style="text-align: center;"><mat-icon>account_box</mat-icon> Razão Social</mat-card-title>
-                        <mat-card-content style="text-align: center;"><strong>Ped.: </strong>{{ invoice.orderFactory_Id }}  - {{ invoice.brand_name}}</mat-card-content>
-                        <mat-grid-list style="font-size: 0.5rem; text-align: left;" cols="4" rowHeight="4:1">
-                            <mat-grid-tile style="text-align: left;"><strong>Qtde. Ped.: </strong>{{ invoice.total_quantity }}</mat-grid-tile>
-                            <mat-grid-tile style="text-align: left;"><strong>Qtde. Emb.: </strong>{{ invoice.packed_quantity }}</mat-grid-tile>
-                            <mat-grid-tile style="text-align: left;"><strong>Qtde. Fat.: </strong>{{ total_quantity_invoiced }}</mat-grid-tile>
-                            <mat-grid-tile style="text-align: left;"><strong>% Fat.: </strong>100%</mat-grid-tile>
-                            <!-- <mat-grid-tile><strong>% fat.: </strong>{{ invoice.percentual_invoiced }}</mat-grid-tile> -->
-                            <mat-grid-tile style="text-align: left;"><strong>Vr. Ped.: </strong>{{ invoice.total_price }}</mat-grid-tile>
-                            <mat-grid-tile style="text-align: left;"><strong>Vr. Emb.: </strong>{{ invoice.packed_price }}</mat-grid-tile>
-                            <mat-grid-tile style="text-align: left;"><strong>Vr. Fat.: </strong>R$ {{ invoice.total_price_invoiced }}</mat-grid-tile>
-                            <mat-grid-tile style="text-align: left;"><strong>Vr. % Fat.: </strong>{{ invoice.invoice }}</mat-grid-tile>
-                        </mat-grid-list>
+                        <mat-card-title style="text-align: center; margin-bottom: 15px"><mat-icon>account_box</mat-icon> Razão Social</mat-card-title>
+                        <div style="width: 100%;">
+                            <mat-card-content style="text-align: center;"><strong>Ped:</strong>{{ invoice.orderFactory_Id }}  - {{ invoice.brand_name }}</mat-card-content>
+                            <div style="width: 100%; text-align: center;"><p>Qtde</p></div>
+                            <div style="width: 25%; float: left; text-align: center;"><strong>Ped:<br></strong>{{ invoice.total_quantity | number:'1.0-0' }}</div>
+                            <div style="width: 25%; float: left; text-align: center;"><strong>Emb:<br></strong>{{ invoice.packed_quantity | number:'1.0-0' }}</div>
+                            <div style="width: 25%; float: left; text-align: center;"><strong>Fat:<br></strong>{{ invoice.total_quantity_invoiced | number:'1.0-0' }}</div>
+                            <div style="width: 25%; float: left; text-align: center;"><strong>%<br></strong>{{ resultado }}</div>
+                            <!-- <div style="width: 25%; float: left; text-align: center;"><strong>%:<br></strong>{{ invoice.percentual_invoiced }}</div> -->
+                            <div style="width: 100%; text-align: center;"><p>Valor</p></div>
+                            <div style="width: 25%; float: left; text-align: center;"><strong>Ped:<br></strong>{{ invoice.total_price | currency: 'BRL' }}</div>
+                            <div style="width: 25%; float: left; text-align: center;"><strong>Emb:<br></strong>{{ invoice.packed_price | currency: 'BRL' }}</div>
+                            <div style="width: 25%; float: left; text-align: center;"><strong>Fat:<br></strong>{{ invoice.total_price_invoiced | currency: 'BRL' }}</div>
+                            <div style="width: 25%; float: left; text-align: center;"><strong>%<br></strong>{{ invoice.total_price_invoiced / invoice.total_price * 100 | number: '1.0-0' }}</div>
+                        </div>
                         <mat-card-footer style="text-align: center;">
-                            <button mat-raised-button style="background-color: black; color:white; margin: 20px;"><mat-icon>remove_red_eye</mat-icon></button>
+                            <button mat-raised-button style="background-color: black; color:white; margin: 15px;"><mat-icon>remove_red_eye</mat-icon></button>
                         </mat-card-footer>
                     </mat-card>
 
