@@ -32,6 +32,7 @@ export class InvoicesComponent implements OnInit {
 
   listaDeInvoices: Object;
   total: Object;
+  consultado = false;
   
   erroCnpj: any;
   erroMarcas: any;
@@ -45,6 +46,7 @@ export class InvoicesComponent implements OnInit {
   collection_Id = '';
   agent_Id = '';
   orderBy = '';
+  diferença: any;
 
   constructor(
     private router: Router,
@@ -117,12 +119,23 @@ export class InvoicesComponent implements OnInit {
   }
 
   public buscarInvoices() {
+    var totalQtde = 0;
+    var totalQtdeFat = 0;
+    var resultado = 0;
     this.buscaInvoices.listarInvoices(this.company_Id, this.dept_Id, this.brand_Id, this.collection_Id, this.agent_Id, this.orderBy).subscribe(dados =>
       {
         this.invoices = dados;
         console.log("Retorno de invoice: " + this.invoices);
         this.listaDeInvoices = dados;
+        this.consultado = true;
         this.buscarTotalInvoices();
+        totalQtde = parseInt(this.invoices.total_quantity);
+        totalQtdeFat = parseInt(this.invoices.total_quantity_invoiced);
+        resultado = totalQtde / totalQtdeFat * 100;
+        console.log('RESULTADO= ' + resultado)
+        if(resultado < 0){
+          resultado = 0;
+        }
       },
       (error:any) => {this.erroInvoices = error;
       console.log('ERRO INVOICES: ' + this.erroInvoices)}
