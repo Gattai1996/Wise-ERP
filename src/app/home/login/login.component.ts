@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 
 import { Login } from 'src/app/models/login.model';
@@ -36,6 +35,7 @@ export class LoginComponent implements OnInit {
   }
 
   getter() {
+
     const usuario = this.loginForm.get('user').value;
     const senha = this.loginForm.get('password').value;
 
@@ -49,9 +49,7 @@ export class LoginComponent implements OnInit {
           this.router.navigate(['/invoices']);
         } else {
           console.log('Login inválido');
-
           this.openDialog();
-
         }
       },
       (error: any) => {
