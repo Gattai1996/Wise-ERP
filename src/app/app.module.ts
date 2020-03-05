@@ -22,6 +22,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { ClientesComponent } from './clientes/clientes/clientes.component';
 import { SidenavbarComponent } from './sidenavbar/sidenavbar/sidenavbar.component';
+import { ReplacePipe } from './pipes/replacepipe';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { SidenavbarComponent } from './sidenavbar/sidenavbar/sidenavbar.componen
     DataTableComponent,
     ClientesComponent,
     SidenavbarComponent,
-    SidenavComponent
+    SidenavComponent,
+    ReplacePipe
   ],
   entryComponents: [DialogErrorComponent],
   imports: [

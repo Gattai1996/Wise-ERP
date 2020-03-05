@@ -10,7 +10,6 @@ import { Collections } from '../models/collections.model';
 import { Agents } from '../models/agents.model';
 import { AgentsService } from '../services/agents.service';
 import { MatSort, MatPaginator } from '@angular/material';
-import { TotalInvoices } from '../models/total-invoices.model'
 import { BuscaTotalInvoicesService } from '../services/busca-total-invoices.service'
  
 @Component({
