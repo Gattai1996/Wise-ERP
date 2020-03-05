@@ -61,11 +61,14 @@ body {
 
 /* ============================ DROPDOWNS =================================== */
 
-mat-grid-tile {
-  font-size: xx-small;
-}
+/* =========================== CARDS ============================== */
 
-/* =========================== FORM DE CNPJ ============================== */
+#card-subdiv {
+  font-size: x-small;
+  width: 25%;
+  float: left;
+  text-align: center;
+}
 
 /* ========================== BREAKPOINTS - REPONSIVIDADE ========================== */
 

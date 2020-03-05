@@ -14,4 +14,5 @@ export class Invoices {
     total_quantity_invoiced:string;
     total_price_invoiced:string;
     percentual_invoiced:string;
+    customer_name:string;
 }
