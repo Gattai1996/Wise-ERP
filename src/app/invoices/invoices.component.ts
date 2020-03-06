@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 import { Router } from '@angular/router';
 import { BuscaInvoices } from '../services/busca-invoices.service';
@@ -8,9 +8,10 @@ import { Brands } from '../models/brands.models';
 import { CollectionsService } from '../services/collections.service';
 import { Collections } from '../models/collections.model';
 import { Agents } from '../models/agents.model';
-import { AgentsService } from '../services/agents.service';
-import { MatSort, MatPaginator } from '@angular/material';
-import { BuscaTotalInvoicesService } from '../services/busca-total-invoices.service'
+// import { AgentsService } from '../services/agents.service';
+import { BuscaTotalInvoicesService } from '../services/busca-total-invoices.service';
+import { Login } from '../models/login.model';
+import { LoginService } from 'src/app/services/login.service';
  
 @Component({
   selector: 'app-invoices',
@@ -19,20 +20,14 @@ import { BuscaTotalInvoicesService } from '../services/busca-total-invoices.serv
 })
 export class InvoicesComponent implements OnInit {  
 
-  @ViewChild(MatSort,null) sort: MatSort;
-  @ViewChild(MatPaginator, null) paginator: MatPaginator;
-  
   sidenavAberta = false;
   invoices: Invoices;
   filtro: string = '';
   marcas: Brands;
   colecoes: Collections;
   repres: Agents;
-
-  listaDeInvoices: Object;
-  total: Object;
-  consultado = false;
-  
+  total: Object; // Guarda o resultado de total de faturamentos
+  consultado = false; // Controla se já pesquisou faturamento
   erroCnpj: any;
   erroMarcas: any;
   erroRepres: any;
@@ -41,23 +36,33 @@ export class InvoicesComponent implements OnInit {
   clienteValido: boolean = false;
   company_Id = '1';
   dept_Id = '1';
-  brand_Id = '';
-  collection_Id = '';
-  agent_Id = '';
-  orderBy = '';
-  diferença: any;
+  brand_Id:string;
+  collection_Id:string;
+  login:Login;
+  agent_Id:string;
+  orderBy:string;
+  diferença:any;
+
+  @Input() dadosRepres: Login;
 
   constructor(
     private router: Router,
     private buscaInvoices: BuscaInvoices,
     private serviceMarcas: BrandsService,
     private serviceColecao: CollectionsService,
-    private serviceRepres: AgentsService,
-    private buscaTotalInvoicesService: BuscaTotalInvoicesService
+    // private serviceRepres: AgentsService,
+    private buscaTotalInvoicesService: BuscaTotalInvoicesService,
+    private loginService: LoginService
     ) {};
 
-  ngOnInit() { 
-    this.listaDeMarcas()
+  ngOnInit() {
+    // Pega o login emitido da tela de login
+    this.loginService.emitirLogin.subscribe( 
+      login => console.log(login)
+    );
+    // Lista as marcas
+    this.listaDeMarcas();
+    console.log('LOGIN= ' + this.login);
   }
 
   public listaDeMarcas() { 
@@ -87,21 +92,21 @@ export class InvoicesComponent implements OnInit {
   public mudarColecao(event) {
     console.log("Selecionou collection_Id: " + event)
     this.collection_Id = event;
-    this.listaDeRepres();
+    // this.listaDeRepres();
   }
 
-  public listaDeRepres() { 
-  this.serviceRepres.listarRepres(this.company_Id, this.dept_Id, this.brand_Id).subscribe(dados =>
-    {this.repres = dados; console.log("Retorno de Repres: " + this.repres);},
-    (error:any) => {this.erroColecoes = error;
-    console.log('ERRO: ' + this.erroColecoes)}
-    )
-  }
+  // public listaDeRepres() { 
+  // this.serviceRepres.listarRepres(this.company_Id, this.dept_Id, this.brand_Id).subscribe(dados =>
+  //   {this.repres = dados; console.log("Retorno de Repres: " + this.repres);},
+  //   (error:any) => {this.erroColecoes = error;
+  //   console.log('ERRO: ' + this.erroColecoes)}
+  //   )
+  // }
 
-  public mudarRepres(event) {
-    console.log("Selecionou agent_Id: " + event);
-    this.agent_Id = event;
-  }
+  // public mudarRepres(event) {
+  //   console.log("Selecionou agent_Id: " + event);
+  //   this.agent_Id = event;
+  // }
 
   public mudarOrdem(event) {
     console.log("Selecionou orderBy: " + event);
@@ -111,30 +116,19 @@ export class InvoicesComponent implements OnInit {
   public resetar() {
     this.brand_Id= '';
     this.collection_Id = '';
-    this.agent_Id='';
+    // this.agent_Id='';
     this.listaDeMarcas();
     this.listaDeColecoes();
-    this.listaDeRepres();
+    // this.listaDeRepres();
   }
 
   public buscarInvoices() {
-    var totalQtde = 0;
-    var totalQtdeFat = 0;
-    var resultado = 0;
     this.buscaInvoices.listarInvoices(this.company_Id, this.dept_Id, this.brand_Id, this.collection_Id, this.agent_Id, this.orderBy).subscribe(dados =>
       {
+        this.consultado = true;
         this.invoices = dados;
         console.log("Retorno de invoice: " + this.invoices);
-        this.listaDeInvoices = dados;
-        this.consultado = true;
         this.buscarTotalInvoices();
-        totalQtde = parseInt(this.invoices.total_quantity);
-        totalQtdeFat = parseInt(this.invoices.total_quantity_invoiced);
-        resultado = totalQtde / totalQtdeFat * 100;
-        console.log('RESULTADO= ' + resultado)
-        if(resultado < 0){
-          resultado = 0;
-        }
       },
       (error:any) => {this.erroInvoices = error;
       console.log('ERRO INVOICES: ' + this.erroInvoices)}
@@ -142,7 +136,7 @@ export class InvoicesComponent implements OnInit {
   }
 
   public buscarTotalInvoices() {
-    this.buscaTotalInvoicesService.buscaTotalInvoices(this.listaDeInvoices).subscribe(res => {
+    this.buscaTotalInvoicesService.buscaTotalInvoices(this.invoices).subscribe(res => {
       console.log("Total Invoices: " + res);
       this.total = res;
       return this.total;
