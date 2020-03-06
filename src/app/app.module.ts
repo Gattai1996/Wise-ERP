@@ -5,9 +5,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { LoginService } from './services/login.service';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { InvoicesComponent } from './invoices/invoices.component';
-import { HomeModule } from './home/home.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material/material.module';
 import { BrandsService } from './services/brands.service';
@@ -21,10 +20,14 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { ClientesComponent } from './clientes/clientes/clientes.component';
 import { ReplacePipe } from './pipes/replacepipe';
+import { LoginComponent } from './home/login/login.component';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
     AppComponent,
+    LoginComponent,
     InvoicesComponent,
     DialogErrorComponent,
     ClientesComponent,
@@ -36,7 +39,10 @@ import { ReplacePipe } from './pipes/replacepipe';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    HomeModule,
+    ReactiveFormsModule,
+    RouterModule,
+    CommonModule,
+    MaterialModule,
     FormsModule,
     BrowserAnimationsModule,
     MaterialModule,

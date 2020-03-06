@@ -22,7 +22,7 @@ export class BrandsService {
 
   // tslint:disable-next-line: variable-name
   public listarMarcas(company_Id: string, dept_Id: string): Observable<Brands> {
-    console.log('CHAMANDO API MARCAS COM URL: ' + this.API_URL + 'company_Id=' + company_Id + '&dept_Id=' + dept_Id + ' RETORNOU > ');
+    // console.log('CHAMANDO API MARCAS COM URL: ' + this.API_URL + 'company_Id=' + company_Id + '&dept_Id=' + dept_Id + ' RETORNOU > ');
     return this.http.get<Brands>(
       this.API_URL + 'company_Id=' + company_Id + '&dept_Id=' + dept_Id)
       .pipe(tap(console.log));

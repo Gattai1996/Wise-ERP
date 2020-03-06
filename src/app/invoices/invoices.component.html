@@ -28,13 +28,17 @@
                 </mat-form-field>
 
                 <!--------------------- REPRESENTANTE --------------------->
-                <mat-form-field id="repres">
+
+                <!-- DESCOMENTAR ISSO E TUDO REFERENTE EM INVOICES.COMPONENT.TS 
+                     FUTURAMENTE SE FOR IMPLEMENTADO VERIFICAÇÃO DE ADM -->
+
+                <!-- <mat-form-field id="repres">
                     <mat-label>Representante</mat-label>
                     <mat-select placeholder="Representante" #represValue (selectionChange)="mudarRepres($event.value)">
                         <mat-option *ngFor="let repre of repres" 
                         [value]="repre.agent_Id">{{ repre.agent_name }}</mat-option>
                     </mat-select>
-                </mat-form-field>
+                </mat-form-field> -->
                 
                 <!----------------------------- ORDER BY ------------------------------>
                 <mat-form-field id="repres">

@@ -12,16 +12,16 @@ import { DialogErrorComponent } from '../dialog-error/dialog-error.component';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-
+ 
   login: Login = new Login();
   erro: any;
+  public dadosRepres: Login;
 
   loginForm: FormGroup;
 
   constructor(
     private formBuilder: FormBuilder,
     private loginService: LoginService,
-
     private router: Router,
     private dialog: MatDialog
     ) {}
@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit {
 
   }
 
-  getter() {
+  fazerLogin() {
 
     const usuario = this.loginForm.get('user').value;
     const senha = this.loginForm.get('password').value;
@@ -42,21 +42,18 @@ export class LoginComponent implements OnInit {
     this.loginService.autenticar(usuario, senha).subscribe(
       (login: Login) => {
         this.login = login;
-        console.log(this.login);
-        console.log('GET com sucesso, validando...');
+        this.loginService.EmitirLogin(login);
         if (login.ok === true) {
-          console.log('Login validado com sucesso');
+          this.dadosRepres = login;
+          // console.log('LOGIN DADOSREPRES= ' + this.dadosRepres.agent_name + this.dadosRepres.agent_Id);
           this.router.navigate(['/invoices']);
         } else {
-          console.log('Login inválido');
           this.openDialog();
         }
       },
       (error: any) => {
         this.erro = error;
         this.openDialog();
-
-        console.log('Deu erro ao tentar se inscrever!');
       });
   }
 
@@ -65,7 +62,7 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    this.getter();
+    this.fazerLogin();
   }
 
 }
