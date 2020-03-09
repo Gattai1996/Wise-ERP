@@ -8,10 +8,10 @@ import { Brands } from '../models/brands.models';
 import { CollectionsService } from '../services/collections.service';
 import { Collections } from '../models/collections.model';
 import { Agents } from '../models/agents.model';
-// import { AgentsService } from '../services/agents.service';
+import { AgentsService } from '../services/agents.service';
 import { BuscaTotalInvoicesService } from '../services/busca-total-invoices.service';
 import { Login } from '../models/login.model';
-import { LoginService } from 'src/app/services/login.service';
+// import { LoginService } from 'src/app/services/login.service';
 
 @Component({
   selector: 'app-invoices',
@@ -36,6 +36,7 @@ export class InvoicesComponent implements OnInit {
   clienteValido: boolean = false;
   company_Id = '1';
   dept_Id = '1';
+  agent_Id: string;
   brand_Id:string;
   collection_Id:string;
   login: Login = new Login();
@@ -47,19 +48,18 @@ export class InvoicesComponent implements OnInit {
     private buscaInvoices: BuscaInvoices,
     private serviceMarcas: BrandsService,
     private serviceColecao: CollectionsService,
-    // private serviceRepres: AgentsService,
+    private serviceRepres: AgentsService,
     private buscaTotalInvoicesService: BuscaTotalInvoicesService,
     ) {};
 
   ngOnInit() {
-    // Pega o login emitido da tela de login
-    LoginService.emitirLogin.subscribe(
-        (login: Login)  => {console.log(login);
-          this.login = login;
-        console.log('TESTE 1 = ' + this.login.agent_Id);
+    // Descomentar isso quando for pegar agent_Id direto da tela de login
+    // LoginService.emitirLogin.subscribe(
+    //     (login: Login) => {this.login = login;
+    //                       console.log('TESTE 1 = ' + this.login.agent_Id);
+    //                       });
+    // console.log('TESTE 2 = ' + this.login.agent_Id);
 
-      });
-    console.log('TESTE 2 = ' + this.login.agent_Id);
     // Lista as marcas
     this.listaDeMarcas();
   }
@@ -91,21 +91,21 @@ export class InvoicesComponent implements OnInit {
   public mudarColecao(event) {
     console.log("Selecionou collection_Id: " + event)
     this.collection_Id = event;
-    // this.listaDeRepres();
+    this.listaDeRepres();
   }
 
-  // public listaDeRepres() { 
-  // this.serviceRepres.listarRepres(this.company_Id, this.dept_Id, this.brand_Id).subscribe(dados =>
-  //   {this.repres = dados; console.log("Retorno de Repres: " + this.repres);},
-  //   (error:any) => {this.erroColecoes = error;
-  //   console.log('ERRO: ' + this.erroColecoes)}
-  //   )
-  // }
+  public listaDeRepres() { 
+  this.serviceRepres.listarRepres(this.company_Id, this.dept_Id, this.brand_Id).subscribe(dados =>
+    {this.repres = dados; console.log("Retorno de Repres: " + this.repres);},
+    (error:any) => {this.erroColecoes = error;
+    console.log('ERRO: ' + this.erroColecoes)}
+    )
+  }
 
-  // public mudarRepres(event) {
-  //   console.log("Selecionou agent_Id: " + event);
-  //   this.agent_Id = event;
-  // }
+  public mudarRepres(event) {
+    console.log("Selecionou agent_Id: " + event);
+    this.agent_Id = event;
+  }
 
   public mudarOrdem(event) {
     console.log("Selecionou orderBy: " + event);
@@ -115,14 +115,14 @@ export class InvoicesComponent implements OnInit {
   public resetar() {
     this.brand_Id= '';
     this.collection_Id = '';
-    // this.agent_Id='';
+    this.agent_Id='';
     this.listaDeMarcas();
     this.listaDeColecoes();
-    // this.listaDeRepres();
+    this.listaDeRepres();
   }
 
   public buscarInvoices() {      
-    this.buscaInvoices.listarInvoices(this.company_Id, this.dept_Id, this.brand_Id, this.collection_Id, this.login.agent_Id, this.orderBy)
+    this.buscaInvoices.listarInvoices(this.company_Id, this.dept_Id, this.brand_Id, this.collection_Id, this.agent_Id, this.orderBy)
       .subscribe(dados =>
       {
         this.consultado = true;
