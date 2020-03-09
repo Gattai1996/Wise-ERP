@@ -25,6 +25,6 @@ export class BrandsService {
     // console.log('CHAMANDO API MARCAS COM URL: ' + this.API_URL + 'company_Id=' + company_Id + '&dept_Id=' + dept_Id + ' RETORNOU > ');
     return this.http.get<Brands>(
       this.API_URL + 'company_Id=' + company_Id + '&dept_Id=' + dept_Id)
-      .pipe(tap(console.log));
+      // .pipe(tap(console.log));
   }
 }
