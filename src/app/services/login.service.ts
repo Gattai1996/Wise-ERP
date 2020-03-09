@@ -11,7 +11,7 @@ export class LoginService {
   private readonly API_URL = 'http://wiseerp-api-demo.azurewebsites.net/api/login';
   private readonly PARAMETERS = '?company_Id=1&dept_Id=1&brand_Id=5';
 
-  emitirLogin = new EventEmitter();
+  static emitirLogin = new EventEmitter<Login>();
 
   constructor(private http: HttpClient) { }
 
@@ -19,7 +19,7 @@ export class LoginService {
     return this.http.get<Login>(this.API_URL + this.PARAMETERS + '&user=' + usuario + '&password=' + senha);
   }
 
-  public EmitirLogin(login) {
-    this.emitirLogin.emit(login);
+  public EmitirLogin(login: Login) {
+    LoginService.emitirLogin.emit(login);
   }
 }
