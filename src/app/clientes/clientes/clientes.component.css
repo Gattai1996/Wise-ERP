@@ -1,0 +1,18 @@
+ * {
+     padding: 0;
+     margin: 0;
+ }
+#content {
+    width: 100%;
+}
+ #filtro {
+     width: 50%;
+}
+table {
+    width: 100%;
+}
+th.mat-header-cell {
+    position: sticky;
+    top: 0;
+    background-color: white;
+  }

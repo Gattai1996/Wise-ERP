@@ -11,18 +11,20 @@ import { tap } from 'rxjs/operators';
 export class BrandsService {
 
   private readonly API_URL = 'http://wiseerp-api-demo.azurewebsites.net/api/brands?';
-  private readonly PARAMETERS = 'company_Id=1&';
+  // private readonly PARAMETERS = 'company_Id=1&';
+  
+
 
   // tslint:disable-next-line: variable-name
-  dept_Id = '1';
+  // dept_Id = '1';
 
   constructor(private http: HttpClient) { }
 
   // tslint:disable-next-line: variable-name
-  public listarMarcas(dept_Id: string): Observable<Brands> {
-    console.log('CHAMANDO API MARCAS COM URL: ' + this.API_URL + this.PARAMETERS + dept_Id + ' RETORNOU > ');
+  public listarMarcas(company_Id: string, dept_Id: string): Observable<Brands> {
+    // console.log('CHAMANDO API MARCAS COM URL: ' + this.API_URL + 'company_Id=' + company_Id + '&dept_Id=' + dept_Id + ' RETORNOU > ');
     return this.http.get<Brands>(
-      this.API_URL + this.PARAMETERS + 'dept_Id=' + dept_Id)
+      this.API_URL + 'company_Id=' + company_Id + '&dept_Id=' + dept_Id)
       .pipe(tap(console.log));
   }
 }

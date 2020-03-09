@@ -12,7 +12,7 @@ mat-sidenav, mat-sidenav-content {
   padding: 1rem;
 }
 mat-sidenav {
-  background-color: #0277b1;
+  background-color: white;
   width: 300px;
   max-width: 100%;
 }
@@ -20,11 +20,15 @@ mat-sidenav {
   width: 180px;
   float: left;
 }
+#logo2 {
+  width: 230px;
+  float: right;
+}
 mat-nav-list {
   margin-top: 3rem;
 }
 #invoices, #sair {
-  color: #fff;
+  color: black;
 }
 #fecharmenu {
   float: right;
@@ -57,33 +61,14 @@ body {
 
 /* ============================ DROPDOWNS =================================== */
 
-/* =============================== GRID INVOICES ================================ */
-.tabela-container {
-  margin-top: 1rem;
-  height: 200px;
-  width: 100%;
-  overflow: auto;
-}
-table {
-  width: 800px;
-}
-td.mat-column-star {
-  width: 20px;
-  padding-right: 8px;
-}
-th.mat-column-position, td.mat-column-position {
-  padding-left: 8px;
-}
-th, td {
-  border-right: 1px solid #e0e0e0;
-  border-left: 1px solid #e0e0e0;
+/* =========================== CARDS ============================== */
+
+#card-subdiv {
+  font-size: x-small;
+  width: 25%;
+  float: left;
   text-align: center;
 }
-.mat-table-sticky:first-child {
-  border-right: 1px solid #e0e0e0;
-}
-
-/* =========================== FORM DE CNPJ ============================== */
 
 /* ========================== BREAKPOINTS - REPONSIVIDADE ========================== */
 

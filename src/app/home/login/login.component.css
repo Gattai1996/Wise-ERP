@@ -1,19 +1,29 @@
 body {
     margin: 0;
     padding: 0;
-    background-color: #fff;
+    background-color: black;
 }
 form {
-    color: #fff;
-    background-color: #0277bd;
+    background-color: white;
     border-radius: 1rem;
-    margin-top: 10%;
-    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
 }
 #logo {
-    width: 100%;
+    width: 85%;
     margin-left: 10%;
 }
+/* .mat-input-element {
+    font: inherit;
+    background: 0 0;
+    color: white;
+    border: none;
+    outline: 0;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    max-width: 100%;
+    vertical-align: bottom;
+    text-align: inherit;
+} */
 #mensagem {
     background-color: #e23939;
     border-radius: 10px;
@@ -21,10 +31,11 @@ form {
     margin-bottom: 2rem;
 }
 #formulario {
+    margin-top: 25%;
     margin-left: auto;
     margin-right: auto;
-    width: 300px;
-    max-width: 100%;
+    width: 230px;
+    max-width: 90%;
     padding: 2rem;
 }
 #login, #senha, #botao-entrar {
@@ -44,15 +55,13 @@ footer {
     padding: 1rem;
 }
 /* BREAKPOINTS */
-/* @media screen and (max-width: 600px) {
-    form {
-        margin-top: 19%;
-        margin-bottom: 19%;
+@media screen and (max-width: 600px) {
+    #formulario {
+        margin-top: 17%;
     }
 }
 @media screen and (min-width: 992px) {
-    form {
-        margin-top: 8%;
-        margin-bottom: 8%;
+    #formulario {
+        margin-top: 12%;
     }
-} */
+}
