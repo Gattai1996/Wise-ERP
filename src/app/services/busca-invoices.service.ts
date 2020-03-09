@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class BuscaInvoices {
-
+ 
   private readonly API_URL = 'http://wiseerp-api-demo.azurewebsites.net/api/invoices?';
 
   constructor(private http: HttpClient) { }

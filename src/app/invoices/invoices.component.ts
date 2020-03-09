@@ -12,7 +12,7 @@ import { Agents } from '../models/agents.model';
 import { BuscaTotalInvoicesService } from '../services/busca-total-invoices.service';
 import { Login } from '../models/login.model';
 import { LoginService } from 'src/app/services/login.service';
- 
+
 @Component({
   selector: 'app-invoices',
   templateUrl: './invoices.component.html',
@@ -38,12 +38,9 @@ export class InvoicesComponent implements OnInit {
   dept_Id = '1';
   brand_Id:string;
   collection_Id:string;
-  login:Login;
-  agent_Id:string;
+  login: Login = new Login();
   orderBy:string;
   diferença:any;
-
-  @Input() dadosRepres: Login;
 
   constructor(
     private router: Router,
@@ -52,17 +49,19 @@ export class InvoicesComponent implements OnInit {
     private serviceColecao: CollectionsService,
     // private serviceRepres: AgentsService,
     private buscaTotalInvoicesService: BuscaTotalInvoicesService,
-    private loginService: LoginService
     ) {};
 
   ngOnInit() {
     // Pega o login emitido da tela de login
-    this.loginService.emitirLogin.subscribe( 
-      login => console.log(login)
-    );
+    LoginService.emitirLogin.subscribe(
+        (login: Login)  => {console.log(login);
+          this.login = login;
+        console.log('TESTE 1 = ' + this.login.agent_Id);
+
+      });
+    console.log('TESTE 2 = ' + this.login.agent_Id);
     // Lista as marcas
     this.listaDeMarcas();
-    console.log('LOGIN= ' + this.login);
   }
 
   public listaDeMarcas() { 
@@ -122,8 +121,9 @@ export class InvoicesComponent implements OnInit {
     // this.listaDeRepres();
   }
 
-  public buscarInvoices() {
-    this.buscaInvoices.listarInvoices(this.company_Id, this.dept_Id, this.brand_Id, this.collection_Id, this.agent_Id, this.orderBy).subscribe(dados =>
+  public buscarInvoices() {      
+    this.buscaInvoices.listarInvoices(this.company_Id, this.dept_Id, this.brand_Id, this.collection_Id, this.login.agent_Id, this.orderBy)
+      .subscribe(dados =>
       {
         this.consultado = true;
         this.invoices = dados;
@@ -132,7 +132,7 @@ export class InvoicesComponent implements OnInit {
       },
       (error:any) => {this.erroInvoices = error;
       console.log('ERRO INVOICES: ' + this.erroInvoices)}
-      )
+      );
   }
 
   public buscarTotalInvoices() {

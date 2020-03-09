@@ -12,7 +12,7 @@ import { DialogErrorComponent } from '../dialog-error/dialog-error.component';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
- 
+
   login: Login = new Login();
   erro: any;
   public dadosRepres: Login;
@@ -43,6 +43,9 @@ export class LoginComponent implements OnInit {
       (login: Login) => {
         this.login = login;
         this.loginService.EmitirLogin(login);
+
+        // console.log('LOGIN EMITIDO = ' + login.agent_Id)
+        
         if (login.ok === true) {
           this.dadosRepres = login;
           // console.log('LOGIN DADOSREPRES= ' + this.dadosRepres.agent_name + this.dadosRepres.agent_Id);
@@ -54,6 +57,7 @@ export class LoginComponent implements OnInit {
       (error: any) => {
         this.erro = error;
         this.openDialog();
+        console.log('Deu erro ao tentar se inscrever!');
       });
   }
 
