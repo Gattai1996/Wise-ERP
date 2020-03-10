@@ -18,7 +18,6 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
-import { ClientesComponent } from './clientes/clientes/clientes.component';
 import { ReplacePipe } from './pipes/replacepipe';
 import { LoginComponent } from './home/login/login.component';
 import { CommonModule } from '@angular/common';
@@ -30,7 +29,6 @@ import { RouterModule } from '@angular/router';
     LoginComponent,
     InvoicesComponent,
     DialogErrorComponent,
-    ClientesComponent,
     SidenavComponent,
     ReplacePipe
   ],
@@ -51,7 +49,7 @@ import { RouterModule } from '@angular/router';
     MatButtonModule,
     MatSidenavModule,
     MatIconModule,
-    MatListModule
+    MatListModule,
   ],
   providers: [
     HttpClient,

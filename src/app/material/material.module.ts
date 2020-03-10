@@ -14,7 +14,9 @@ import {
   MatFormFieldModule,
   MatInputModule,
   MatGridListModule,
-  MatCardModule
+  MatCardModule,
+  MatToolbarModule,
+  MatAutocompleteModule
   
 } from '@angular/material'
 
@@ -35,7 +37,9 @@ const MeterialComponents =
   MatInputModule,
   MatGridListModule,
   MatCardModule,
-  MatGridListModule
+  MatGridListModule,
+  MatToolbarModule,
+  MatAutocompleteModule
 ]
 
 @NgModule({
