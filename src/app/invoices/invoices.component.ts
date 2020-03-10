@@ -11,6 +11,7 @@ import { Agents } from '../models/agents.model';
 import { AgentsService } from '../services/agents.service';
 import { BuscaTotalInvoicesService } from '../services/busca-total-invoices.service';
 import { Login } from '../models/login.model';
+import { TotalInvoices } from '../models/total-invoices.model';
 // import { LoginService } from 'src/app/services/login.service';
 
 @Component({
@@ -18,30 +19,31 @@ import { Login } from '../models/login.model';
   templateUrl: './invoices.component.html',
   styleUrls: ['./invoices.component.css']
 })
-export class InvoicesComponent implements OnInit {  
+export class InvoicesComponent implements OnInit {
 
   sidenavAberta = false;
   invoices: Invoices;
-  filtro: string = '';
+  filtro: string;
   marcas: Brands;
   colecoes: Collections;
   repres: Agents;
-  total: Object; // Guarda o resultado de total de faturamentos
+  total: TotalInvoices; // Guarda o resultado de total de faturamentos
   consultado = false; // Controla se já pesquisou faturamento
+  cnpjDigitado: string;
   erroCnpj: any;
   erroMarcas: any;
   erroRepres: any;
   erroColecoes: any;
   erroInvoices: any;
-  clienteValido: boolean = false;
-  company_Id = '1';
-  dept_Id = '1';
-  agent_Id: string;
-  brand_Id:string;
-  collection_Id:string;
+  clienteValido = false;
+  companyId = '1';
+  deptId = '1';
+  agentId: string;
+  brandId: string;
+  collectionId: string;
   login: Login = new Login();
-  orderBy:string;
-  diferença:any;
+  orderBy: string;
+  diferença: any;
 
   constructor(
     private router: Router,
@@ -50,7 +52,7 @@ export class InvoicesComponent implements OnInit {
     private serviceColecao: CollectionsService,
     private serviceRepres: AgentsService,
     private buscaTotalInvoicesService: BuscaTotalInvoicesService,
-    ) {};
+    ) {}
 
   ngOnInit() {
     // Descomentar isso quando for pegar agent_Id direto da tela de login
@@ -64,83 +66,80 @@ export class InvoicesComponent implements OnInit {
     this.listaDeMarcas();
   }
 
-  public listaDeMarcas() { 
-    this.serviceMarcas.listarMarcas(this.company_Id, this.dept_Id).subscribe(dados =>
-      {this.marcas = dados;},
-      (error:any) => {this.erroMarcas = error;
-      console.log('ERRO: ' + this.erroMarcas)}
-    )
+  public listaDeMarcas() {
+    this.serviceMarcas.listarMarcas(this.companyId, this.deptId).subscribe(dados => { this.marcas = dados; } ,
+      (error: any) => {this.erroMarcas = error;
+                       console.log('ERRO: ' + this.erroMarcas); });
   }
 
   public mudarMarca(event) {
     // this.resetar();
-    console.log("Selecionou brand_Id: " + event);
-    this.brand_Id = event;
-    console.log(this.brand_Id);
+    console.log('Selecionou brand_Id: ' + event);
+    this.brandId = event;
+    console.log(this.brandId);
     this.listaDeColecoes();
   }
 
-  public listaDeColecoes() { 
-  this.serviceColecao.listarColecoes(this.company_Id, this.dept_Id, this.brand_Id).subscribe(dados =>
-    {this.colecoes = dados;},
-    (error:any) => {this.erroColecoes = error;
-    console.log('ERRO: ' + this.erroColecoes)}
-    )
+  public listaDeColecoes() {
+  this.serviceColecao.listarColecoes(this.companyId, this.deptId, this.brandId)
+  .subscribe(dados => {this.colecoes = dados; },
+    (error: any) => { this.erroColecoes = error;
+                      console.log('ERRO: ' + this.erroColecoes); }
+    );
   }
 
   public mudarColecao(event) {
-    console.log("Selecionou collection_Id: " + event)
-    this.collection_Id = event;
+    console.log('Selecionou collection_Id: ' + event);
+    this.collectionId = event;
     this.listaDeRepres();
   }
 
-  public listaDeRepres() { 
-  this.serviceRepres.listarRepres(this.company_Id, this.dept_Id, this.brand_Id).subscribe(dados =>
-    {this.repres = dados; console.log("Retorno de Repres: " + this.repres);},
-    (error:any) => {this.erroColecoes = error;
-    console.log('ERRO: ' + this.erroColecoes)}
-    )
+  public listaDeRepres() {
+  this.serviceRepres.listarRepres(this.companyId, this.deptId, this.brandId)
+  .subscribe(dados => {this.repres = dados; console.log('Retorno de Repres: ' + this.repres); },
+    (error: any) => { this.erroColecoes = error;
+                      console.log('ERRO: ' + this.erroColecoes); }
+    );
   }
 
-  public mudarRepres(event) {
-    console.log("Selecionou agent_Id: " + event);
-    this.agent_Id = event;
+  public mudarRepres(event: string) {
+    console.log('Selecionou agent_Id: ' + event);
+    this.agentId = event;
   }
 
-  public mudarOrdem(event) {
-    console.log("Selecionou orderBy: " + event);
+  public mudarOrdem(event: string) {
+    console.log('Selecionou orderBy: ' + event);
     this.orderBy = event;
   }
 
   public resetar() {
-    this.brand_Id= '';
-    this.collection_Id = '';
-    this.agent_Id='';
+    this.brandId = '';
+    this.collectionId = '';
+    this.agentId = '';
     this.listaDeMarcas();
     this.listaDeColecoes();
     this.listaDeRepres();
   }
 
-  public buscarInvoices() {      
-    this.buscaInvoices.listarInvoices(this.company_Id, this.dept_Id, this.brand_Id, this.collection_Id, this.agent_Id, this.orderBy)
-      .subscribe(dados =>
-      {
+  public buscarInvoices() {
+    this.buscaInvoices.listarInvoices(this.companyId, this.deptId, this.brandId, this.collectionId, this.agentId, this.orderBy)
+      .subscribe(dados => {
         this.consultado = true;
         this.invoices = dados;
-        console.log("Retorno de invoice: " + this.invoices);
+        console.log('Retorno de invoice: ' + this.invoices);
         this.buscarTotalInvoices();
       },
-      (error:any) => {this.erroInvoices = error;
-      console.log('ERRO INVOICES: ' + this.erroInvoices)}
+      (error: any) => {this.erroInvoices = error;
+                       console.log('ERRO INVOICES: ' + this.erroInvoices); }
       );
   }
 
   public buscarTotalInvoices() {
     this.buscaTotalInvoicesService.buscaTotalInvoices(this.invoices).subscribe(res => {
-      console.log("Total Invoices: " + res);
+      console.log('Total Invoices: ' + res);
       this.total = res;
       return this.total;
-    })
+    });
   }
 
   public voltarAoLogin() {
