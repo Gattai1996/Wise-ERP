@@ -54,23 +54,21 @@
             <!------------------------ CAMPO RAZÃO SOCIAL ------------------------->
             <mat-form-field id="razao-social" (keyup)="companyName = $event.target.value" (keyup)="buscarClientes()">
                 <mat-label>Razão Social</mat-label>
-                <input type="text" matInput>
-                <mat-autocomplete>
-                    <mat-option *ngFor="let cliente of clientes" value="cliente">
-                        {{ cliente.customer_name }} - {{ cliente.company_doc }}
+                <input type="text" matInput [formControl]="myControl" [matAutocomplete]="autoCompleteRazao">
+                <mat-autocomplete #autoCompleteRazao="matAutocomplete" [displayWith]="displayRazaoFn()">
+                    <mat-option *ngFor="let cliente of clientes" [value]="cliente.customer_name">
+                        {{ cliente.customer_name }} - {{ cliente.customerFab_Id }}
                     </mat-option>
                 </mat-autocomplete>
             </mat-form-field>
-            
 
-
-            <!------------------------ CAMPO CNPJ/CÓDIGO ------------------------->
+            <!---------------------- CAMPO CNPJ/CÓDIGO ------------------------->
             <mat-form-field id="cnpj-codigo" (keyup)="companyDoc = $event.target.value" (keyup)="buscarClientes()">
                 <mat-label>CNPJ / Código</mat-label>
-                <input type="text" matInput>
-                <mat-autocomplete>
-                    <mat-option *ngFor="let cliente of clientes" value="cliente">
-                        {{ cliente.customer_name }} - {{ cliente.company_doc }}
+                <input type="text" matInput [formControl]="myControl" [matAutocomplete]="autoCompleteCnpj">
+                <mat-autocomplete #autoCompleteCnpj="matAutocomplete" [displayWith]="displayCnpjFn()">
+                    <mat-option *ngFor="let cliente of clientes" [value]="cliente.company_doc">
+                        {{ cliente.company_doc }}
                     </mat-option>
                 </mat-autocomplete>
             </mat-form-field>

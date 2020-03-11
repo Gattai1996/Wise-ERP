@@ -14,7 +14,15 @@ import { Login } from '../models/login.model';
 import { TotalInvoices } from '../models/total-invoices.model';
 import { ConsultaStringService } from '../services/consulta-string.service';
 import { ConsultaString } from '../models/consulta-string.model';
+import { Subject } from 'rxjs';
+import { FormControl } from '@angular/forms';
 // import { LoginService } from 'src/app/services/login.service';
+
+
+export interface User {
+  name: string;
+}
+
 
 @Component({
   selector: 'app-invoices',
@@ -50,6 +58,15 @@ export class InvoicesComponent implements OnInit {
   login: Login = new Login();
   orderBy: string;
   diferença: any;
+
+
+  myControl = new FormControl();
+  options: User[] = [
+    {name: 'Mary'},
+    {name: 'Shelley'},
+    {name: 'Igor'}
+
+  ]
 
   constructor(
     private router: Router,
@@ -143,6 +160,15 @@ export class InvoicesComponent implements OnInit {
                        console.log('ERRO INVOICES: ' + this.erroClientes.message); }
       );
   }
+
+  displayRazaoFn(data: ConsultaString): string {
+    return data && data.customer_name ? data.customer_name : '';
+  }
+
+  displayCnpjFn(data: ConsultaString): string {
+    return data && data.company_doc ? data.company_doc : '';
+  }
+
 
 
 
