@@ -18,12 +18,6 @@ import { Subject } from 'rxjs';
 import { FormControl } from '@angular/forms';
 // import { LoginService } from 'src/app/services/login.service';
 
-
-export interface User {
-  name: string;
-}
-
-
 @Component({
   selector: 'app-invoices',
   templateUrl: './invoices.component.html',
@@ -53,20 +47,12 @@ export class InvoicesComponent implements OnInit {
   agentId: string;
   brandId: string;
   collectionId: string;
-  companyName: string;
-  companyDoc: string;
+  companyName = '';
+  companyDoc = '';
+  customerFabId = '';
   login: Login = new Login();
   orderBy: string;
   diferença: any;
-
-
-  myControl = new FormControl();
-  options: User[] = [
-    {name: 'Mary'},
-    {name: 'Shelley'},
-    {name: 'Igor'}
-
-  ]
 
   constructor(
     private router: Router,
@@ -149,9 +135,13 @@ export class InvoicesComponent implements OnInit {
 
 
 
+
+
+
+
   public buscarClientes() {
     this.consultaStringService.consultarString(
-      this.companyId, this.deptId, this.brandId, this.companyName, this.companyDoc)
+      this.companyId, this.deptId, this.brandId, this.companyName)
       .subscribe(dados => {
         console.log(dados);
         this.clientes = dados;
@@ -161,6 +151,13 @@ export class InvoicesComponent implements OnInit {
       );
   }
 
+  mudarCustomerFabId(event: string) {
+    console.log('Selecionou custumerFab_Id= ' + this.customerFabId);
+    this.customerFabId = event;
+  }
+
+  // Funções DisplayFn são utilizadas para mostrar os dados corretamente depois
+  // de selecionar clicando na lista de autocomplete
   displayRazaoFn(data: ConsultaString): string {
     return data && data.customer_name ? data.customer_name : '';
   }
@@ -169,12 +166,23 @@ export class InvoicesComponent implements OnInit {
     return data && data.company_doc ? data.company_doc : '';
   }
 
+  displayCodigoFn(data: ConsultaString): string {
+    return data && data.customerFab_Id ? data.customerFab_Id : '';
+  }
+
+
+
+
+
+
 
 
 
   public buscarInvoices() {
     this.buscaInvoices.listarInvoices(
-      this.companyId, this.deptId, this.brandId, this.collectionId, this.agentId, this.orderBy)
+      this.companyId, this.deptId, this.brandId, this.collectionId, this.agentId, 
+      this.orderBy, this.companyDoc, this.customerFabId
+      )
       .subscribe(dados => {
         this.consultado = true;
         this.invoices = dados;

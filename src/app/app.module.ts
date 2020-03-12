@@ -22,6 +22,7 @@ import { ReplacePipe } from './pipes/replacepipe';
 import { LoginComponent } from './home/login/login.component';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { RouterModule } from '@angular/router';
     MatSidenavModule,
     MatIconModule,
     MatListModule,
+    ScrollingModule
   ],
   providers: [
     HttpClient,

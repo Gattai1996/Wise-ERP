@@ -75,11 +75,14 @@ body {
 }
 
 #razao-social {
-  width: 55%;
+  width: 100%;
 }
 
-#cnpj-codigo {
-  width: 40%;
+#cnpj, #codigo {
+  width: 48%;
+}
+
+#codigo {
   margin-left: 4%;
 }
 
