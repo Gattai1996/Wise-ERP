@@ -149,26 +149,20 @@ export class InvoicesComponent implements OnInit {
       (error: any) => {this.erroClientes = error;
                        console.log('ERRO INVOICES: ' + this.erroClientes.message); }
       );
-  }
+    }
 
-  mudarCustomerFabId(event: string) {
+  mudarCustomerFabId(event) {
     console.log('Selecionou custumerFab_Id= ' + this.customerFabId);
-    this.customerFabId = event;
+    console.log(event)
+    this.customerFabId = event.option.value;
   }
 
   // Funções DisplayFn são utilizadas para mostrar os dados corretamente depois
   // de selecionar clicando na lista de autocomplete
-  displayRazaoFn(data: ConsultaString): string {
-    return data && data.customer_name ? data.customer_name : '';
+  displayRazaoFn(cliente: ConsultaString): string {
+    return cliente && cliente.customer_name ? cliente.customer_name : '';
   }
 
-  displayCnpjFn(data: ConsultaString): string {
-    return data && data.company_doc ? data.company_doc : '';
-  }
-
-  displayCodigoFn(data: ConsultaString): string {
-    return data && data.customerFab_Id ? data.customerFab_Id : '';
-  }
 
 
 

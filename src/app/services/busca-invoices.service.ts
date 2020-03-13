@@ -21,8 +21,7 @@ export class BuscaInvoices {
     console.log('Chamando API Invoices com método GET com a URL: ' + this.API_URL + 
     'company_Id=' + company_Id + '&dept_Id=' + dept_Id + '&brand_Id=' + brand_Id + 
     '&collection_Id=' + collection_Id + '&agent_Id=' + agent_Id + 
-    '&orderBy=' + orderBy + '&company_doc=' + companyDoc + '&customerFab_Id=' + customerFabId
-    );
+    '&orderBy=' + orderBy + '&company_doc=' + companyDoc + '&customerFab_Id=' + customerFabId);
     return this.http.get<Invoices>(
       this.API_URL + 
       'company_Id=' + company_Id + '&dept_Id=' + dept_Id + '&brand_Id=' + brand_Id + 
