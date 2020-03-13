@@ -14,8 +14,6 @@ import { Login } from '../models/login.model';
 import { TotalInvoices } from '../models/total-invoices.model';
 import { ConsultaStringService } from '../services/consulta-string.service';
 import { ConsultaString } from '../models/consulta-string.model';
-import { Subject } from 'rxjs';
-import { FormControl } from '@angular/forms';
 // import { LoginService } from 'src/app/services/login.service';
 
 @Component({
@@ -78,7 +76,7 @@ export class InvoicesComponent implements OnInit {
 
   public listaDeMarcas() {
     this.serviceMarcas.listarMarcas(this.companyId, this.deptId)
-    .subscribe(dados => { this.marcas = dados; } ,
+    .subscribe(dados => {this.marcas = dados;} ,
       (error: any) => {this.erroMarcas = error;
                        console.log('ERRO: ' + this.erroMarcas.message); });
   }
@@ -93,7 +91,7 @@ export class InvoicesComponent implements OnInit {
 
   public listaDeColecoes() {
   this.serviceColecao.listarColecoes(this.companyId, this.deptId, this.brandId)
-  .subscribe(dados => {this.colecoes = dados; },
+  .subscribe(dados => {this.colecoes = dados;},
     (error: any) => { this.erroColecoes = error;
                       console.log('ERRO: ' + this.erroColecoes.message); }
     );
@@ -107,8 +105,7 @@ export class InvoicesComponent implements OnInit {
 
   public listaDeRepres() {
   this.serviceRepres.listarRepres(this.companyId, this.deptId, this.brandId)
-  .subscribe(dados => { this.repres = dados; 
-                        console.log('Retorno de Repres: ' + this.repres); },
+  .subscribe(dados => {this.repres = dados;},
     (error: any) => { this.erroColecoes = error;
                       console.log('ERRO: ' + this.erroColecoes.message); }
     );
@@ -149,18 +146,24 @@ export class InvoicesComponent implements OnInit {
       (error: any) => {this.erroClientes = error;
                        console.log('ERRO INVOICES: ' + this.erroClientes.message); }
       );
-    }
+  }
 
-  mudarCustomerFabId(event) {
-    console.log('Selecionou custumerFab_Id= ' + this.customerFabId);
-    console.log(event)
-    this.customerFabId = event.option.value;
+  mudarCompanyDoc(compapany_doc: string) {
+    this.companyDoc = compapany_doc;
+    console.log('Selecionou companyDoc= ' + this.companyDoc);
+  }
+
+  mudarCustomerFabId(customerFabId: string) {
+    this.customerFabId = customerFabId;
+    console.log('Selecionou custumerFabId= ' + this.customerFabId);
   }
 
   // Funções DisplayFn são utilizadas para mostrar os dados corretamente depois
   // de selecionar clicando na lista de autocomplete
-  displayRazaoFn(cliente: ConsultaString): string {
-    return cliente && cliente.customer_name ? cliente.customer_name : '';
+  displayFn(cliente: ConsultaString): string {
+    if(cliente != undefined) {
+      return cliente.customer_name;
+    }
   }
 
 
@@ -180,7 +183,6 @@ export class InvoicesComponent implements OnInit {
       .subscribe(dados => {
         this.consultado = true;
         this.invoices = dados;
-        console.log('Retorno de invoice: ' + this.invoices);
         this.buscarTotalInvoices();
       },
       (error: any) => {this.erroInvoices = error;
@@ -189,8 +191,7 @@ export class InvoicesComponent implements OnInit {
   }
 
   public buscarTotalInvoices() {
-    this.buscaTotalInvoicesService.buscaTotalInvoices(this.invoices).subscribe(res => {
-      console.log('Total Invoices: ' + res);
+    this.buscaTotalInvoicesService.buscaTotalInvoices(this.invoices).subscribe((res: TotalInvoices) => {
       this.total = res;
       return this.total;
     });
