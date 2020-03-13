@@ -62,9 +62,13 @@
             <mat-form-field id="razao-social" (keyup)="companyName = $event.target.value" (keyup)="buscarClientes()">
                 <mat-label>Razão Social</mat-label>
                 <input type="text" matInput [matAutocomplete]="autoCompleteRazao">
-                <mat-autocomplete #autoCompleteRazao="matAutocomplete" (optionSelected)="mudarCustomerFabId($event)" [displayWith]="displayRazaoFn()">
-                    <mat-option *ngFor="let cliente of clientes" [value]="cliente.customerFab_Id">
-                        {{ cliente.customer_name }} - {{ cliente.customerFab_Id }}
+                <mat-autocomplete 
+                #autoCompleteRazao="matAutocomplete"
+                (optionSelected)="mudarCompanyDoc($event.option.value.company_doc)" 
+                (optionSelected)="mudarCustomerFabId($event.option.value.customerFab_Id)" 
+                [displayWith]="displayFn.bind(this)">
+                    <mat-option *ngFor="let cliente of clientes" [value]="cliente">
+                        {{ cliente.customer_name }}
                     </mat-option>
                 </mat-autocomplete>
             </mat-form-field>
@@ -72,20 +76,13 @@
             <!---------------------- CAMPO CNPJ ------------------------->
             <mat-form-field id="cnpj" (keyup)="companyDoc = $event.target.value" (keyup)="buscarClientes()">
                 <mat-label>CNPJ</mat-label>
-                <input type="text" matInput [matAutocomplete]="autoCompleteCnpj">
+                <input type="text" matInput [value]="companyDoc">
             </mat-form-field>
-
-
-
-
-
-
-
 
             <!---------------------- CAMPO CÓDIGO ------------------------->
             <mat-form-field id="codigo" (keyup)="customerFabId = $event.target.value" (keyup)="buscarClientes()">
                 <mat-label>Código</mat-label>
-                <input type="text" matInput [matAutocomplete]="autoCompleteCodigo">
+                <input type="text" matInput [value]="customerFabId">
             </mat-form-field>
 
 
