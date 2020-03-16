@@ -50,6 +50,7 @@ body {
 
 #content {
     padding: 5px;
+    margin: 0 2%
 }
 
 #abrirmenu {
@@ -59,11 +60,11 @@ body {
 }
 
 #marca, #colecao, #repres, #ordem {
-  width: 48%;
+  width: 49%;
 }
 
 #colecao, #ordem {
-  margin-left: 4%;
+  margin-left: 2%;
 }
 
 #botao-buscar {
@@ -79,11 +80,11 @@ body {
 }
 
 #cnpj, #codigo {
-  width: 48%;
+  width: 49%;
 }
 
 #codigo {
-  margin-left: 4%;
+  margin-left: 2%;
 }
 
 /* ============================ DROPDOWNS =================================== */
@@ -99,16 +100,32 @@ body {
 
 /* ========================== BREAKPOINTS - REPONSIVIDADE ========================== */
 
-/* ============== APARELHOS MÉDIOS - TABLETS E MONITORES PEQUENOS ===================== */
-@media screen and (max-width: 700px) {
-  .example-container {
-    height: 100px;
+/* ============== APARELHOS GRANDES - DESKTOPS ===================== */
+@media screen and (min-width: 960px) {
+
+  #marca, #colecao, #repres, #ordem {
+    width: 23%;
   }
-}
+
+  #repres {
+    margin-left: 2%;
+  }
+
+  #razao-social {
+    width: 48%;
+  }
   
-/* ========================== APARELHOS PEQUENOS - SMARTPHONES ======================== */
-@media screen and (max-width: 400px) {
-  .example-container {
-    height: 50px;
+  #cnpj {
+    width: 48%;
   }
+
+  #cnpj, #codigo {
+    width: 23%;
+    margin-left: 2%;
+  }
+  
+  #codigo {
+    margin-left: 2%;
+  }
+
 }

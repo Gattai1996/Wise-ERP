@@ -1,89 +1,84 @@
-<html>
-    <head>
-    </head>
-    <body>
 
-        <!------------------ CONTENT -------------------->
-        <div id="content">
+<!------------------ CONTENT -------------------->
+<div id="content">
+
+    <!------------------ DROPDOWNS -------------------->
+    <!---------------- MARCA ------------------->
+    <mat-form-field id="marca">
+        <mat-label>Marca</mat-label>
+        <mat-select placeholder="Marca" #marcaValue (selectionChange)="mudarMarca($event.value)">
+            <mat-option *ngFor="let marca of marcas" 
+            [value]="marca.brand_Id">{{ marca.brand_name }}</mat-option>
+        </mat-select>
+    </mat-form-field>
     
-            <!------------------ DROPDOWNS -------------------->
+    <!---------------- COLEÇÃO ------------------->
+    <mat-form-field id="colecao">
+        <mat-label>Coleção</mat-label>
+        <mat-select placeholder="Marca" #colecaoValue (selectionChange)="mudarColecao($event.value)">
+            <mat-option *ngFor="let colecao of colecoes" 
+            [value]="colecao.collection_Id">{{ colecao.collection_name }}</mat-option>
+        </mat-select>
+    </mat-form-field>
 
-            <!---------------- MARCA ------------------->
-            <mat-form-field id="marca">
-                <mat-label>Marca</mat-label>
-                <mat-select placeholder="Marca" #marcaValue (selectionChange)="mudarMarca($event.value)">
-                    <mat-option *ngFor="let marca of marcas" 
-                    [value]="marca.brand_Id">{{ marca.brand_name }}</mat-option>
-                </mat-select>
-            </mat-form-field>
-            
-            <!---------------- COLEÇÃO ------------------->
-            <mat-form-field id="colecao">
-                <mat-label>Coleção</mat-label>
-                <mat-select placeholder="Marca" #colecaoValue (selectionChange)="mudarColecao($event.value)">
-                    <mat-option *ngFor="let colecao of colecoes" 
-                    [value]="colecao.collection_Id">{{ colecao.collection_name }}</mat-option>
-                </mat-select>
-            </mat-form-field>
+    <!--------------------- REPRESENTANTE --------------------->
 
-            <!--------------------- REPRESENTANTE --------------------->
-
-            <mat-form-field id="repres">
-                <mat-label>Representante</mat-label>
-                <mat-select placeholder="Representante" #represValue (selectionChange)="mudarRepres($event.value)">
-                    <mat-option *ngFor="let repre of repres" 
-                    [value]="repre.agent_Id">{{ repre.agent_name }}</mat-option>
-                </mat-select>
-            </mat-form-field>
-            
-            <!----------------------------- ORDER BY ------------------------------>
-            <mat-form-field id="ordem">
-                <mat-label>Ordenar</mat-label>
-                <mat-select placeholder="Ordenar" #orderBy (selectionChange)="mudarOrdem($event.value)">
-                    <mat-option value="1">COLEÇÃO EM ORDEM CRESCENTE</mat-option>
-                    <mat-option value="2">COLEÇÃO EM ORDEM DECRESCENTE</mat-option>
-                    <mat-option value="3">DATA DE ENTRADA EM ORDEM CRESCENTE</mat-option>
-                    <mat-option value="4">DATA DE ENTRADA EM ORDEM DECRESCENTE</mat-option>
-                    <mat-option value="5">NÚMERO DO PEDIDO EM ORDEM CRESCENTE</mat-option>
-                    <mat-option value="6">NÚMERO DO PEDIDO EM ORDEM DECRESCENTE</mat-option>
-                    <mat-option value="7">A - Z</mat-option>
-                    <mat-option value="8">Z - A</mat-option>
-                </mat-select>
-            </mat-form-field>
+    <mat-form-field id="repres">
+        <mat-label>Representante</mat-label>
+        <mat-select placeholder="Representante" #represValue (selectionChange)="mudarRepres($event.value)">
+            <mat-option *ngFor="let repre of repres" 
+            [value]="repre.agent_Id">{{ repre.agent_name }}</mat-option>
+        </mat-select>
+    </mat-form-field>
+    
+    <!----------------------------- ORDER BY ------------------------------>
+    <mat-form-field id="ordem">
+        <mat-label>Ordenar</mat-label>
+        <mat-select placeholder="Ordenar" #orderBy (selectionChange)="mudarOrdem($event.value)">
+            <mat-option value="1">COLEÇÃO EM ORDEM CRESCENTE</mat-option>
+            <mat-option value="2">COLEÇÃO EM ORDEM DECRESCENTE</mat-option>
+            <mat-option value="3">DATA DE ENTRADA EM ORDEM CRESCENTE</mat-option>
+            <mat-option value="4">DATA DE ENTRADA EM ORDEM DECRESCENTE</mat-option>
+            <mat-option value="5">NÚMERO DO PEDIDO EM ORDEM CRESCENTE</mat-option>
+            <mat-option value="6">NÚMERO DO PEDIDO EM ORDEM DECRESCENTE</mat-option>
+            <mat-option value="7">A - Z</mat-option>
+            <mat-option value="8">Z - A</mat-option>
+        </mat-select>
+    </mat-form-field>
+    <!------------------------- FIM DROPDOWNS -------------------------->
 
 
 
 
 
 
+    
+    <!------------------------ CAMPO RAZÃO SOCIAL ------------------------->
+    <mat-form-field id="razao-social" (keyup)="companyName = $event.target.value" (keyup)="buscarClientes()">
+        <mat-label>Razão Social</mat-label>
+        <input type="text" matInput [matAutocomplete]="autoCompleteRazao">
+        <mat-autocomplete 
+        #autoCompleteRazao="matAutocomplete"
+        (optionSelected)="mudarCompanyDoc($event.option.value.company_doc)" 
+        (optionSelected)="mudarCustomerFabId($event.option.value.customerFab_Id)" 
+        [displayWith]="displayFn.bind(this)">
+            <mat-option *ngFor="let cliente of clientes" [value]="cliente">
+                {{ cliente.customer_name }}
+            </mat-option>
+        </mat-autocomplete>
+    </mat-form-field>
 
-            
-            <!------------------------ CAMPO RAZÃO SOCIAL ------------------------->
-            <mat-form-field id="razao-social" (keyup)="companyName = $event.target.value" (keyup)="buscarClientes()">
-                <mat-label>Razão Social</mat-label>
-                <input type="text" matInput [matAutocomplete]="autoCompleteRazao">
-                <mat-autocomplete 
-                #autoCompleteRazao="matAutocomplete"
-                (optionSelected)="mudarCompanyDoc($event.option.value.company_doc)" 
-                (optionSelected)="mudarCustomerFabId($event.option.value.customerFab_Id)" 
-                [displayWith]="displayFn.bind(this)">
-                    <mat-option *ngFor="let cliente of clientes" [value]="cliente">
-                        {{ cliente.customer_name }}
-                    </mat-option>
-                </mat-autocomplete>
-            </mat-form-field>
+    <!---------------------- CAMPO CNPJ ------------------------->
+    <mat-form-field id="cnpj" (keyup)="companyDoc = $event.target.value">
+        <mat-label>CNPJ</mat-label>
+        <input type="text" matInput [value]="companyDoc">
+    </mat-form-field>
 
-            <!---------------------- CAMPO CNPJ ------------------------->
-            <mat-form-field id="cnpj" (keyup)="companyDoc = $event.target.value" (keyup)="buscarClientes()">
-                <mat-label>CNPJ</mat-label>
-                <input type="text" matInput [value]="companyDoc">
-            </mat-form-field>
-
-            <!---------------------- CAMPO CÓDIGO ------------------------->
-            <mat-form-field id="codigo" (keyup)="customerFabId = $event.target.value" (keyup)="buscarClientes()">
-                <mat-label>Código</mat-label>
-                <input type="text" matInput [value]="customerFabId">
-            </mat-form-field>
+    <!---------------------- CAMPO CÓDIGO ------------------------->
+    <mat-form-field id="codigo" (keyup)="customerFabId = $event.target.value">
+        <mat-label>Código</mat-label>
+        <input type="text" matInput [value]="customerFabId">
+    </mat-form-field>
 
 
 
@@ -91,50 +86,46 @@
 
 
 
-            <!---------------------- BUTTON PESQUISAR CNPJ --------------------->
-            <button mat-raised-button
-            color="primary"
-            style="background-color: black;"
-            id="botao-buscar" 
-            type="submit" 
-            (click)="company_doc = cnpjDigitado"
-            (click)="buscarInvoices()">
-            <i class="material-icons right">search</i>BUSCAR</button>
+    <!---------------------- BUTTON PESQUISAR CNPJ --------------------->
+    <button mat-raised-button
+    color="primary"
+    style="background-color: black;"
+    id="botao-buscar" 
+    type="submit" 
+    (click)="company_doc = cnpjDigitado"
+    (click)="buscarInvoices()">
+    <i class="material-icons right">search</i>BUSCAR</button>
 
-            <mat-card *ngIf="consultado" style="margin: 15px 0; text-align: center;">
-                <mat-card-title>
-                    <mat-icon>poll</mat-icon> Totais
-                </mat-card-title>
-                <mat-card-content>
-                    <strong>Qtde Fat:</strong><br> {{ total.sum_total_quantity_invoiced | number: '1.0-0' | replace:',':'.' }}
-                    <br>
-                    <strong>Vr Fat:</strong><br> {{ total.sum_total_price_invoiced | currency: 'BRL' : 'symbol' : '1.0-0' | replace:',':'.' | replace:',':'.' }}
-                </mat-card-content>
-            </mat-card>
-            
-            <mat-card *ngFor="let invoice of invoices" class="mat-elevation-z8" style="margin: 15px 0;">
-                <mat-card-title style="text-align: center; margin-bottom: 15px"><mat-icon>account_box</mat-icon> {{ invoice.customer_name }} </mat-card-title>
-                <div style="width: 100%;">
-                    <mat-card-content>
-                        <div style="font-size: medium; text-align: center;"><strong>NF: </strong>{{ invoice.invoice }}  - {{ invoice.dt_invoice }}</div>
-                        <div style="font-size: small; text-align: center; margin: 15px 0"><strong>Ped Linx:</strong> {{ invoice.orderFactory_Id }}<strong>Ped Wise:</strong> {{ invoice.order_Id }}</div>
-                        <div id="card-subdiv"><strong>Ped:<br></strong>{{ invoice.total_quantity | number:'1.0-0' | replace:',':'.' }}</div>
-                        <div id="card-subdiv"><strong>Emb:<br></strong>{{ invoice.packed_quantity | number:'1.0-0' | replace:',':'.' }}</div>
-                        <div id="card-subdiv"><strong>Fat:<br></strong>{{ invoice.total_quantity_invoiced | number:'1.0-0' | replace:',':'.' }}</div>
-                        <div id="card-subdiv"><strong>%<br></strong>{{ invoice.total_quantity_invoiced / invoice.total_quantity * 100 | number: '1.0-0' | replace:',':'.' }}</div>
-                        <div id="card-subdiv"><strong>Ped:<br></strong>{{ invoice.total_price | currency: 'BRL' : 'symbol' : '1.0-0' | replace:',':'.' }}</div>
-                        <div id="card-subdiv"><strong>Emb:<br></strong>{{ invoice.packed_price | currency: 'BRL' : 'symbol' : '1.0-0' | replace:',':'.' }}</div>
-                        <div id="card-subdiv"><strong>Fat:<br></strong>{{ invoice.total_price_invoiced | currency: 'BRL' : 'symbol' : '1.0-0' | replace:',':'.' }}</div>
-                        <div id="card-subdiv"><strong>%<br></strong>{{ invoice.total_price_invoiced / invoice.total_price * 100 | number: '1.0-0' | replace:',':'.' }}</div>
-                    </mat-card-content>
-                </div>
-                <mat-card-footer style="text-align: center;">
-                    <button mat-raised-button style="background-color: black; color:white; margin: 15px;"><mat-icon>remove_red_eye</mat-icon></button>
-                </mat-card-footer>
-            </mat-card>
-
+    <mat-card *ngIf="consultado" style="margin: 15px 0; text-align: center;">
+        <mat-card-title>
+            <mat-icon>poll</mat-icon> Totais
+        </mat-card-title>
+        <mat-card-content>
+            <strong>Qtde Fat:</strong><br> {{ total.sum_total_quantity_invoiced | number: '1.0-0' | replace:',':'.' }}
+            <br>
+            <strong>Vr Fat:</strong><br> {{ total.sum_total_price_invoiced | currency: 'BRL' : 'symbol' : '1.0-0' | replace:',':'.' | replace:',':'.' }}
+        </mat-card-content>
+    </mat-card>
+    
+    <mat-card *ngFor="let invoice of invoices" class="mat-elevation-z8" style="margin: 15px 0;">
+        <mat-card-title style="text-align: center; margin-bottom: 15px"><mat-icon>account_box</mat-icon> {{ invoice.customer_name }} </mat-card-title>
+        <div style="width: 100%;">
+            <mat-card-content>
+                <div style="font-size: medium; text-align: center;"><strong>NF: </strong>{{ invoice.invoice }}  - {{ invoice.dt_invoice }}</div>
+                <div style="font-size: small; text-align: center; margin: 15px 0"><strong>Ped Linx:</strong> {{ invoice.orderFactory_Id }}<strong>Ped Wise:</strong> {{ invoice.order_Id }}</div>
+                <div id="card-subdiv"><strong>Ped:<br></strong>{{ invoice.total_quantity | number:'1.0-0' | replace:',':'.' }}</div>
+                <div id="card-subdiv"><strong>Emb:<br></strong>{{ invoice.packed_quantity | number:'1.0-0' | replace:',':'.' }}</div>
+                <div id="card-subdiv"><strong>Fat:<br></strong>{{ invoice.total_quantity_invoiced | number:'1.0-0' | replace:',':'.' }}</div>
+                <div id="card-subdiv"><strong>%<br></strong>{{ invoice.total_quantity_invoiced / invoice.total_quantity * 100 | number: '1.0-0' | replace:',':'.' }}</div>
+                <div id="card-subdiv"><strong>Ped:<br></strong>{{ invoice.total_price | currency: 'BRL' : 'symbol' : '1.0-0' | replace:',':'.' }}</div>
+                <div id="card-subdiv"><strong>Emb:<br></strong>{{ invoice.packed_price | currency: 'BRL' : 'symbol' : '1.0-0' | replace:',':'.' }}</div>
+                <div id="card-subdiv"><strong>Fat:<br></strong>{{ invoice.total_price_invoiced | currency: 'BRL' : 'symbol' : '1.0-0' | replace:',':'.' }}</div>
+                <div id="card-subdiv"><strong>%<br></strong>{{ invoice.total_price_invoiced / invoice.total_price * 100 | number: '1.0-0' | replace:',':'.' }}</div>
+            </mat-card-content>
         </div>
+        <mat-card-footer style="text-align: center;">
+            <button mat-raised-button style="background-color: black; color:white; margin: 15px;"><mat-icon>remove_red_eye</mat-icon></button>
+        </mat-card-footer>
+    </mat-card>
 
-    </body>
-
-</html>
+</div>

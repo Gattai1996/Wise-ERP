@@ -144,7 +144,8 @@ export class InvoicesComponent implements OnInit {
         this.clientes = dados;
       },
       (error: any) => {this.erroClientes = error;
-                       console.log('ERRO INVOICES: ' + this.erroClientes.message); }
+                       console.log('ERRO INVOICES: ' + this.erroClientes.message); 
+                      }
       );
   }
 
@@ -186,7 +187,8 @@ export class InvoicesComponent implements OnInit {
         this.buscarTotalInvoices();
       },
       (error: any) => {this.erroInvoices = error;
-                       console.log('ERRO INVOICES: ' + this.erroInvoices.message); }
+                       console.log('ERRO INVOICES: ' + this.erroInvoices.message); 
+                      }
       );
   }
 
