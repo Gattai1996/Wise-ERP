@@ -1,16 +1,27 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { LoginComponent } from './home/login/login.component';
+import { LoginComponent } from './login/login.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
+import { NotFoundComponent } from './not-found/not/found/not-found.component';
 
 const routes: Routes = [
+  {
+    path: '',
+    redirectTo: '/login',
+    pathMatch: 'full'
+  },
   { 
-    path: '', 
+    path: 'login', 
     component: LoginComponent 
   },
   { 
     path: 'invoices', 
     component: SidenavComponent 
+  },
+  {
+    path: "**",
+    component: NotFoundComponent,
+    pathMatch: 'full'
   }
 ];
 

@@ -10,7 +10,7 @@ import { InvoicesComponent } from './invoices/invoices.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material/material.module';
 import { BrandsService } from './services/brands.service';
-import { DialogErrorComponent } from './home/dialog-error/dialog-error.component';
+import { DialogErrorComponent } from './login/dialog-error/dialog-error.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -19,10 +19,11 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { ReplacePipe } from './pipes/replacepipe';
-import { LoginComponent } from './home/login/login.component';
+import { LoginComponent } from './login/login.component';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { ScrollingModule } from '@angular/cdk/scrolling';
+import { NotFoundComponent } from './not-found/not/found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
     InvoicesComponent,
     DialogErrorComponent,
     SidenavComponent,
-    ReplacePipe
+    ReplacePipe,
+    NotFoundComponent
   ],
   entryComponents: [DialogErrorComponent],
   imports: [
