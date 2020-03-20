@@ -24,6 +24,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { NotFoundComponent } from './not-found/not/found/not-found.component';
+import { GuardRoutesGuard } from './guard-routes/guard-routes.guard';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,8 @@ import { NotFoundComponent } from './not-found/not/found/not-found.component';
   providers: [
     HttpClient,
     LoginService,
-    BrandsService
+    BrandsService,
+    GuardRoutesGuard
   ],
   bootstrap: [AppComponent]
 })

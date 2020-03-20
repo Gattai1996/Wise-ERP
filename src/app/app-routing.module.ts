@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
 import { NotFoundComponent } from './not-found/not/found/not-found.component';
+import { GuardRoutesGuard } from './guard-routes/guard-routes.guard';
 
 const routes: Routes = [
   {
@@ -16,7 +17,8 @@ const routes: Routes = [
   },
   { 
     path: 'invoices', 
-    component: SidenavComponent 
+    component: SidenavComponent,
+    canActivate: [GuardRoutesGuard]
   },
   {
     path: "**",

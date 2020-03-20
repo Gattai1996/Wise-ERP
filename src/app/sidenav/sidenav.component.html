@@ -3,13 +3,16 @@
       [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
       [mode]="(isHandset$ | async) ? 'over' : 'side'"
       [opened]="(isHandset$ | async) === false">
-    <mat-toolbar><a href="#"><img style="width: 100%;" src="../../assets/logo.png"></a></mat-toolbar>
+    <mat-toolbar><a routerLink="/login"><img style="width: 100%;" src="../../assets/logo.png"></a></mat-toolbar>
     <mat-nav-list>
-      <a href="#">
+      <a routerLink="/login">
         <mat-list-item id="sair"><mat-icon>home</mat-icon> Inicio</mat-list-item>
     </a>
-    <a href="/invoices">
-        <mat-list-item id="invoices"><mat-icon>monetization_on</mat-icon> Faturamentos</mat-list-item>
+    <a routerLink="/invoices">
+        <mat-list-item id="invoices"><mat-icon>assessment</mat-icon> Faturamentos</mat-list-item>
+    </a>
+    <a routerLink="/invoices">
+      <mat-list-item id="invoices"><mat-icon>monetization_on</mat-icon> Duplicatas</mat-list-item>
     </a>
     </mat-nav-list>
   </mat-sidenav>
@@ -23,7 +26,7 @@
         *ngIf="isHandset$ | async">
         <mat-icon style="color: white" aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
-      <span style="color: white;">Wise ERP</span>
+      <span style="color: white;">Wise ERP - Faturamentos</span>
     </mat-toolbar>
     <!-- Add Content Here -->
     <app-invoices></app-invoices>
