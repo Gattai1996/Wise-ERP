@@ -5,7 +5,7 @@ import { LoginService } from 'src/app/services/login.service';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material'
-import { DialogErrorComponent } from '../dialog-error/dialog-error.component';
+import { DialogErrorComponent } from './dialog-error/dialog-error.component';
 
 @Component({
   templateUrl: './login.component.html',
