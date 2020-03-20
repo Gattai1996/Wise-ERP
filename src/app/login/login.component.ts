@@ -48,6 +48,7 @@ export class LoginComponent implements OnInit {
         
         if (login.ok === true) {
           this.dadosRepres = login;
+          localStorage.setItem('token', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.'+ login.agent_Id + '.SmjuyXgloA2RUhIlAEetrQwfC0EhBmhu-xOMzyY3Y_Q');
           // console.log('LOGIN DADOSREPRES= ' + this.dadosRepres.agent_name + this.dadosRepres.agent_Id);
           this.router.navigate(['/invoices']);
         } else {

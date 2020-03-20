@@ -59,7 +59,7 @@
         <input type="text" matInput [matAutocomplete]="autoCompleteRazao">
         <mat-autocomplete 
         #autoCompleteRazao="matAutocomplete"
-        (optionSelected)="mudarCompanyDoc($event.option.value.company_doc)" 
+        
         (optionSelected)="mudarCustomerFabId($event.option.value.customerFab_Id)" 
         [displayWith]="displayFn.bind(this)">
             <mat-option *ngFor="let cliente of clientes" [value]="cliente">
