@@ -97,6 +97,11 @@ body {
   padding: 1%;
 }
 
+#botao-mostrar-todos {
+  text-align: center;
+  margin: 1rem auto;
+}
+
 #cardsFaturamentos {
   margin: 1%;
   padding: 1%;

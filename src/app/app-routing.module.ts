@@ -11,11 +11,11 @@ const routes: Routes = [
     redirectTo: '/login',
     pathMatch: 'full'
   },
-  { 
+  {
     path: 'login', 
     component: LoginComponent 
   },
-  { 
+  {
     path: 'invoices', 
     component: SidenavComponent,
     canActivate: [GuardRoutesGuard]

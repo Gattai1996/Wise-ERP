@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material'
 import { DialogErrorComponent } from './dialog-error/dialog-error.component';
+import { LoadingIndicatorComponent } from '../loading-indicator/loading-indicator.component';
 
 @Component({
   templateUrl: './login.component.html',
@@ -41,6 +42,7 @@ export class LoginComponent implements OnInit {
 
     this.loginService.autenticar(usuario, senha).subscribe(
       (login: Login) => {
+        this.openLoadingDialog();
         this.login = login;
         this.loginService.EmitirLogin(login);
 
@@ -52,18 +54,28 @@ export class LoginComponent implements OnInit {
           // console.log('LOGIN DADOSREPRES= ' + this.dadosRepres.agent_name + this.dadosRepres.agent_Id);
           this.router.navigate(['/invoices']);
         } else {
-          this.openDialog();
+          this.openErrorDialog();
         }
+        this.closeLoadingDialog();
       },
       (error: any) => {
         this.erro = error;
-        this.openDialog();
+        this.closeLoadingDialog();
+        this.openErrorDialog();
         console.log('Deu erro ao tentar se inscrever!');
       });
   }
 
-  openDialog() {
+  openErrorDialog() {
     this.dialog.open(DialogErrorComponent);
+  }
+
+  openLoadingDialog() {
+    this.dialog.open(LoadingIndicatorComponent);
+  }
+
+  closeLoadingDialog() {
+    this.dialog.closeAll();
   }
 
   onSubmit() {

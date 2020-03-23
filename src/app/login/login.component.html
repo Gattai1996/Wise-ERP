@@ -19,14 +19,13 @@
                         matInput
                         class="form-group"
                         formControlName="user"
-                        (change)="usuario = $event.target.value" 
-                        class="white-text">
+                        (change)="usuario = $event.target.value">
                         <mat-label for="Login"><mat-icon>person</mat-icon>&nbsp;&nbsp;Usuário</mat-label>
                     </mat-form-field>
                     <div
                         id="mensagem"
                         *ngIf="loginForm.get('user').errors?.required && loginForm.get('user').touched" 
-                        class="flow-text white-text">
+                        style="color: white; padding: 1%;">
                         Usuário é obrigatório
                         <i class="tiny material-icons">announcement</i>
                     </div>
@@ -39,14 +38,13 @@
                         class="form-group"
                         formControlName="password"
                         type="password" 
-                        (change)="senha = $event.target.value" 
-                        class="white-text">
+                        (change)="senha = $event.target.value">
                         <mat-label for="senha" class="password"><mat-icon>vpn_key</mat-icon>&nbsp;&nbsp;Senha</mat-label>
                     </mat-form-field>
                     <div
                         id="mensagem"
                         *ngIf="loginForm.get('password').errors?.required && loginForm.get('password').touched" 
-                        class="flow-text white-text">
+                        style="color: white; padding: 1%;">
                         Senha é obrigatória
                         <i class="tiny material-icons">announcement</i>
                     </div>
