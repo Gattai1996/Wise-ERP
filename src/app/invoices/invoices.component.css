@@ -59,16 +59,21 @@ body {
   z-index: 1;
 }
 
-#marca, #colecao, #repres, #ordem {
+/* ============================ DROPDOWNS =================================== */
+#marca, #colecao, #repres {
   width: 49%;
 }
 
-#colecao, #ordem {
+#ordem {
+  width: 100%;
+}
+
+#colecao {
   margin-left: 2%;
 }
 
 #botao-buscar {
-  width: 100%
+  width: 100%;
 }
 
 #marca, #colecao, #botao-buscar {
@@ -87,14 +92,11 @@ body {
   margin-left: 2%;
 }
 
-/* ============================ DROPDOWNS =================================== */
-
 /* =========================== CARDS ============================== */
-
-#cardTotais {
+#cardTotal {
   text-align: center;
-  margin: 1%;
-  padding: 1%;
+  margin: 2%;
+  padding: 2%;
 }
 
 #botao-mostrar-todos {
@@ -103,9 +105,10 @@ body {
 }
 
 #cardsFaturamentos {
-  margin: 1%;
-  padding: 1%;
+  margin: 2%;
+  padding: 2%;
   text-align: center;
+  min-height: 180px;
 }
 
 #cardsFaturamentosGrande {
@@ -126,8 +129,13 @@ body {
 /* ============== APARELHOS GRANDES - DESKTOPS ===================== */
 @media screen and (min-width: 960px) {
 
-  #marca, #colecao, #repres, #ordem {
+  #marca, #colecao, #repres {
     width: 23%;
+  }
+
+  #ordem {
+    width: 48%;
+    margin-left: 2%;
   }
 
   #repres {
@@ -151,15 +159,20 @@ body {
     margin-left: 2%;
   }
 
-  #cardTotais {
-    width: 45%;
+  #botao-buscar {
+    width: 40%;
+    margin-left: 30%;
+  }
+
+  #cardTotal {
+    width: 44%;
     margin-left: auto;
     margin-right: auto;
   }
 
   #cardsFaturamentos {
     float: left;
-    width: 45%;
+    width: 44%;
     margin: 1%;
   }
 

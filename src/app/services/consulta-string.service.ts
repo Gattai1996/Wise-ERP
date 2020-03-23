@@ -14,10 +14,10 @@ export class ConsultaStringService {
   constructor(private http: HttpClient) { }
 
   // tslint:disable-next-line: variable-name
-  public consultarString(companyId: string, deptId: string, brandId: string, companyName: string):
+  public consultarString(companyId: string, deptId: string, brandId: string, companyName: string, agentId: string):
   Observable<ConsultaString> {
     return this.http.get<ConsultaString>(
       this.API_URL + 'company_Id=' + companyId + '&dept_Id=' + deptId 
-      + '&brand_Id=' + brandId + '&company_name=' + companyName);
+      + '&brand_Id=' + brandId + '&company_name=' + companyName + '&agent_Id=' + agentId);
   }
 }

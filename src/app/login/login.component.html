@@ -1,67 +1,35 @@
-<html>
-    <head>
-    </head>
-    
-    <body>   
-
-        <form id="formulario" [formGroup]="loginForm" (submit)="onSubmit()">
-
-            <div id="logo">
-                <!-- <img src="https://i.ibb.co/wszdgT7/wise-erp-logo.png" alt="wise-erp-logo"> -->
-                <img id="logo" href="#" src="../../assets/logo.png" alt="restoque-logo">
-            </div>
-            
-            <div>
-                
-                <div>
-                    <mat-form-field id="login">
-                        <input 
-                        matInput
-                        class="form-group"
-                        formControlName="user"
-                        (change)="usuario = $event.target.value">
-                        <mat-label for="Login"><mat-icon>person</mat-icon>&nbsp;&nbsp;Usuário</mat-label>
-                    </mat-form-field>
-                    <div
-                        id="mensagem"
-                        *ngIf="loginForm.get('user').errors?.required && loginForm.get('user').touched" 
-                        style="color: white; padding: 1%;">
-                        Usuário é obrigatório
-                        <i class="tiny material-icons">announcement</i>
-                    </div>
-                </div>
- 
-                <div>
-                    <mat-form-field id="senha">
-                        <input 
-                        matInput
-                        class="form-group"
-                        formControlName="password"
-                        type="password" 
-                        (change)="senha = $event.target.value">
-                        <mat-label for="senha" class="password"><mat-icon>vpn_key</mat-icon>&nbsp;&nbsp;Senha</mat-label>
-                    </mat-form-field>
-                    <div
-                        id="mensagem"
-                        *ngIf="loginForm.get('password').errors?.required && loginForm.get('password').touched" 
-                        style="color: white; padding: 1%;">
-                        Senha é obrigatória
-                        <i class="tiny material-icons">announcement</i>
-                    </div>
-                </div>
-
-                <button mat-raised-button
-                color="primary"
-                style="background-color: black;"
-                id="botao-entrar" 
-                type="submit">
-                Login&nbsp;
-                <i class="material-icons right">send</i></button>
-
-            </div>
-
-        </form>
-        
-    </body>
-
-</html>
+<form id="formulario" [formGroup]="loginForm" (submit)="onSubmit()">
+    <div id="logo">
+        <!-- <img src="https://i.ibb.co/wszdgT7/wise-erp-logo.png" alt="wise-erp-logo"> -->
+        <img id="logo" href="#" src="../../assets/logo.png" alt="restoque-logo">
+    </div>
+    <div>
+        <div>
+            <mat-form-field id="login">
+                <input 
+                matInput
+                class="form-group"
+                formControlName="user"
+                (change)="usuario = $event.target.value">
+                <mat-label for="Login"><mat-icon>person</mat-icon>&nbsp;&nbsp;Usuário</mat-label>
+            </mat-form-field>
+        </div>
+        <div>
+            <mat-form-field id="senha">
+                <input 
+                matInput
+                class="form-group"
+                formControlName="password"
+                type="password" 
+                (change)="senha = $event.target.value">
+                <mat-label for="senha" class="password"><mat-icon>vpn_key</mat-icon>&nbsp;&nbsp;Senha</mat-label>
+            </mat-form-field>
+        </div>
+        <button mat-raised-button
+        color="accent"
+        id="botao-entrar" 
+        type="submit">
+        <strong>Login</strong>&nbsp;
+        <i class="material-icons right">send</i></button>
+    </div>
+</form>
