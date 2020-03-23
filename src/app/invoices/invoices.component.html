@@ -22,13 +22,14 @@
     </mat-form-field>
 
     <!--------------------- REPRESENTANTE --------------------->
-    <mat-form-field id="repres">
+    <!-- <mat-form-field id="repres">
         <mat-label>Representante</mat-label>
         <mat-select placeholder="Representante" #represValue (selectionChange)="mudarRepres($event.value)">
             <mat-option *ngFor="let repre of repres" 
-            [value]="repre.agent_Id">{{ repre.agent_name }}</mat-option>
+            [value]="repre.agent_Id">{{ agentId }}</mat-option>
         </mat-select>
-    </mat-form-field>
+        
+    </mat-form-field> -->
     
     <!----------------------------- ORDER BY ------------------------------>
     <mat-form-field id="ordem">
@@ -52,7 +53,8 @@
         <input type="text" matInput [matAutocomplete]="autoCompleteRazao">
         <mat-autocomplete 
         #autoCompleteRazao="matAutocomplete"
-        (optionSelected)="mudarCustomerFabId($event.option.value.customerFab_Id)" 
+        (optionSelected)="mudarCustomerFabId($event.option.value.customerFab_Id)"
+        (optionSelected)="mudarCompanyDoc($event.option.value.company_doc)" 
         [displayWith]="displayFn.bind(this)">
             <mat-option *ngFor="let cliente of clientes" [value]="cliente">
                 {{ cliente.customer_name }}
@@ -72,19 +74,19 @@
         <input type="text" matInput [value]="customerFabId">
     </mat-form-field>
 
-    <!---------------------- BUTTON PESQUISAR CNPJ --------------------->
+    <!---------------------- BOTAO PESQUISAR --------------------->
     <button mat-raised-button
-    color="primary"
-    style="background-color: black;"
+    color="accent"
     id="botao-buscar" 
     type="submit" 
     (click)="company_doc = cnpjDigitado"
     (click)="buscarInvoices()">
-    <i class="material-icons right">search</i>BUSCAR</button> 
+    <i class="material-icons right">search</i><strong>BUSCAR</strong></button> 
     
-    <mat-card id="cardTotais" *ngIf="consultado">
+    <!--------------------- CARDS FATURAMENTOS ---------------------->
+    <mat-card id="cardTotal" *ngIf="consultado" class="mat-elevation-z8">
         <mat-card-title>
-            <mat-icon>poll</mat-icon> Totais
+            <mat-icon>poll</mat-icon> Total
         </mat-card-title>
         <mat-card-content>
             <strong>Qtde Fat:</strong><br> {{ total.sum_total_quantity_invoiced | number: '1.0-0' | replace:',':'.' }}
@@ -96,8 +98,8 @@
     <div id="botao-mostrar-todos" *ngIf="consultado">
         <mat-slide-toggle 
         [(ngModel)]="mostrarTodosOsFaturamentos" 
-        color="primary"> 
-        <span> 
+        color="accent"> 
+        <span style="font-weight: bold; font-size: 1.2rem;"> 
             Mostrar todos os faturamentos 
         </span> 
         </mat-slide-toggle>

@@ -16,7 +16,7 @@ import { ConsultaStringService } from '../services/consulta-string.service';
 import { ConsultaString } from '../models/consulta-string.model';
 import { MatDialog } from '@angular/material'
 import { LoadingIndicatorComponent } from '../loading-indicator/loading-indicator.component';
-// import { LoginService } from 'src/app/services/login.service';
+import { LoginService } from '../services/login.service';
 
 @Component({
   selector: 'app-invoices',
@@ -63,16 +63,21 @@ export class InvoicesComponent implements OnInit {
     private serviceColecao: CollectionsService,
     private serviceRepres: AgentsService,
     private buscaTotalInvoicesService: BuscaTotalInvoicesService,
-    private consultaStringService: ConsultaStringService
+    private consultaStringService: ConsultaStringService,
+    private loginService: LoginService
     ) {}
 
   ngOnInit() {
-    // Descomentar isso quando for pegar agent_Id direto da tela de login
-    // LoginService.emitirLogin.subscribe(
-    //     (login: Login) => {this.login = login;
-    //                       console.log('TESTE 1 = ' + this.login.agent_Id);
-    //                       });
-    // console.log('TESTE 2 = ' + this.login.agent_Id);
+    this.loginService.login$.subscribe(
+        dados => {this.login = dados;
+                          this.agentId = this.login.agent_Id;
+                          console.log('TESTE 1= ' + this.agentId);
+                          });
+    console.log('TESTE 2= ' + this.agentId);
+
+    // Pega o Agent_Id do arquivo armazenado
+    this.agentId = localStorage.getItem('token');
+    console.log('TESTE 3= ' + this.agentId)
 
     // Lista as marcas
     this.listaDeMarcas();
@@ -151,7 +156,7 @@ export class InvoicesComponent implements OnInit {
   public buscarClientes() {
     this.openLoadingDialog();
     this.consultaStringService.consultarString(
-      this.companyId, this.deptId, this.brandId, this.companyName)
+      this.companyId, this.deptId, this.brandId, this.companyName, this.agentId)
       .subscribe(dados => {
         console.log(dados);
         this.clientes = dados;

@@ -1,5 +1,6 @@
-import { Injectable, EventEmitter } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Injectable } from '@angular/core';
+
+import { Observable, Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Login } from '../models/login.model';
 
@@ -12,7 +13,8 @@ export class LoginService {
   private readonly PARAMETERS = '?company_Id=1&dept_Id=1&brand_Id=5';
 
   // Isso será usado quando for emitir o agent_Id da tela de login para invoices
-  static emitirLogin = new EventEmitter<Login>();
+  private loginSource = new Subject<Login>();
+  login$ = this.loginSource.asObservable();
 
   constructor(private http: HttpClient) { }
 
@@ -21,6 +23,6 @@ export class LoginService {
   }
 
   public EmitirLogin(login: Login) {
-    LoginService.emitirLogin.emit(login);
+    this.loginSource.next(login);
   }
 }
