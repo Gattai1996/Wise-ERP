@@ -22,7 +22,6 @@
     </mat-form-field>
 
     <!--------------------- REPRESENTANTE --------------------->
-
     <mat-form-field id="repres">
         <mat-label>Representante</mat-label>
         <mat-select placeholder="Representante" #represValue (selectionChange)="mudarRepres($event.value)">
@@ -46,12 +45,6 @@
         </mat-select>
     </mat-form-field>
     <!------------------------- FIM DROPDOWNS -------------------------->
-
-
-
-
-
-
     
     <!------------------------ CAMPO RAZÃO SOCIAL ------------------------->
     <mat-form-field id="razao-social" (keyup)="companyName = $event.target.value" (keyup)="buscarClientes()">
@@ -59,7 +52,6 @@
         <input type="text" matInput [matAutocomplete]="autoCompleteRazao">
         <mat-autocomplete 
         #autoCompleteRazao="matAutocomplete"
-        
         (optionSelected)="mudarCustomerFabId($event.option.value.customerFab_Id)" 
         [displayWith]="displayFn.bind(this)">
             <mat-option *ngFor="let cliente of clientes" [value]="cliente">
@@ -80,12 +72,6 @@
         <input type="text" matInput [value]="customerFabId">
     </mat-form-field>
 
-
-
-
-
-
-
     <!---------------------- BUTTON PESQUISAR CNPJ --------------------->
     <button mat-raised-button
     color="primary"
@@ -94,7 +80,7 @@
     type="submit" 
     (click)="company_doc = cnpjDigitado"
     (click)="buscarInvoices()">
-    <i class="material-icons right">search</i>BUSCAR</button>
+    <i class="material-icons right">search</i>BUSCAR</button> 
     
     <mat-card id="cardTotais" *ngIf="consultado">
         <mat-card-title>
@@ -106,24 +92,32 @@
             <strong>Vr Fat:</strong><br> {{ total.sum_total_price_invoiced | currency: 'BRL' : 'symbol' : '1.0-0' | replace:',':'.' | replace:',':'.' }}
         </mat-card-content>
     </mat-card>
+   
+    <div id="botao-mostrar-todos" *ngIf="consultado">
+        <mat-slide-toggle 
+        [(ngModel)]="mostrarTodosOsFaturamentos" 
+        color="primary"> 
+        <span> 
+            Mostrar todos os faturamentos 
+        </span> 
+        </mat-slide-toggle>
+    </div>
     
-    <mat-card id="cardsFaturamentos" *ngFor="let invoice of invoices" class="mat-elevation-z8">
-        <mat-card-title id="cardsFaturamentosGrande"><mat-icon>account_box</mat-icon> {{ invoice.customer_name }} </mat-card-title>
-        <mat-card-content>
-            <div id="cardsFaturamentosMedio"><strong>NF: </strong>{{ invoice.invoice }}  - {{ invoice.dt_invoice }}</div>
-            <div id="cardsFaturamentosMedio"><strong>Ped Linx:</strong> {{ invoice.orderFactory_Id }}<strong>Ped Wise:</strong> {{ invoice.order_Id }}</div>
-            <div id="cardsFaturamentosPequeno"><strong>Ped:<br></strong>{{ invoice.total_quantity | number:'1.0-0' | replace:',':'.' }}</div>
-            <div id="cardsFaturamentosPequeno"><strong>Emb:<br></strong>{{ invoice.packed_quantity | number:'1.0-0' | replace:',':'.' }}</div>
-            <div id="cardsFaturamentosPequeno"><strong>Fat:<br></strong>{{ invoice.total_quantity_invoiced | number:'1.0-0' | replace:',':'.' }}</div>
-            <div id="cardsFaturamentosPequeno"><strong>%<br></strong>{{ invoice.total_quantity_invoiced / invoice.total_quantity * 100 | number: '1.0-0' | replace:',':'.' }}</div>
-            <div id="cardsFaturamentosPequeno"><strong>Ped:<br></strong>{{ invoice.total_price | currency: 'BRL' : 'symbol' : '1.0-0' | replace:',':'.' }}</div>
-            <div id="cardsFaturamentosPequeno"><strong>Emb:<br></strong>{{ invoice.packed_price | currency: 'BRL' : 'symbol' : '1.0-0' | replace:',':'.' }}</div>
-            <div id="cardsFaturamentosPequeno"><strong>Fat:<br></strong>{{ invoice.total_price_invoiced | currency: 'BRL' : 'symbol' : '1.0-0' | replace:',':'.' }}</div>
-            <div id="cardsFaturamentosPequeno"><strong>%<br></strong>{{ invoice.total_price_invoiced / invoice.total_price * 100 | number: '1.0-0' | replace:',':'.' }}</div>
-        </mat-card-content>
-        <mat-card-footer style="text-align: center;">
-            <button mat-raised-button style="background-color: black; color:white; margin: 15px;"><mat-icon>remove_red_eye</mat-icon></button>
-        </mat-card-footer>
-    </mat-card>
-
+    <div *ngIf="mostrarTodosOsFaturamentos">
+        <mat-card id="cardsFaturamentos" *ngFor="let invoice of invoices" class="mat-elevation-z8">
+            <mat-card-title id="cardsFaturamentosGrande"><mat-icon>account_box</mat-icon> {{ invoice.customer_name }} </mat-card-title>
+            <mat-card-content>
+                <div id="cardsFaturamentosMedio"><strong>NF: </strong>{{ invoice.invoice }}  - {{ invoice.dt_invoice }}</div>
+                <div id="cardsFaturamentosMedio"><strong>Ped Linx:</strong> {{ invoice.orderFactory_Id }}<strong>Ped Wise:</strong> {{ invoice.order_Id }}</div>
+                <div id="cardsFaturamentosPequeno"><strong>Ped:<br></strong>{{ invoice.total_quantity | number:'1.0-0' | replace:',':'.' }}</div>
+                <div id="cardsFaturamentosPequeno"><strong>Emb:<br></strong>{{ invoice.packed_quantity | number:'1.0-0' | replace:',':'.' }}</div>
+                <div id="cardsFaturamentosPequeno"><strong>Fat:<br></strong>{{ invoice.total_quantity_invoiced | number:'1.0-0' | replace:',':'.' }}</div>
+                <div id="cardsFaturamentosPequeno"><strong>%<br></strong>{{ invoice.total_quantity_invoiced / invoice.total_quantity * 100 | number: '1.0-0' | replace:',':'.' }}</div>
+                <div id="cardsFaturamentosPequeno"><strong>Ped:<br></strong>{{ invoice.total_price | currency: 'BRL' : 'symbol' : '1.0-0' | replace:',':'.' }}</div>
+                <div id="cardsFaturamentosPequeno"><strong>Emb:<br></strong>{{ invoice.packed_price | currency: 'BRL' : 'symbol' : '1.0-0' | replace:',':'.' }}</div>
+                <div id="cardsFaturamentosPequeno"><strong>Fat:<br></strong>{{ invoice.total_price_invoiced | currency: 'BRL' : 'symbol' : '1.0-0' | replace:',':'.' }}</div>
+                <div id="cardsFaturamentosPequeno"><strong>%<br></strong>{{ invoice.total_price_invoiced / invoice.total_price * 100 | number: '1.0-0' | replace:',':'.' }}</div>
+            </mat-card-content>
+        </mat-card>
+    </div>
 </div>

@@ -25,6 +25,7 @@ import { RouterModule } from '@angular/router';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { NotFoundComponent } from './not-found/not/found/not-found.component';
 import { GuardRoutesGuard } from './guard-routes/guard-routes.guard';
+import { LoadingIndicatorComponent } from './loading-indicator/loading-indicator.component';
 
 @NgModule({
   declarations: [
@@ -34,9 +35,10 @@ import { GuardRoutesGuard } from './guard-routes/guard-routes.guard';
     DialogErrorComponent,
     SidenavComponent,
     ReplacePipe,
-    NotFoundComponent
+    NotFoundComponent,
+    LoadingIndicatorComponent
   ],
-  entryComponents: [DialogErrorComponent],
+  entryComponents: [DialogErrorComponent, LoadingIndicatorComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

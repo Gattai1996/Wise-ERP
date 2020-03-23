@@ -9,7 +9,6 @@ export class DialogErrorComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
 }

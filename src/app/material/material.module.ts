@@ -16,7 +16,9 @@ import {
   MatGridListModule,
   MatCardModule,
   MatToolbarModule,
-  MatAutocompleteModule
+  MatAutocompleteModule,
+  MatProgressSpinnerModule,
+  MatSlideToggleModule
   
 } from '@angular/material'
 
@@ -39,7 +41,9 @@ const MeterialComponents =
   MatCardModule,
   MatGridListModule,
   MatToolbarModule,
-  MatAutocompleteModule
+  MatAutocompleteModule,
+  MatProgressSpinnerModule,
+  MatSlideToggleModule
 ]
 
 @NgModule({

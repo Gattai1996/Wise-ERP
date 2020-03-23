@@ -14,6 +14,8 @@ import { Login } from '../models/login.model';
 import { TotalInvoices } from '../models/total-invoices.model';
 import { ConsultaStringService } from '../services/consulta-string.service';
 import { ConsultaString } from '../models/consulta-string.model';
+import { MatDialog } from '@angular/material'
+import { LoadingIndicatorComponent } from '../loading-indicator/loading-indicator.component';
 // import { LoginService } from 'src/app/services/login.service';
 
 @Component({
@@ -51,8 +53,10 @@ export class InvoicesComponent implements OnInit {
   login: Login = new Login();
   orderBy: string;
   diferença: any;
+  mostrarTodosOsFaturamentos = false;
 
   constructor(
+    private dialog: MatDialog,
     private router: Router,
     private buscaInvoices: BuscaInvoices,
     private serviceMarcas: BrandsService,
@@ -72,6 +76,14 @@ export class InvoicesComponent implements OnInit {
 
     // Lista as marcas
     this.listaDeMarcas();
+  }
+
+  openLoadingDialog() {
+    this.dialog.open(LoadingIndicatorComponent);
+  }
+
+  closeLoadingDialog() {
+    this.dialog.closeAll();
   }
 
   public listaDeMarcas() {
@@ -137,14 +149,17 @@ export class InvoicesComponent implements OnInit {
 
 
   public buscarClientes() {
+    this.openLoadingDialog();
     this.consultaStringService.consultarString(
       this.companyId, this.deptId, this.brandId, this.companyName)
       .subscribe(dados => {
         console.log(dados);
         this.clientes = dados;
+        this.closeLoadingDialog();
       },
       (error: any) => {this.erroClientes = error;
                        console.log('ERRO INVOICES: ' + this.erroClientes.message); 
+                       this.closeLoadingDialog();
                       }
       );
   }
@@ -177,6 +192,7 @@ export class InvoicesComponent implements OnInit {
 
 
   public buscarInvoices() {
+    this.openLoadingDialog();
     this.buscaInvoices.listarInvoices(
       this.companyId, this.deptId, this.brandId, this.collectionId, this.agentId, 
       this.orderBy, this.companyDoc, this.customerFabId
@@ -185,9 +201,11 @@ export class InvoicesComponent implements OnInit {
         this.consultado = true;
         this.invoices = dados;
         this.buscarTotalInvoices();
+        this.closeLoadingDialog();
       },
       (error: any) => {this.erroInvoices = error;
-                       console.log('ERRO INVOICES: ' + this.erroInvoices.message); 
+                       console.log('ERRO INVOICES: ' + this.erroInvoices.message);
+                       this.closeLoadingDialog();
                       }
       );
   }
