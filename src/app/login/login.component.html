@@ -1,35 +1,49 @@
-<form id="formulario" [formGroup]="loginForm" (submit)="onSubmit()">
+<form id="formulario" [formGroup]="loginForm" (submit)="onSubmit()" class="mat-elevation-z8">
     <div id="logo">
         <!-- <img src="https://i.ibb.co/wszdgT7/wise-erp-logo.png" alt="wise-erp-logo"> -->
         <img id="logo" href="#" src="../../assets/logo.png" alt="restoque-logo">
     </div>
     <div>
-        <div>
-            <mat-form-field id="login">
-                <input 
-                matInput
-                class="form-group"
-                formControlName="user"
-                (change)="usuario = $event.target.value">
-                <mat-label for="Login"><mat-icon>person</mat-icon>&nbsp;&nbsp;Usuário</mat-label>
-            </mat-form-field>
-        </div>
-        <div>
-            <mat-form-field id="senha">
-                <input 
-                matInput
-                class="form-group"
-                formControlName="password"
-                type="password" 
-                (change)="senha = $event.target.value">
-                <mat-label for="senha" class="password"><mat-icon>vpn_key</mat-icon>&nbsp;&nbsp;Senha</mat-label>
-            </mat-form-field>
-        </div>
-        <button mat-raised-button
-        color="accent"
-        id="botao-entrar" 
-        type="submit">
-        <strong>Login</strong>&nbsp;
-        <i class="material-icons right">send</i></button>
+        <mat-form-field id="login" color="accent">
+            <input 
+            matInput
+            autofocus
+            class="form-group"
+            formControlName="user"
+            (change)="usuario = $event.target.value">
+            <mat-label for="Login"><mat-icon>person</mat-icon>&nbsp;&nbsp;Usuário</mat-label>
+            <span 
+            *ngIf="loginForm.get('user').errors?.required && loginForm.get('user').touched"
+            matBadge="!" 
+            matBadgeSize="large"
+            color="warn">
+            </span>
+        </mat-form-field>
     </div>
+    <div>
+        <mat-form-field id="senha" color="accent">
+            <input 
+            matInput
+            class="form-group"
+            formControlName="password"
+            type="password" 
+            (change)="senha = $event.target.value">
+            <mat-label for="senha" class="password"><mat-icon>vpn_key</mat-icon>&nbsp;&nbsp;Senha</mat-label>
+            <span 
+            *ngIf="loginForm.get('password').errors?.required && loginForm.get('password').touched"
+            matBadge="!" 
+            matBadgeSize="large"
+            color="warn">
+            </span>
+        </mat-form-field>
+    </div>
+    <button mat-raised-button
+    [disabled]="loginForm.invalid"
+    (click)="this.openLoadingDialog()"
+    color="accent"
+    id="botao-entrar" 
+    type="submit">
+    <strong>Login</strong>&nbsp;
+    <mat-icon>send</mat-icon>
+    </button>
 </form>

@@ -1,7 +1,9 @@
-* {
+#content {
     text-align: center;
+    padding: 1.5rem;
 }
 #fechar {
     margin: 1rem auto;
-    color: #fff;
+    border-radius: 5px; 
+    width: 100%; 
 }
