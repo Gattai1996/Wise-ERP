@@ -1,25 +1,108 @@
-
-<!------------------ CONTENT -------------------->
 <div id="content">
 
-    <!------------------ DROPDOWNS -------------------->
-    <!---------------- MARCA ------------------->
-    <mat-form-field id="marca">
-        <mat-label>Marca</mat-label>
-        <mat-select placeholder="Marca" #marcaValue (selectionChange)="mudarMarca($event.value)">
-            <mat-option *ngFor="let marca of marcas" 
-            [value]="marca.brand_Id">{{ marca.brand_name }}</mat-option>
-        </mat-select>
-    </mat-form-field>
-    
-    <!---------------- COLEÇÃO ------------------->
-    <mat-form-field id="colecao">
-        <mat-label>Coleção</mat-label>
-        <mat-select placeholder="Marca" #colecaoValue (selectionChange)="mudarColecao($event.value)">
-            <mat-option *ngFor="let colecao of colecoes" 
-            [value]="colecao.collection_Id">{{ colecao.collection_name }}</mat-option>
-        </mat-select>
-    </mat-form-field>
+    <mat-vertical-stepper #stepper>
+
+      <!-- MARCA -->
+      <mat-step>
+        <ng-template matStepLabel>Marca {{ brandName }}</ng-template>
+        <!---------------- DDL MARCA ------------------->
+        <mat-form-field id="marca">
+          <mat-label>Marca</mat-label>
+          <mat-select placeholder="Marca" #marcaValue (selectionChange)="mudarMarca($event.value)">
+              <mat-option *ngFor="let marca of marcas" (click)="brandName = marca.brand_name"
+              [value]="marca.brand_Id">{{ marca.brand_name }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <button mat-raised-button color="accent" matStepperNext>Próximo<mat-icon>arrow_downward</mat-icon></button>
+      </mat-step>
+
+      <!-- COLEÇÃO -->
+      <mat-step>
+        <ng-template matStepLabel>Coleção {{ collectionName }}</ng-template>
+        <!---------------- DDL COLEÇÃO ------------------->
+        <mat-form-field id="colecao">
+          <mat-label>Coleção</mat-label>
+          <mat-select placeholder="Marca" #colecaoValue (selectionChange)="mudarColecao($event.value)">
+              <mat-option *ngFor="let colecao of colecoes" 
+              (click)="collectionName = colecao.collection_name"
+              [value]="colecao.collection_Id">{{ colecao.collection_name }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <button mat-raised-button color="accent" matStepperPrevious>Voltar<mat-icon>arrow_upward</mat-icon></button>
+        &nbsp;
+        <button mat-raised-button color="accent" matStepperNext>Próximo<mat-icon>arrow_downward</mat-icon></button>
+      </mat-step>
+      
+      <!-- ORDENAR -->
+      <mat-step>
+        <ng-template matStepLabel>Ordenar {{ orderByName }}</ng-template>
+        <!------------------------ DDL ORDENAR ------------------------------>
+        <mat-form-field id="ordem">
+          <mat-label>Ordenar</mat-label>
+          <mat-select placeholder="Ordenar" #orderBy (selectionChange)="mudarOrdem($event.value)">
+              <mat-option value="1">COLEÇÃO EM ORDEM CRESCENTE</mat-option>
+              <mat-option value="2">COLEÇÃO EM ORDEM DECRESCENTE</mat-option>
+              <mat-option value="3">DATA DE ENTRADA EM ORDEM CRESCENTE</mat-option>
+              <mat-option value="4">DATA DE ENTRADA EM ORDEM DECRESCENTE</mat-option>
+              <mat-option value="5">NÚMERO DO PEDIDO EM ORDEM CRESCENTE</mat-option>
+              <mat-option value="6">NÚMERO DO PEDIDO EM ORDEM DECRESCENTE</mat-option>
+              <mat-option value="7">A - Z</mat-option>
+              <mat-option value="8">Z - A</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <button mat-raised-button color="accent" matStepperPrevious>Voltar<mat-icon>arrow_upward</mat-icon></button>
+        &nbsp;
+        <button mat-raised-button color="accent" matStepperNext>Próximo<mat-icon>arrow_downward</mat-icon></button>
+      </mat-step>
+
+      <!-- RAZÃO SOCIAL -->
+      <mat-step>
+        <ng-template matStepLabel>Razão Social {{ razaoSocial }}</ng-template>
+        <!------------------------ CAMPO RAZÃO SOCIAL ------------------------->
+        <mat-form-field id="razao-social" (keyup)="companyName = $event.target.value" (keyup)="buscarClientes()">
+          <mat-label>Razão Social</mat-label>
+          <input type="text" matInput [matAutocomplete]="autoCompleteRazao">
+          <mat-autocomplete 
+          #autoCompleteRazao="matAutocomplete"
+          (optionSelected)="mudarCustomerFabId($event.option.value.customerFab_Id)"
+          (optionSelected)="mudarCompanyDoc($event.option.value.company_doc)" 
+          [displayWith]="displayFn.bind(this)">
+              <mat-option *ngFor="let cliente of clientes" [value]="cliente" (click)="razaoSocial = cliente.customer_name">
+                  {{ cliente.customer_name }}
+              </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+        <button mat-raised-button color="accent" matStepperPrevious>Voltar<mat-icon>arrow_upward</mat-icon></button>
+        &nbsp;
+        <button mat-raised-button color="accent" matStepperNext>Próximo<mat-icon>arrow_downward</mat-icon></button>
+      </mat-step>
+
+      <!-- CNPJ -->
+      <mat-step label="CNPJ">
+        <ng-template matStepLabel>CNPJ {{ companyDoc }}</ng-template>
+        <!---------------------- CAMPO CNPJ ------------------------->
+        <mat-form-field id="cnpj" (keyup)="companyDoc = $event.target.value">
+          <mat-label>CNPJ</mat-label>
+          <input type="text" matInput [value]="companyDoc">
+        </mat-form-field>
+        <button mat-raised-button color="accent" matStepperPrevious>Voltar<mat-icon>arrow_upward</mat-icon></button>
+        &nbsp;
+        <button mat-raised-button color="accent" matStepperNext>Próximo<mat-icon>arrow_downward</mat-icon></button>
+      </mat-step>
+
+      <!-- CÓDIGO -->
+      <mat-step label="Código">
+        <ng-template matStepLabel>Código {{ customerFabId }}</ng-template>
+        <!---------------------- CAMPO CÓDIGO ------------------------->
+        <mat-form-field id="codigo" (keyup)="customerFabId = $event.target.value">
+          <mat-label>Código</mat-label>
+          <input type="text" matInput [value]="customerFabId">
+        </mat-form-field>
+        <button mat-raised-button color="accent" matStepperPrevious>Voltar<mat-icon>arrow_upward</mat-icon></button>
+        &nbsp;
+        <button mat-raised-button color="accent" (click)="stepper.reset()">Retornar <mat-icon>block</mat-icon></button>
+      </mat-step>
+    </mat-vertical-stepper>
 
     <!--------------------- REPRESENTANTE --------------------->
     <!-- <mat-form-field id="repres">
@@ -28,51 +111,7 @@
             <mat-option *ngFor="let repre of repres" 
             [value]="repre.agent_Id">{{ agentId }}</mat-option>
         </mat-select>
-        
     </mat-form-field> -->
-    
-    <!----------------------------- ORDER BY ------------------------------>
-    <mat-form-field id="ordem">
-        <mat-label>Ordenar</mat-label>
-        <mat-select placeholder="Ordenar" #orderBy (selectionChange)="mudarOrdem($event.value)">
-            <mat-option value="1">COLEÇÃO EM ORDEM CRESCENTE</mat-option>
-            <mat-option value="2">COLEÇÃO EM ORDEM DECRESCENTE</mat-option>
-            <mat-option value="3">DATA DE ENTRADA EM ORDEM CRESCENTE</mat-option>
-            <mat-option value="4">DATA DE ENTRADA EM ORDEM DECRESCENTE</mat-option>
-            <mat-option value="5">NÚMERO DO PEDIDO EM ORDEM CRESCENTE</mat-option>
-            <mat-option value="6">NÚMERO DO PEDIDO EM ORDEM DECRESCENTE</mat-option>
-            <mat-option value="7">A - Z</mat-option>
-            <mat-option value="8">Z - A</mat-option>
-        </mat-select>
-    </mat-form-field>
-    <!------------------------- FIM DROPDOWNS -------------------------->
-    
-    <!------------------------ CAMPO RAZÃO SOCIAL ------------------------->
-    <mat-form-field id="razao-social" (keyup)="companyName = $event.target.value" (keyup)="buscarClientes()">
-        <mat-label>Razão Social</mat-label>
-        <input type="text" matInput [matAutocomplete]="autoCompleteRazao">
-        <mat-autocomplete 
-        #autoCompleteRazao="matAutocomplete"
-        (optionSelected)="mudarCustomerFabId($event.option.value.customerFab_Id)"
-        (optionSelected)="mudarCompanyDoc($event.option.value.company_doc)" 
-        [displayWith]="displayFn.bind(this)">
-            <mat-option *ngFor="let cliente of clientes" [value]="cliente">
-                {{ cliente.customer_name }}
-            </mat-option>
-        </mat-autocomplete>
-    </mat-form-field>
-
-    <!---------------------- CAMPO CNPJ ------------------------->
-    <mat-form-field id="cnpj" (keyup)="companyDoc = $event.target.value">
-        <mat-label>CNPJ</mat-label>
-        <input type="text" matInput [value]="companyDoc">
-    </mat-form-field>
-
-    <!---------------------- CAMPO CÓDIGO ------------------------->
-    <mat-form-field id="codigo" (keyup)="customerFabId = $event.target.value">
-        <mat-label>Código</mat-label>
-        <input type="text" matInput [value]="customerFabId">
-    </mat-form-field>
 
     <!---------------------- BOTAO PESQUISAR --------------------->
     <button mat-raised-button
@@ -81,7 +120,9 @@
     type="submit" 
     (click)="company_doc = cnpjDigitado"
     (click)="buscarInvoices()">
-    <i class="material-icons right">search</i><strong>BUSCAR</strong></button> 
+    <strong>BUSCAR</strong>
+    <mat-icon>search</mat-icon>
+    </button> 
     
     <!--------------------- CARDS FATURAMENTOS ---------------------->
     <mat-card id="cardTotal" *ngIf="consultado" class="mat-elevation-z8">

@@ -46,12 +46,16 @@ export class InvoicesComponent implements OnInit {
   deptId = '1';
   agentId: string;
   brandId: string;
+  brandName: string;
   collectionId: string;
+  collectionName: string;
   companyName = '';
+  razaoSocial: string;
   companyDoc = '';
   customerFabId = '';
   login: Login = new Login();
   orderBy: string;
+  orderByName: string;
   diferença: any;
   mostrarTodosOsFaturamentos = false;
 
@@ -136,6 +140,30 @@ export class InvoicesComponent implements OnInit {
   public mudarOrdem(event: string) {
     console.log('Selecionou orderBy: ' + event);
     this.orderBy = event;
+    if(event == '1') {
+      this.orderByName = 'COLEÇÃO EM ORDEM CRESCENTE';
+    } 
+    if(event == '2') {
+      this.orderByName = 'COLEÇÃO EM ORDEM DECRESCENTE';
+    } 
+    if(event == '3') {
+      this.orderByName = 'DATA DE ENTRADA EM ORDEM CRESCENTE';
+    } 
+    if(event == '4') {
+      this.orderByName = 'DATA DE ENTRADA EM ORDEM DECRESCENTE';
+    } 
+    if(event == '5') {
+      this.orderByName = 'NÚMERO DO PEDIDO EM ORDEM CRESCENTE';
+    } 
+    if(event == '6') {
+      this.orderByName = 'NÚMERO DO PEDIDO EM ORDEM DECRESCENTE';
+    } 
+    if(event == '7') {
+      this.orderByName = 'A - Z';
+    } 
+    if(event == '8') {
+      this.orderByName = 'Z - A';
+    } 
   }
 
   public resetar() {

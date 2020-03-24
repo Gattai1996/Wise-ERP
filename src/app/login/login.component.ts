@@ -4,7 +4,7 @@ import { Login } from 'src/app/models/login.model';
 import { LoginService } from 'src/app/services/login.service';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { MatDialog } from '@angular/material'
+import { MatDialog, MatSnackBar } from '@angular/material'
 import { DialogErrorComponent } from './dialog-error/dialog-error.component';
 import { LoadingIndicatorComponent } from '../loading-indicator/loading-indicator.component';
 
@@ -24,7 +24,8 @@ export class LoginComponent implements OnInit {
     private formBuilder: FormBuilder,
     private loginService: LoginService,
     private router: Router,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private snackBar: MatSnackBar
     ) {}
 
   ngOnInit(): void {
@@ -41,7 +42,6 @@ export class LoginComponent implements OnInit {
 
     this.loginService.autenticar(usuario, senha).subscribe(
       (login: Login) => {
-        this.openLoadingDialog();
         this.login = login;
         this.loginService.EmitirLogin(login);        
         if (login.ok === true) {

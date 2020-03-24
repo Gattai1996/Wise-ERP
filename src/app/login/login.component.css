@@ -1,66 +1,33 @@
-body {
-    margin: 0;
-    padding: 0;
-}
-form {
-    background-color: white;
-    border-radius: 1rem;
-}
 #logo {
-    width: 85%;
-    margin-left: 10%;
-}
-/* .mat-input-element {
-    font: inherit;
-    background: 0 0;
-    color: white;
-    border: none;
-    outline: 0;
-    padding: 0;
-    margin: 0;
-    width: 100%;
-    max-width: 100%;
-    vertical-align: bottom;
-    text-align: inherit;
-} */
-#mensagem {
-    background-color: #e23939;
-    border-radius: 10px;
-    width: 100%;
-    margin-bottom: 2rem;
+    width: 83%;
+    margin-top: 0.25rem;
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 #formulario {
-    margin-top: 25%;
-    margin-left: auto;
-    margin-right: auto;
-    width: 230px;
-    max-width: 90%;
+    width: 330px;
     padding: 2rem;
+    border-radius: 5px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+#login {
+    margin-top: 1rem;
 }
 #login, #senha, #botao-entrar {
     width: 100%;
 }
 #botao-entrar {
     margin-top: 1rem;
-    border-radius: 0.5rem;
-}
-#mensagem {
-    font-size: 1rem;
-    text-align: center;
-}
-footer {
-    background-color: #1e366c;
-    text-align: center;
-    padding: 1rem;
+    border-radius: 5px;
 }
 /* BREAKPOINTS */
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 992px) {
     #formulario {
-        margin-top: 17%;
-    }
-}
-@media screen and (min-width: 992px) {
-    #formulario {
-        margin-top: 12%;
+        width: 230px;
     }
 }

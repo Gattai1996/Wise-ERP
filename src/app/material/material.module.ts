@@ -18,7 +18,10 @@ import {
   MatToolbarModule,
   MatAutocompleteModule,
   MatProgressSpinnerModule,
-  MatSlideToggleModule
+  MatSlideToggleModule,
+  MatSnackBarModule,
+  MatBadgeModule,
+  MatStepperModule 
   
 } from '@angular/material'
 
@@ -43,7 +46,10 @@ const MeterialComponents =
   MatToolbarModule,
   MatAutocompleteModule,
   MatProgressSpinnerModule,
-  MatSlideToggleModule
+  MatSlideToggleModule,
+  MatSnackBarModule,
+  MatBadgeModule,
+  MatStepperModule
 ]
 
 @NgModule({

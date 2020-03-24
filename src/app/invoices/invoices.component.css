@@ -60,37 +60,37 @@ body {
 }
 
 /* ============================ DROPDOWNS =================================== */
-#marca, #colecao, #repres {
-  width: 49%;
+#marca, #colecao, #repres, #razao-social, #cnpj, #codigo, #ordem {
+  width: 100%;
 }
 
 #ordem {
   width: 100%;
 }
 
-#colecao {
+/* #colecao {
   margin-left: 2%;
-}
+} */
 
 #botao-buscar {
   width: 100%;
 }
 
-#marca, #colecao, #botao-buscar {
+/* #marca, #colecao, #botao-buscar {
   margin-top: 3rem;
-}
+} */
 
-#razao-social {
+/* #razao-social {
   width: 100%;
-}
+} */
 
-#cnpj, #codigo {
+/* #cnpj, #codigo {
   width: 49%;
-}
+} */
 
-#codigo {
+/* #codigo {
   margin-left: 2%;
-}
+} */
 
 /* =========================== CARDS ============================== */
 #cardTotal {
@@ -129,11 +129,11 @@ body {
 /* ============== APARELHOS GRANDES - DESKTOPS ===================== */
 @media screen and (min-width: 960px) {
 
-  #marca, #colecao, #repres {
+  /* #marca, #colecao, #repres {
     width: 23%;
-  }
+  } */
 
-  #ordem {
+  /* #ordem {
     width: 48%;
     margin-left: 2%;
   }
@@ -144,20 +144,20 @@ body {
 
   #razao-social {
     width: 48%;
-  }
+  } */
   
-  #cnpj {
+  /* #cnpj {
     width: 48%;
-  }
+  } */
 
-  #cnpj, #codigo {
+  /* #cnpj, #codigo {
     width: 23%;
     margin-left: 2%;
-  }
+  } */
   
-  #codigo {
+  /* #codigo {
     margin-left: 2%;
-  }
+  } */
 
   #botao-buscar {
     width: 40%;
