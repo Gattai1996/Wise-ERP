@@ -1,106 +1,129 @@
-<div id="content">
+<div #target #topo id="content">
 
-    <mat-vertical-stepper #stepper>
+  <form id="formulario" [formGroup]="invoicesForm" (submit)="buscarInvoices()">
+
+    <p style="text-align: center; margin: 2%;">
+      <mat-icon>info</mat-icon> Dica: É obrigatório selecionar Marca e Coleção para consultar Faturamentos.
+    </p>
+
+    <mat-vertical-stepper id="stepper" linear #stepper>
 
       <!-- MARCA -->
-      <mat-step>
+      <mat-step Control="invoicesForm" optional="false" [completed]="selecionouMarca">
         <ng-template matStepLabel>Marca {{ brandName }}</ng-template>
         <!---------------- DDL MARCA ------------------->
         <mat-form-field id="marca">
-          <mat-label>Marca</mat-label>
-          <mat-select placeholder="Marca" #marcaValue (selectionChange)="mudarMarca($event.value)">
-              <mat-option *ngFor="let marca of marcas" (click)="brandName = marca.brand_name"
-              [value]="marca.brand_Id">{{ marca.brand_name }}</mat-option>
+          <mat-label>Marca*</mat-label>
+          <mat-select class="form-group" formControlName="brand" placeholder="Marca" #marcaValue
+            (selectionChange)="mudarMarca($event.value)">
+            <mat-option *ngFor="let marca of marcas" (click)="brandName = marca.brand_name" [value]="marca.brand_Id">
+              {{ marca.brand_name }}</mat-option>
           </mat-select>
         </mat-form-field>
-        <button mat-raised-button color="accent" matStepperNext>Próximo<mat-icon>arrow_downward</mat-icon></button>
+        <button type="button" class="botao-baixo" mat-raised-button color="accent" matStepperNext>
+          <mat-icon>arrow_downward</mat-icon>
+        </button>
       </mat-step>
 
       <!-- COLEÇÃO -->
-      <mat-step>
+      <mat-step optional="false" [completed]="selecionouColecao">
         <ng-template matStepLabel>Coleção {{ collectionName }}</ng-template>
         <!---------------- DDL COLEÇÃO ------------------->
         <mat-form-field id="colecao">
-          <mat-label>Coleção</mat-label>
-          <mat-select placeholder="Marca" #colecaoValue (selectionChange)="mudarColecao($event.value)">
-              <mat-option *ngFor="let colecao of colecoes" 
-              (click)="collectionName = colecao.collection_name"
+          <mat-label>Coleção*</mat-label>
+          <mat-select class="form-group" formControlName="collection" placeholder="Coleção" #colecaoValue
+            (selectionChange)="mudarColecao($event.value)">
+            <mat-option *ngFor="let colecao of colecoes" (click)="collectionName = colecao.collection_name"
               [value]="colecao.collection_Id">{{ colecao.collection_name }}</mat-option>
           </mat-select>
         </mat-form-field>
-        <button mat-raised-button color="accent" matStepperPrevious>Voltar<mat-icon>arrow_upward</mat-icon></button>
-        &nbsp;
-        <button mat-raised-button color="accent" matStepperNext>Próximo<mat-icon>arrow_downward</mat-icon></button>
+        <button type="button" class="botao-cima" mat-raised-button color="accent" matStepperPrevious>
+          <mat-icon>arrow_upward</mat-icon>
+        </button>
+        <button type="button" class="botao-baixo" mat-raised-button color="accent" matStepperNext>
+          <mat-icon>arrow_downward</mat-icon>
+        </button>
       </mat-step>
-      
+
       <!-- ORDENAR -->
-      <mat-step>
+      <mat-step optional="true">
         <ng-template matStepLabel>Ordenar {{ orderByName }}</ng-template>
         <!------------------------ DDL ORDENAR ------------------------------>
         <mat-form-field id="ordem">
           <mat-label>Ordenar</mat-label>
           <mat-select placeholder="Ordenar" #orderBy (selectionChange)="mudarOrdem($event.value)">
-              <mat-option value="1">COLEÇÃO EM ORDEM CRESCENTE</mat-option>
-              <mat-option value="2">COLEÇÃO EM ORDEM DECRESCENTE</mat-option>
-              <mat-option value="3">DATA DE ENTRADA EM ORDEM CRESCENTE</mat-option>
-              <mat-option value="4">DATA DE ENTRADA EM ORDEM DECRESCENTE</mat-option>
-              <mat-option value="5">NÚMERO DO PEDIDO EM ORDEM CRESCENTE</mat-option>
-              <mat-option value="6">NÚMERO DO PEDIDO EM ORDEM DECRESCENTE</mat-option>
-              <mat-option value="7">A - Z</mat-option>
-              <mat-option value="8">Z - A</mat-option>
+            <mat-option value="1">COLEÇÃO EM ORDEM CRESCENTE</mat-option>
+            <mat-option value="2">COLEÇÃO EM ORDEM DECRESCENTE</mat-option>
+            <mat-option value="3">DATA DE ENTRADA EM ORDEM CRESCENTE</mat-option>
+            <mat-option value="4">DATA DE ENTRADA EM ORDEM DECRESCENTE</mat-option>
+            <mat-option value="5">NÚMERO DO PEDIDO EM ORDEM CRESCENTE</mat-option>
+            <mat-option value="6">NÚMERO DO PEDIDO EM ORDEM DECRESCENTE</mat-option>
+            <mat-option value="7">A - Z</mat-option>
+            <mat-option value="8">Z - A</mat-option>
           </mat-select>
         </mat-form-field>
-        <button mat-raised-button color="accent" matStepperPrevious>Voltar<mat-icon>arrow_upward</mat-icon></button>
-        &nbsp;
-        <button mat-raised-button color="accent" matStepperNext>Próximo<mat-icon>arrow_downward</mat-icon></button>
+        <button type="button" class="botao-cima" mat-raised-button color="accent" matStepperPrevious>
+          <mat-icon>arrow_upward</mat-icon>
+        </button>
+        <button type="button" class="botao-baixo" mat-raised-button color="accent" matStepperNext>
+          <mat-icon>arrow_downward</mat-icon>
+        </button>
       </mat-step>
 
       <!-- RAZÃO SOCIAL -->
-      <mat-step>
+      <mat-step optional="true">
         <ng-template matStepLabel>Razão Social {{ razaoSocial }}</ng-template>
         <!------------------------ CAMPO RAZÃO SOCIAL ------------------------->
         <mat-form-field id="razao-social" (keyup)="companyName = $event.target.value" (keyup)="buscarClientes()">
           <mat-label>Razão Social</mat-label>
           <input type="text" matInput [matAutocomplete]="autoCompleteRazao">
-          <mat-autocomplete 
-          #autoCompleteRazao="matAutocomplete"
-          (optionSelected)="mudarCustomerFabId($event.option.value.customerFab_Id)"
-          (optionSelected)="mudarCompanyDoc($event.option.value.company_doc)" 
-          [displayWith]="displayFn.bind(this)">
-              <mat-option *ngFor="let cliente of clientes" [value]="cliente" (click)="razaoSocial = cliente.customer_name">
-                  {{ cliente.customer_name }}
-              </mat-option>
+          <mat-autocomplete #autoCompleteRazao="matAutocomplete"
+            (optionSelected)="mudarCustomerFabId($event.option.value.customerFab_Id)"
+            (optionSelected)="mudarCompanyDoc($event.option.value.company_doc)" [displayWith]="displayFn.bind(this)">
+            <mat-option *ngFor="let cliente of clientes" [value]="cliente"
+              (click)="razaoSocial = cliente.customer_name">
+              {{ cliente.customer_name }}
+            </mat-option>
           </mat-autocomplete>
         </mat-form-field>
-        <button mat-raised-button color="accent" matStepperPrevious>Voltar<mat-icon>arrow_upward</mat-icon></button>
-        &nbsp;
-        <button mat-raised-button color="accent" matStepperNext>Próximo<mat-icon>arrow_downward</mat-icon></button>
+        <button type="button" class="botao-cima" mat-raised-button color="accent" matStepperPrevious>
+          <mat-icon>arrow_upward</mat-icon>
+        </button>
+        <button type="button" class="botao-baixo" mat-raised-button color="accent" matStepperNext>
+          <mat-icon>arrow_downward</mat-icon>
+        </button>
       </mat-step>
 
       <!-- CNPJ -->
-      <mat-step label="CNPJ">
+      <mat-step optional="true">
         <ng-template matStepLabel>CNPJ {{ companyDoc }}</ng-template>
         <!---------------------- CAMPO CNPJ ------------------------->
         <mat-form-field id="cnpj" (keyup)="companyDoc = $event.target.value">
           <mat-label>CNPJ</mat-label>
           <input type="text" matInput [value]="companyDoc">
         </mat-form-field>
-        <button mat-raised-button color="accent" matStepperPrevious>Voltar<mat-icon>arrow_upward</mat-icon></button>
-        &nbsp;
-        <button mat-raised-button color="accent" matStepperNext>Próximo<mat-icon>arrow_downward</mat-icon></button>
+        <button type="button" class="botao-cima" mat-raised-button color="accent" matStepperPrevious>
+          <mat-icon>arrow_upward</mat-icon>
+        </button>
+        <button type="button" class="botao-baixo" mat-raised-button color="accent" matStepperNext>
+          <mat-icon>arrow_downward</mat-icon>
+        </button>
       </mat-step>
 
       <!-- CÓDIGO -->
-      <mat-step label="Código">
+      <mat-step optional="true">
         <ng-template matStepLabel>Código {{ customerFabId }}</ng-template>
         <!---------------------- CAMPO CÓDIGO ------------------------->
         <mat-form-field id="codigo" (keyup)="customerFabId = $event.target.value">
           <mat-label>Código</mat-label>
           <input type="text" matInput [value]="customerFabId">
         </mat-form-field>
-        <button mat-raised-button color="accent" matStepperPrevious>Voltar<mat-icon>arrow_upward</mat-icon></button>
-        &nbsp;
-        <button mat-raised-button color="accent" (click)="stepper.reset()">Retornar <mat-icon>block</mat-icon></button>
+        <button type="button" class="botao-cima" mat-raised-button color="accent" matStepperPrevious>
+          <mat-icon>arrow_upward</mat-icon>
+        </button>
+        <button type="button" class="botao-reset" mat-raised-button color="accent" (click)="stepper.reset()">
+          <mat-icon>block</mat-icon>
+        </button>
       </mat-step>
     </mat-vertical-stepper>
 
@@ -114,53 +137,66 @@
     </mat-form-field> -->
 
     <!---------------------- BOTAO PESQUISAR --------------------->
-    <button mat-raised-button
-    color="accent"
-    id="botao-buscar" 
-    type="submit" 
-    (click)="company_doc = cnpjDigitado"
-    (click)="buscarInvoices()">
-    <strong>BUSCAR</strong>
-    <mat-icon>search</mat-icon>
-    </button> 
-    
-    <!--------------------- CARDS FATURAMENTOS ---------------------->
-    <mat-card id="cardTotal" *ngIf="consultado" class="mat-elevation-z8">
-        <mat-card-title>
-            <mat-icon>poll</mat-icon> Total
-        </mat-card-title>
-        <mat-card-content>
-            <strong>Qtde Fat:</strong><br> {{ total.sum_total_quantity_invoiced | number: '1.0-0' | replace:',':'.' }}
-            <br>
-            <strong>Vr Fat:</strong><br> {{ total.sum_total_price_invoiced | currency: 'BRL' : 'symbol' : '1.0-0' | replace:',':'.' | replace:',':'.' }}
-        </mat-card-content>
+    <button mat-raised-button color="accent" id="botao-buscar" type="submit" [disabled]="invoicesForm.invalid"
+      (click)="scroll(target)" (click)="company_doc = cnpjDigitado" (click)="buscarInvoices()">
+      <strong>BUSCAR FATURAMENTOS </strong>
+      <mat-icon>search</mat-icon>
+    </button>
+
+  </form>
+
+  <!--------------------- CARDS FATURAMENTOS ---------------------->
+  <mat-card id="cardTotal" *ngIf="consultado" class="mat-elevation-z8">
+    <mat-card-title>
+      <mat-icon>poll</mat-icon> Total
+    </mat-card-title>
+    <mat-card-content>
+      <strong>Qtde Fat:</strong><br> {{ total.sum_total_quantity_invoiced | number: '1.0-0' | replace:',':'.' }}
+      <br>
+      <strong>Vr Fat:</strong><br>
+      {{ total.sum_total_price_invoiced | currency: 'BRL' : 'symbol' : '1.0-0' | replace:',':'.' | replace:',':'.' }}
+    </mat-card-content>
+  </mat-card>
+
+  <div id="botao-mostrar-todos" *ngIf="consultado">
+    <mat-slide-toggle [(ngModel)]="mostrarTodosOsFaturamentos" color="accent">
+      <span style="font-weight: bold; font-size: 1.2rem;">
+        Mostrar todos os faturamentos
+      </span>
+    </mat-slide-toggle>
+  </div>
+
+  <div *ngIf="mostrarTodosOsFaturamentos">
+    <mat-card id="cardsFaturamentos" *ngFor="let invoice of invoices" class="mat-elevation-z8">
+      <mat-card-title id="cardsFaturamentosGrande">
+        <mat-icon color="primary">account_box</mat-icon> {{ invoice.customer_name }}
+      </mat-card-title>
+      <mat-card-content>
+        <div id="cardsFaturamentosGrande"><mat-icon color="accent">work</mat-icon><strong> NF: </strong>{{ invoice.invoice }} - {{ invoice.dt_invoice }}</div>
+        <div id="cardsFaturamentosMedio"><strong>Ped Linx:</strong> {{ invoice.orderFactory_Id }}</div>
+        <div id="cardsFaturamentosMedio"><strong>Ped Wise:</strong> {{ invoice.order_Id }}</div>
+        <div id="cardsFaturamentosPequeno">
+          <strong>Ped:<br></strong>{{ invoice.total_quantity | number:'1.0-0' | replace:',':'.' }}</div>
+        <div id="cardsFaturamentosPequeno">
+          <strong>Emb:<br></strong>{{ invoice.packed_quantity | number:'1.0-0' | replace:',':'.' }}</div>
+        <div id="cardsFaturamentosPequeno">
+          <strong>Fat:<br></strong>{{ invoice.total_quantity_invoiced | number:'1.0-0' | replace:',':'.' }}</div>
+        <div id="cardsFaturamentosPequeno">
+          <strong>%<br></strong>{{ invoice.total_quantity_invoiced / invoice.total_quantity * 100 | number: '1.0-0' | replace:',':'.' }}
+        </div>
+        <div id="cardsFaturamentosPequeno">
+          <strong>Ped:<br></strong>{{ invoice.total_price | currency: 'BRL' : 'symbol' : '1.0-0' | replace:',':'.' }}
+        </div>
+        <div id="cardsFaturamentosPequeno">
+          <strong>Emb:<br></strong>{{ invoice.packed_price | currency: 'BRL' : 'symbol' : '1.0-0' | replace:',':'.' }}
+        </div>
+        <div id="cardsFaturamentosPequeno">
+          <strong>Fat:<br></strong>{{ invoice.total_price_invoiced | currency: 'BRL' : 'symbol' : '1.0-0' | replace:',':'.' }}
+        </div>
+        <div id="cardsFaturamentosPequeno">
+          <strong>%<br></strong>{{ invoice.total_price_invoiced / invoice.total_price * 100 | number: '1.0-0' | replace:',':'.' }}
+        </div>
+      </mat-card-content>
     </mat-card>
-   
-    <div id="botao-mostrar-todos" *ngIf="consultado">
-        <mat-slide-toggle 
-        [(ngModel)]="mostrarTodosOsFaturamentos" 
-        color="accent"> 
-        <span style="font-weight: bold; font-size: 1.2rem;"> 
-            Mostrar todos os faturamentos 
-        </span> 
-        </mat-slide-toggle>
-    </div>
-    
-    <div *ngIf="mostrarTodosOsFaturamentos">
-        <mat-card id="cardsFaturamentos" *ngFor="let invoice of invoices" class="mat-elevation-z8">
-            <mat-card-title id="cardsFaturamentosGrande"><mat-icon>account_box</mat-icon> {{ invoice.customer_name }} </mat-card-title>
-            <mat-card-content>
-                <div id="cardsFaturamentosMedio"><strong>NF: </strong>{{ invoice.invoice }}  - {{ invoice.dt_invoice }}</div>
-                <div id="cardsFaturamentosMedio"><strong>Ped Linx:</strong> {{ invoice.orderFactory_Id }}<strong>Ped Wise:</strong> {{ invoice.order_Id }}</div>
-                <div id="cardsFaturamentosPequeno"><strong>Ped:<br></strong>{{ invoice.total_quantity | number:'1.0-0' | replace:',':'.' }}</div>
-                <div id="cardsFaturamentosPequeno"><strong>Emb:<br></strong>{{ invoice.packed_quantity | number:'1.0-0' | replace:',':'.' }}</div>
-                <div id="cardsFaturamentosPequeno"><strong>Fat:<br></strong>{{ invoice.total_quantity_invoiced | number:'1.0-0' | replace:',':'.' }}</div>
-                <div id="cardsFaturamentosPequeno"><strong>%<br></strong>{{ invoice.total_quantity_invoiced / invoice.total_quantity * 100 | number: '1.0-0' | replace:',':'.' }}</div>
-                <div id="cardsFaturamentosPequeno"><strong>Ped:<br></strong>{{ invoice.total_price | currency: 'BRL' : 'symbol' : '1.0-0' | replace:',':'.' }}</div>
-                <div id="cardsFaturamentosPequeno"><strong>Emb:<br></strong>{{ invoice.packed_price | currency: 'BRL' : 'symbol' : '1.0-0' | replace:',':'.' }}</div>
-                <div id="cardsFaturamentosPequeno"><strong>Fat:<br></strong>{{ invoice.total_price_invoiced | currency: 'BRL' : 'symbol' : '1.0-0' | replace:',':'.' }}</div>
-                <div id="cardsFaturamentosPequeno"><strong>%<br></strong>{{ invoice.total_price_invoiced / invoice.total_price * 100 | number: '1.0-0' | replace:',':'.' }}</div>
-            </mat-card-content>
-        </mat-card>
-    </div>
+  </div>
 </div>

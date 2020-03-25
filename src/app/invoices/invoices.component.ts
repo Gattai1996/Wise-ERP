@@ -17,6 +17,7 @@ import { ConsultaString } from '../models/consulta-string.model';
 import { MatDialog } from '@angular/material'
 import { LoadingIndicatorComponent } from '../loading-indicator/loading-indicator.component';
 import { LoginService } from '../services/login.service';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-invoices',
@@ -25,58 +26,66 @@ import { LoginService } from '../services/login.service';
 })
 export class InvoicesComponent implements OnInit {
 
-  sidenavAberta = false;
-  invoices: Invoices;
-  filtro: string;
   marcas: Brands;
-  colecoes: Collections;
   repres: Agents;
-  total: TotalInvoices; // Guarda o resultado de total de faturamentos
-  consultado = false; // Controla se já pesquisou faturamento
+  invoices: Invoices;
+  colecoes: Collections;
+  total: TotalInvoices;
   clientes: ConsultaString;
+  companyId: string = '1';
+  deptId: string = '1';
+  orderBy: string = '1';
+  filtro: string;
   cnpjDigitado: string;
+  agentId: string;
+  brandId: string;
+  brandName: string;
+  collectionId: string;
+  collectionName: string;
+  companyName: string;
+  razaoSocial: string;
+  companyDoc: string = '';
+  customerFabId: string = '';
+  orderByName: string;
   erroCnpj: any;
   erroMarcas: any;
   erroRepres: any;
   erroColecoes: any;
   erroInvoices: any;
   erroClientes: any;
-  clienteValido = false;
-  companyId = '1';
-  deptId = '1';
-  agentId: string;
-  brandId: string;
-  brandName: string;
-  collectionId: string;
-  collectionName: string;
-  companyName = '';
-  razaoSocial: string;
-  companyDoc = '';
-  customerFabId = '';
+  selecionouMarca: boolean = false;
+  selecionouColecao: boolean = false;
+  consultado: boolean = false;
+  mostrarTodosOsFaturamentos: boolean = false;
+
   login: Login = new Login();
-  orderBy: string;
-  orderByName: string;
-  diferença: any;
-  mostrarTodosOsFaturamentos = false;
+  invoicesForm: FormGroup;
 
   constructor(
     private dialog: MatDialog,
-    private router: Router,
     private buscaInvoices: BuscaInvoices,
     private serviceMarcas: BrandsService,
     private serviceColecao: CollectionsService,
     private serviceRepres: AgentsService,
     private buscaTotalInvoicesService: BuscaTotalInvoicesService,
     private consultaStringService: ConsultaStringService,
-    private loginService: LoginService
-    ) {}
+    private loginService: LoginService,
+    private formBuilder: FormBuilder
+  ) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
+
+    this.invoicesForm = this.formBuilder.group({
+      brand: ['', Validators.required],
+      collection: ['', Validators.required]
+    });
+
     this.loginService.login$.subscribe(
-        dados => {this.login = dados;
-                          this.agentId = this.login.agent_Id;
-                          console.log('TESTE 1= ' + this.agentId);
-                          });
+      dados => {
+        this.login = dados;
+        this.agentId = this.login.agent_Id;
+        console.log('TESTE 1= ' + this.agentId);
+      });
     console.log('TESTE 2= ' + this.agentId);
 
     // Pega o Agent_Id do arquivo armazenado
@@ -97,13 +106,16 @@ export class InvoicesComponent implements OnInit {
 
   public listaDeMarcas() {
     this.serviceMarcas.listarMarcas(this.companyId, this.deptId)
-    .subscribe(dados => {this.marcas = dados;} ,
-      (error: any) => {this.erroMarcas = error;
-                       console.log('ERRO: ' + this.erroMarcas.message); });
+      .subscribe(dados => { this.marcas = dados; },
+        (error: any) => {
+          this.erroMarcas = error;
+          console.log('ERRO: ' + this.erroMarcas.message);
+        });
   }
 
   public mudarMarca(event: string) {
     // this.resetar();
+    this.selecionouMarca = true;
     console.log('Selecionou brand_Id: ' + event);
     this.brandId = event;
     console.log(this.brandId);
@@ -111,25 +123,30 @@ export class InvoicesComponent implements OnInit {
   }
 
   public listaDeColecoes() {
-  this.serviceColecao.listarColecoes(this.companyId, this.deptId, this.brandId)
-  .subscribe(dados => {this.colecoes = dados;},
-    (error: any) => { this.erroColecoes = error;
-                      console.log('ERRO: ' + this.erroColecoes.message); }
-    );
+    this.serviceColecao.listarColecoes(this.companyId, this.deptId, this.brandId)
+      .subscribe(dados => { this.colecoes = dados; },
+        (error: any) => {
+          this.erroColecoes = error;
+          console.log('ERRO: ' + this.erroColecoes.message);
+        }
+      );
   }
 
   public mudarColecao(event: string) {
+    this.selecionouColecao = true;
     console.log('Selecionou collection_Id: ' + event);
     this.collectionId = event;
     this.listaDeRepres();
   }
 
   public listaDeRepres() {
-  this.serviceRepres.listarRepres(this.companyId, this.deptId, this.brandId)
-  .subscribe(dados => {this.repres = dados;},
-    (error: any) => { this.erroColecoes = error;
-                      console.log('ERRO: ' + this.erroColecoes.message); }
-    );
+    this.serviceRepres.listarRepres(this.companyId, this.deptId, this.brandId)
+      .subscribe(dados => { this.repres = dados; },
+        (error: any) => {
+          this.erroColecoes = error;
+          console.log('ERRO: ' + this.erroColecoes.message);
+        }
+      );
   }
 
   public mudarRepres(event: string) {
@@ -140,30 +157,30 @@ export class InvoicesComponent implements OnInit {
   public mudarOrdem(event: string) {
     console.log('Selecionou orderBy: ' + event);
     this.orderBy = event;
-    if(event == '1') {
+    if (event == '1') {
       this.orderByName = 'COLEÇÃO EM ORDEM CRESCENTE';
-    } 
-    if(event == '2') {
+    }
+    if (event == '2') {
       this.orderByName = 'COLEÇÃO EM ORDEM DECRESCENTE';
-    } 
-    if(event == '3') {
+    }
+    if (event == '3') {
       this.orderByName = 'DATA DE ENTRADA EM ORDEM CRESCENTE';
-    } 
-    if(event == '4') {
+    }
+    if (event == '4') {
       this.orderByName = 'DATA DE ENTRADA EM ORDEM DECRESCENTE';
-    } 
-    if(event == '5') {
+    }
+    if (event == '5') {
       this.orderByName = 'NÚMERO DO PEDIDO EM ORDEM CRESCENTE';
-    } 
-    if(event == '6') {
+    }
+    if (event == '6') {
       this.orderByName = 'NÚMERO DO PEDIDO EM ORDEM DECRESCENTE';
-    } 
-    if(event == '7') {
+    }
+    if (event == '7') {
       this.orderByName = 'A - Z';
-    } 
-    if(event == '8') {
+    }
+    if (event == '8') {
       this.orderByName = 'Z - A';
-    } 
+    }
   }
 
   public resetar() {
@@ -175,12 +192,6 @@ export class InvoicesComponent implements OnInit {
     this.listaDeRepres();
   }
 
-
-
-
-
-
-
   public buscarClientes() {
     this.openLoadingDialog();
     this.consultaStringService.consultarString(
@@ -190,10 +201,11 @@ export class InvoicesComponent implements OnInit {
         this.clientes = dados;
         this.closeLoadingDialog();
       },
-      (error: any) => {this.erroClientes = error;
-                       console.log('ERRO INVOICES: ' + this.erroClientes.message); 
-                       this.closeLoadingDialog();
-                      }
+        (error: any) => {
+          this.erroClientes = error;
+          console.log('ERRO INVOICES: ' + this.erroClientes.message);
+          this.closeLoadingDialog();
+        }
       );
   }
 
@@ -210,36 +222,28 @@ export class InvoicesComponent implements OnInit {
   // Funções DisplayFn são utilizadas para mostrar os dados corretamente depois
   // de selecionar clicando na lista de autocomplete
   displayFn(cliente: ConsultaString): string {
-    if(cliente != undefined) {
+    if (cliente != undefined) {
       return cliente.customer_name;
     }
   }
 
-
-
-
-
-
-
-
-
-
   public buscarInvoices() {
     this.openLoadingDialog();
     this.buscaInvoices.listarInvoices(
-      this.companyId, this.deptId, this.brandId, this.collectionId, this.agentId, 
+      this.companyId, this.deptId, this.brandId, this.collectionId, this.agentId,
       this.orderBy, this.companyDoc, this.customerFabId
-      )
+    )
       .subscribe(dados => {
         this.consultado = true;
         this.invoices = dados;
         this.buscarTotalInvoices();
         this.closeLoadingDialog();
       },
-      (error: any) => {this.erroInvoices = error;
-                       console.log('ERRO INVOICES: ' + this.erroInvoices.message);
-                       this.closeLoadingDialog();
-                      }
+        (error: any) => {
+          this.erroInvoices = error;
+          console.log('ERRO INVOICES: ' + this.erroInvoices.message);
+          this.closeLoadingDialog();
+        }
       );
   }
 
@@ -250,7 +254,8 @@ export class InvoicesComponent implements OnInit {
     });
   }
 
-  public voltarAoLogin() {
-    this.router.navigate(['/']);
+  scroll(e: HTMLElement) {
+    e.scrollIntoView();
   }
+  
 }
