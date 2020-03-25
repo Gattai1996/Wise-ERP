@@ -1,8 +1,10 @@
 <form id="formulario" [formGroup]="loginForm" (submit)="onSubmit()" class="mat-elevation-z8">
+
     <div id="logo">
         <!-- <img src="https://i.ibb.co/wszdgT7/wise-erp-logo.png" alt="wise-erp-logo"> -->
         <img id="logo" href="#" src="../../assets/logo.png" alt="restoque-logo">
     </div>
+
     <div>
         <mat-form-field id="login" color="accent">
             <input 
@@ -20,6 +22,7 @@
             </span>
         </mat-form-field>
     </div>
+
     <div>
         <mat-form-field id="senha" color="accent">
             <input 
@@ -37,6 +40,7 @@
             </span>
         </mat-form-field>
     </div>
+
     <button mat-raised-button
     [disabled]="loginForm.invalid"
     (click)="this.openLoadingDialog()"
@@ -46,4 +50,5 @@
     <strong>Login</strong>&nbsp;
     <mat-icon>send</mat-icon>
     </button>
+    
 </form>

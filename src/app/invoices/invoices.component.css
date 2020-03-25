@@ -1,10 +1,12 @@
 /* ==================== NORMALIZE ===================== */
+
 * {
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
 }
 
 /* ============== SIDEBAR ============== */
+
 mat-sidenav-container {
   height: 100%;
 }
@@ -43,29 +45,31 @@ mat-nav-list {
 }
 
 /* ===================== CONTENT ======================= */
-body {
-    width: 100%;
-    background-color: #fff;
-}
 
 #content {
-    padding: 5px;
-    margin: 0 2%
+  padding: 5px;
 }
 
-#abrirmenu {
-  float: left;
+#topo {
   position: fixed;
+  top: 10%;
+  right: 0;
+  transform: translate(-50%, -50%);
   z-index: 1;
 }
 
 /* ============================ DROPDOWNS =================================== */
+
+#stepper {
+  background-color: white;
+}
+
 #marca, #colecao, #repres, #razao-social, #cnpj, #codigo, #ordem {
   width: 100%;
 }
 
-#ordem {
-  width: 100%;
+.botao-baixo, .botao-cima, .botao-reset {
+  margin: 1%;
 }
 
 /* #colecao {
@@ -73,7 +77,8 @@ body {
 } */
 
 #botao-buscar {
-  width: 100%;
+  width: 96%;
+  margin: 2%;
 }
 
 /* #marca, #colecao, #botao-buscar {
@@ -93,6 +98,7 @@ body {
 } */
 
 /* =========================== CARDS ============================== */
+
 #cardTotal {
   text-align: center;
   margin: 2%;
@@ -108,17 +114,23 @@ body {
   margin: 2%;
   padding: 2%;
   text-align: center;
-  min-height: 180px;
+  min-height: 230px;
 }
 
 #cardsFaturamentosGrande {
+  margin-top: 5px;
   font-size: large;
 }
+
 #cardsFaturamentosMedio {
+  margin-top: 20px;
   font-size: medium;
+  width: 50%;
+  float: left;
 }
 
 #cardsFaturamentosPequeno {
+  margin-top: 20px;
   font-size: x-small;
   width: 25%;
   float: left;
@@ -127,12 +139,11 @@ body {
 /* ========================== BREAKPOINTS - REPONSIVIDADE ========================== */
 
 /* ============== APARELHOS GRANDES - DESKTOPS ===================== */
-@media screen and (min-width: 960px) {
 
+@media screen and (min-width: 960px) {
   /* #marca, #colecao, #repres {
     width: 23%;
   } */
-
   /* #ordem {
     width: 48%;
     margin-left: 2%;
@@ -145,35 +156,28 @@ body {
   #razao-social {
     width: 48%;
   } */
-  
   /* #cnpj {
     width: 48%;
   } */
-
   /* #cnpj, #codigo {
     width: 23%;
     margin-left: 2%;
   } */
-  
   /* #codigo {
     margin-left: 2%;
   } */
-
   #botao-buscar {
     width: 40%;
     margin-left: 30%;
   }
-
   #cardTotal {
     width: 44%;
     margin-left: auto;
     margin-right: auto;
   }
-
   #cardsFaturamentos {
     float: left;
     width: 44%;
     margin: 1%;
   }
-
 }

@@ -16,7 +16,7 @@
     transform: translate(-50%, -50%);
 }
 #login {
-    margin-top: 1rem;
+    margin-top: 2rem;
 }
 #login, #senha, #botao-entrar {
     width: 100%;
