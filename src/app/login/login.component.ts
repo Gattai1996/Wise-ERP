@@ -4,9 +4,10 @@ import { Login } from 'src/app/models/login.model';
 import { LoginService } from 'src/app/services/login.service';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { MatDialog, MatSnackBar } from '@angular/material'
+import { MatDialog } from '@angular/material'
 import { DialogErrorComponent } from './dialog-error/dialog-error.component';
 import { LoadingIndicatorComponent } from '../loading-indicator/loading-indicator.component';
+import { OverlayContainer } from '@angular/cdk/overlay';
 
 @Component({
   templateUrl: './login.component.html',
@@ -14,9 +15,10 @@ import { LoadingIndicatorComponent } from '../loading-indicator/loading-indicato
 })
 export class LoginComponent implements OnInit {
 
+  public dadosRepres: Login;
   login: Login = new Login();
   erro: any;
-  public dadosRepres: Login;
+  tema: string = 'tema-light';
 
   loginForm: FormGroup;
 
@@ -25,13 +27,15 @@ export class LoginComponent implements OnInit {
     private loginService: LoginService,
     private router: Router,
     private dialog: MatDialog,
-    private snackBar: MatSnackBar
-    ) {}
+    private overlayContainer: OverlayContainer
+  ) { }
 
   ngOnInit(): void {
+    this.overlayContainer.getContainerElement().classList.remove(this.tema);
+    this.overlayContainer.getContainerElement().classList.add(this.tema);
     this.loginForm = this.formBuilder.group({
-        user: ['', Validators.required],
-        password: ['', Validators.required]
+      user: ['', Validators.required],
+      password: ['', Validators.required]
     });
   }
 
@@ -43,7 +47,7 @@ export class LoginComponent implements OnInit {
     this.loginService.autenticar(usuario, senha).subscribe(
       (login: Login) => {
         this.login = login;
-        this.loginService.EmitirLogin(login);        
+        this.loginService.EmitirLogin(login);
         if (login.ok === true) {
           this.dadosRepres = login;
           localStorage.setItem('token', login.agent_Id);

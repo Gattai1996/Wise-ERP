@@ -15,3 +15,10 @@
   top: 0;
   z-index: 2;
 }
+
+#tema {
+  width: 80%;
+  margin: 10%;
+  position: absolute;
+  bottom: 0;
+}
