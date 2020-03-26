@@ -7,20 +7,6 @@
 
 /* ============== SIDEBAR ============== */
 
-mat-sidenav-container {
-  height: 100%;
-}
-
-mat-sidenav, mat-sidenav-content {
-  padding: 1rem;
-}
-
-mat-sidenav {
-  background-color: white;
-  width: 300px;
-  max-width: 100%;
-}
-
 #logo {
   width: 180px;
   float: left;
@@ -59,10 +45,6 @@ mat-nav-list {
 }
 
 /* ============================ DROPDOWNS =================================== */
-
-#stepper {
-  background-color: white;
-}
 
 #marca, #colecao, #repres, #razao-social, #cnpj, #codigo, #ordem {
   width: 100%;
@@ -103,6 +85,17 @@ mat-nav-list {
   text-align: center;
   margin: 2%;
   padding: 2%;
+  min-height: 100px;
+}
+
+#cardTotalMedio {
+  width: 45%;
+  margin-left: 4%;
+  float: left;
+  font-size: larger;
+  border: solid;
+  border-width: 1px;
+  border-radius: 1rem;
 }
 
 #botao-mostrar-todos {
@@ -118,7 +111,6 @@ mat-nav-list {
 }
 
 #cardsFaturamentosGrande {
-  margin-top: 5px;
   font-size: large;
 }
 

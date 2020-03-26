@@ -1,34 +1,39 @@
-<mat-sidenav-container class="sidenav-container">
-  <mat-sidenav #drawer class="sidenav" fixedInViewport
-      [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
-      [mode]="(isHandset$ | async) ? 'over' : 'side'"
-      [opened]="(isHandset$ | async) === false">
-    <mat-toolbar><a routerLink="/login"><img style="width: 100%;" src="../../assets/logo.png"></a></mat-toolbar>
-    <mat-nav-list>
-      <a routerLink="/login">
-        <mat-list-item id="sair"><mat-icon>home</mat-icon> Inicio</mat-list-item>
-    </a>
-    <a routerLink="/invoices">
-        <mat-list-item id="invoices"><mat-icon>assessment</mat-icon> Faturamentos</mat-list-item>
-    </a>
-    <a routerLink="/invoices">
-      <mat-list-item id="invoices"><mat-icon>monetization_on</mat-icon> Duplicatas</mat-list-item>
-    </a>
-    </mat-nav-list>
-  </mat-sidenav>
-  <mat-sidenav-content>
-    <mat-toolbar color="primary">
-      <button
-        type="button"
-        aria-label="Toggle sidenav"
-        mat-icon-button
-        (click)="drawer.toggle()"
-        *ngIf="isHandset$ | async">
-        <mat-icon style="color: white" aria-label="Side nav toggle icon">menu</mat-icon>
-      </button>
-      <span style="color: white;">Wise ERP - Faturamentos</span>
-    </mat-toolbar>
-    <!-- Add Content Here -->
-    <app-invoices></app-invoices>
-  </mat-sidenav-content>
-</mat-sidenav-container>
+<div [class]="tema">
+  <mat-sidenav-container class="sidenav-container">
+    <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+      [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
+      <mat-toolbar><a routerLink="/login"><img style="width: 100%;" src="../../assets/logo.png"></a></mat-toolbar>
+      <mat-nav-list>
+        <a routerLink="/login">
+          <mat-list-item id="sair">
+            <mat-icon>home</mat-icon> Inicio
+          </mat-list-item>
+        </a>
+        <a routerLink="/invoices">
+          <mat-list-item id="invoices">
+            <mat-icon>monetization_on</mat-icon> Faturamentos
+          </mat-list-item>
+        </a>
+        <a routerLink="/invoices">
+          <mat-list-item id="invoices">
+            <mat-icon>file_copy</mat-icon> Duplicatas
+          </mat-list-item>
+        </a>
+        <mat-slide-toggle id="tema" [(ngModel)]="temaEscuro" (change)="onThemeChange()" placeholder="Tema">
+          Tema escuro
+        </mat-slide-toggle>
+      </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <mat-toolbar color="primary">
+        <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()"
+          *ngIf="isHandset$ | async">
+          <mat-icon style="color: white" aria-label="Side nav toggle icon">menu</mat-icon>
+        </button>
+        <span style="color: white;">Restoque - Faturamentos</span>
+      </mat-toolbar>
+      <!-- Add Content Here -->
+      <app-invoices></app-invoices>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>

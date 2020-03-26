@@ -1,6 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
-import { Router } from '@angular/router';
 import { BuscaInvoices } from '../services/busca-invoices.service';
 import { Invoices } from '../models/invoices.model';
 import { BrandsService } from '../services/brands.service';
