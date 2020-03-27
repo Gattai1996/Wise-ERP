@@ -1,0 +1,10 @@
+mat-card {
+    text-align: center;
+    width: 330px;
+    padding: 2rem;
+    border-radius: 5px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
