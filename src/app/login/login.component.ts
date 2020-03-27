@@ -5,11 +5,12 @@ import { LoginService } from 'src/app/services/login.service';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material'
-import { DialogErrorComponent } from './dialog-error/dialog-error.component';
+import { DialogErrorComponent } from '../dialog-error/dialog-error.component';
 import { LoadingIndicatorComponent } from '../loading-indicator/loading-indicator.component';
 import { OverlayContainer } from '@angular/cdk/overlay';
 
 @Component({
+  selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
