@@ -4,7 +4,7 @@
 
     <mat-vertical-stepper id="stepper" linear #stepper>
 
-      <!-- MARCA -->
+      <!-- MARCA --> 
       <mat-step Control="invoicesForm" [completed]="selecionouMarca">
         <ng-template matStepLabel>Marca {{ brandName }}</ng-template>
         <!---------------- DDL MARCA ------------------->
@@ -107,7 +107,7 @@
 
     <!---------------------- BOTAO PESQUISAR --------------------->
     <button mat-raised-button color="accent" id="botao-buscar" type="submit" [disabled]="invoicesForm.invalid"
-      (click)="scroll(target)" (click)="company_doc = cnpjDigitado" (click)="buscarInvoices()" style="color: white;">
+      (click)="scroll(target)" (click)="company_doc = cnpjDigitado" (click)="buscarInvoices()">
       BUSCAR&nbsp;
       <mat-icon>search</mat-icon>
     </button>

@@ -9,12 +9,12 @@
             <mat-icon>home</mat-icon> Inicio
           </mat-list-item>
         </a>
-        <a routerLink="/invoices">
+        <a routerLink="/invoices" (click)="onPageChange()">
           <mat-list-item id="invoices">
             <mat-icon>monetization_on</mat-icon> Faturamentos
           </mat-list-item>
         </a>
-        <a routerLink="/duplicates">
+        <a routerLink="/duplicates" (click)="onPageChange()">
           <mat-list-item id="duplicates">
             <mat-icon>file_copy</mat-icon> Duplicatas
           </mat-list-item>
@@ -30,7 +30,7 @@
           *ngIf="isHandset$ | async">
           <mat-icon style="color: white" aria-label="Side nav toggle icon">menu</mat-icon>
         </button>
-        <span style="color: white;">Restoque - Faturamentos</span>
+        <span style="color: white;">Restoque - {{ page }}</span>
       </mat-toolbar>
       <!-- Add Content Here -->
       <router-outlet></router-outlet>

@@ -13,6 +13,7 @@ import { Router } from '@angular/router';
 export class AppComponent implements OnInit {
 
   title = 'Wise-ERP';
+  page: string = 'Faturamentos';
 
   temaEscuro: boolean = false;
   tema: string = 'tema-light';
@@ -28,8 +29,16 @@ export class AppComponent implements OnInit {
     this.overlayContainer.getContainerElement().classList.add(this.tema);
   }
 
+  onPageChange(): void {
+    if (this.router.url == '/invoices') {
+      this.page = 'Faturamentos'
+    } else {
+      this.page = 'Duplicatas';
+    }
+  }
+
   onThemeChange() {
-    if(this.temaEscuro) {
+    if (this.temaEscuro) {
       this.tema = 'tema-dark';
     } else {
       this.tema = 'tema-light'
@@ -43,4 +52,5 @@ export class AppComponent implements OnInit {
       map(result => result.matches),
       shareReplay()
     );
+
 }

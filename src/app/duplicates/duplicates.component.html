@@ -1,0 +1,51 @@
+<div class="content">
+
+    <form>
+        <mat-form-field>
+            <mat-label>Marca</mat-label>
+            <mat-select>
+                <mat-option value="Teste">
+                    Teste
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Código</mat-label>
+            <input type="text" matInput>
+        </mat-form-field>
+        <button type="submit" mat-raised-button color="accent">Buscar <mat-icon>search</mat-icon></button>
+    </form>
+
+    <mat-card id="card-total" class="mat-elevation-z8">
+        <mat-card-title>
+            Cliente Exemplo 1
+        </mat-card-title>
+        <mat-card-content>
+            <strong>DíVIDA TOTAL:</strong> R$ 341.000<br>
+            <strong>DíVIDA A VENCER:</strong> R$ 1.340.000
+        </mat-card-content>
+    </mat-card>
+    
+    <div class="detalhar">
+        <mat-slide-toggle color="accent" [(ngModel)]="detalhar">
+            <span>
+                Detalhar
+            </span>
+        </mat-slide-toggle>
+    </div>
+
+    <div class='card-detalhes' *ngIf="detalhar">
+        <mat-card *ngFor="let cliente of clientes" class="mat-elevation-z8">
+            <mat-card-title>
+                <mat-icon>account_box</mat-icon> {{ cliente.nome }}
+            </mat-card-title>
+            <mat-card-content>
+                <span class="card-content"> <strong>MARCA</strong> {{ cliente.marca }} </span><br>
+                <span class="card-content"> <strong>CÓDIGO</strong> {{ cliente.codigo }} </span><br>
+                <span class="card-content"> <strong>DíVIDA</strong> {{ cliente.divida }} </span><br>
+                <span class="card-content"> <strong>DíVIDA EM OUTRAS MARCAS</strong> {{ cliente.outraDivida }} </span>
+            </mat-card-content>
+        </mat-card>
+    </div>
+
+</div>
