@@ -46,3 +46,17 @@
     justify-content: center;
 }
 
+.tabela tr th, td {
+    list-style: none; 
+    border: solid 1px; 
+    border-color: rgba(51, 51, 51, 0.3);
+    border-radius: 5px; 
+    margin-top: 1px; 
+    text-align: justify; 
+    padding: 1rem;
+}
+
+.tabela tr th:hover, td:hover {
+    cursor: pointer;
+    border-color: rgba(51, 51, 51, 1);
+}
