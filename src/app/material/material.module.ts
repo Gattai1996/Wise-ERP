@@ -21,12 +21,13 @@ import {
   MatSlideToggleModule,
   MatSnackBarModule,
   MatBadgeModule,
-  MatStepperModule 
+  MatStepperModule, 
+  MatExpansionModule
   
 } from '@angular/material'
 
 
-const MeterialComponents =
+const MaterialComponents =
 [
   MatButtonModule,
   MatMenuModule,
@@ -49,11 +50,12 @@ const MeterialComponents =
   MatSlideToggleModule,
   MatSnackBarModule,
   MatBadgeModule,
-  MatStepperModule
+  MatStepperModule,
+  MatExpansionModule
 ]
 
 @NgModule({
-  imports: [MeterialComponents],
-  exports: [MeterialComponents]
+  imports: [MaterialComponents],
+  exports: [MaterialComponents]
 })
 export class MaterialModule { }

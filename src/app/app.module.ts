@@ -24,6 +24,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { GuardRoutesGuard } from './guard-routes/guard-routes.guard';
 import { LoadingIndicatorComponent } from './loading-indicator/loading-indicator.component';
 import { routingComponents } from './app-routing.module';
+import { DashboardComponent } from './dashboard/dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { routingComponents } from './app-routing.module';
     ReplacePipe,
     NotFoundComponent,
     LoadingIndicatorComponent,
-    routingComponents
+    routingComponents,
+    DashboardComponent
   ],
   entryComponents: [DialogErrorComponent, LoadingIndicatorComponent],
   imports: [

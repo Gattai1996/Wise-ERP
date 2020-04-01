@@ -41,7 +41,7 @@ export class InvoicesComponent implements OnInit {
   brandName: string;
   collectionId: string;
   collectionName: string;
-  companyName: string;
+  customerName: string;
   razaoSocial: string;
   companyDoc: string = '';
   customerFabId: string = '';
@@ -51,11 +51,14 @@ export class InvoicesComponent implements OnInit {
   erroRepres: any;
   erroColecoes: any;
   erroInvoices: any;
+  erroTotalInvoices: any;
   erroClientes: any;
   selecionouMarca: boolean = false;
   selecionouColecao: boolean = false;
   consultado: boolean = false;
   mostrarTodosOsFaturamentos: boolean = false;
+  buscaInvoicesDetalhado: boolean = false;
+  outrosFiltros: boolean = true;
 
   login: Login = new Login();
   invoicesForm: FormGroup;
@@ -136,6 +139,7 @@ export class InvoicesComponent implements OnInit {
     console.log('Selecionou collection_Id: ' + event);
     this.collectionId = event;
     this.listaDeRepres();
+    this.outrosFiltros = false;
   }
 
   public listaDeRepres() {
@@ -192,18 +196,15 @@ export class InvoicesComponent implements OnInit {
   }
 
   public buscarClientes() {
-    this.openLoadingDialog();
     this.consultaStringService.consultarString(
-      this.companyId, this.deptId, this.brandId, this.companyName, this.agentId)
+      this.companyId, this.deptId, this.brandId, this.customerName, this.agentId)
       .subscribe(dados => {
         console.log(dados);
         this.clientes = dados;
-        this.closeLoadingDialog();
       },
         (error: any) => {
           this.erroClientes = error;
           console.log('ERRO INVOICES: ' + this.erroClientes.message);
-          this.closeLoadingDialog();
         }
       );
   }
@@ -235,7 +236,6 @@ export class InvoicesComponent implements OnInit {
       .subscribe(dados => {
         this.consultado = true;
         this.invoices = dados;
-        this.buscarTotalInvoices();
         this.closeLoadingDialog();
       },
         (error: any) => {
@@ -247,14 +247,22 @@ export class InvoicesComponent implements OnInit {
   }
 
   public buscarTotalInvoices() {
-    this.buscaTotalInvoicesService.buscaTotalInvoices(this.invoices).subscribe((res: TotalInvoices) => {
-      this.total = res;
-      return this.total;
-    });
-  }
-
-  scroll(e: HTMLElement) {
-    e.scrollIntoView();
+    if(this.companyDoc !== '' && this.customerFabId !== '') {
+      this.buscaInvoicesDetalhado = true;
+    }
+    this.openLoadingDialog();
+    this.buscaTotalInvoicesService.buscaTotalInvoices(this.companyId, this.deptId, this.brandId, this.collectionId, this.agentId)
+    .subscribe((dados: TotalInvoices) => {
+              this.consultado = true;
+              this.total = dados;
+              this.closeLoadingDialog();
+            },
+              (error: any) => {
+                this.erroTotalInvoices = error;
+                this.closeLoadingDialog();
+                alert(this.erroTotalInvoices.message);
+              }
+            );
   }
   
 }
