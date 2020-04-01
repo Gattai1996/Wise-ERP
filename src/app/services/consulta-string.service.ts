@@ -18,6 +18,6 @@ export class ConsultaStringService {
   Observable<ConsultaString> {
     return this.http.get<ConsultaString>(
       this.API_URL + 'company_Id=' + companyId + '&dept_Id=' + deptId 
-      + '&brand_Id=' + brandId + '&company_name=' + companyName + '&agent_Id=' + agentId);
+      + '&brand_Id=' + brandId + '&customer_name=' + companyName + '&agent_Id=' + agentId);
   }
 }
